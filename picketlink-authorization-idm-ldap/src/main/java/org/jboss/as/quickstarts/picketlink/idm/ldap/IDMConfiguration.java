@@ -16,10 +16,20 @@
  */
 package org.jboss.as.quickstarts.picketlink.idm.ldap;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Produces;
 import org.picketlink.idm.config.IdentityConfiguration;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
+import org.picketlink.idm.model.IdentityType;
+import org.picketlink.idm.model.sample.Agent;
+import org.picketlink.idm.model.sample.Grant;
+import org.picketlink.idm.model.sample.Group;
+import org.picketlink.idm.model.sample.GroupMembership;
+import org.picketlink.idm.model.sample.Role;
+import org.picketlink.idm.model.sample.User;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+
+import static org.picketlink.idm.ldap.internal.LDAPConstants.*;
 
 @ApplicationScoped
 public class IDMConfiguration {
@@ -43,17 +53,46 @@ public class IDMConfiguration {
         IdentityConfigurationBuilder builder = new IdentityConfigurationBuilder();
 
         builder
-            .stores()
-                .ldap()
-                .baseDN(BASE_DN)
-                .bindDN("uid=admin,ou=system")
-                .bindCredential("secret")
-                .url(LDAP_URL)
-                .userDNSuffix(USER_DN_SUFFIX)
-                .roleDNSuffix(ROLES_DN_SUFFIX)
-                .agentDNSuffix(AGENT_DN_SUFFIX)
-                .groupDNSuffix(GROUP_DN_SUFFIX)
-                .supportAllFeatures();
+            .named("default")
+                .stores()
+                    .ldap()
+                        .baseDN(BASE_DN)
+                        .bindDN("uid=admin,ou=system")
+                        .bindCredential("secret")
+                        .url(LDAP_URL)
+                        .supportType(IdentityType.class)
+                        .supportGlobalRelationship(Grant.class, GroupMembership.class)
+                        .mapping(Agent.class)
+                            .baseDN(AGENT_DN_SUFFIX)
+                            .objectClasses("account")
+                            .attribute("loginName", UID, true)
+                            .readOnlyAttribute("createdDate", CREATE_TIMESTAMP)
+                        .mapping(User.class)
+                            .baseDN(USER_DN_SUFFIX)
+                            .objectClasses("inetOrgPerson", "organizationalPerson")
+                            .attribute("loginName", UID, true)
+                            .attribute("firstName", CN)
+                            .attribute("lastName", SN)
+                            .attribute("email", EMAIL)
+                            .readOnlyAttribute("createdDate", CREATE_TIMESTAMP)
+                        .mapping(Role.class)
+                            .baseDN(ROLES_DN_SUFFIX)
+                            .objectClasses(GROUP_OF_NAMES)
+                            .attribute("name", CN, true)
+                            .readOnlyAttribute("createdDate", CREATE_TIMESTAMP)
+                        .mapping(Group.class)
+                            .baseDN(GROUP_DN_SUFFIX)
+                            .objectClasses(GROUP_OF_NAMES)
+                            .attribute("name", CN, true)
+                            .readOnlyAttribute("createdDate", CREATE_TIMESTAMP)
+                            .parentMembershipAttributeName("member")
+                            .parentMapping("QA Group", "ou=QA,dc=jboss,dc=org")
+                        .mapping(Grant.class)
+                            .forMapping(Role.class)
+                            .attribute("assignee", "member")
+                        .mapping(GroupMembership.class)
+                            .forMapping(Group.class)
+                            .attribute("member", "member");
 
         return builder.build();
     }

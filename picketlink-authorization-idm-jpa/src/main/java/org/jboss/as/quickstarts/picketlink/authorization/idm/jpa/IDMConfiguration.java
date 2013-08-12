@@ -70,7 +70,6 @@ public class IDMConfiguration {
                 .stores()
                     .jpa()
                         .mappedEntity(
-                                AttributedTypeEntity.class,
                                 AccountTypeEntity.class,
                                 RoleTypeEntity.class,
                                 GroupTypeEntity.class,

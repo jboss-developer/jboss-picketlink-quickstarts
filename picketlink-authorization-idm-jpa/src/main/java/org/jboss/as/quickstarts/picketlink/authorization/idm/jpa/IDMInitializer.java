@@ -16,19 +16,20 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.idm.jpa;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.inject.Inject;
 import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.sample.Group;
 import org.picketlink.idm.model.sample.Role;
 import org.picketlink.idm.model.sample.User;
-import static org.picketlink.idm.model.sample.SampleModel.addToGroup;
-import static org.picketlink.idm.model.sample.SampleModel.grantGroupRole;
-import static org.picketlink.idm.model.sample.SampleModel.grantRole;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
+
+import static org.picketlink.idm.model.sample.SampleModel.*;
 
 /**
  * This startup bean creates a number of default users, groups and roles when the application is started.
@@ -40,10 +41,7 @@ import static org.picketlink.idm.model.sample.SampleModel.grantRole;
 public class IDMInitializer {
 
     @Inject
-    private IdentityManager identityManager;
-
-    @Inject
-    private RelationshipManager relationshipManager;
+    private PartitionManager partitionManager;
 
     @PostConstruct
     public void create() {
@@ -53,6 +51,9 @@ public class IDMInitializer {
         john.setEmail("john@acme.com");
         john.setFirstName("John");
         john.setLastName("Smith");
+
+        IdentityManager identityManager = this.partitionManager.createIdentityManager();
+
         identityManager.add(john);
         identityManager.updateCredential(john, new Password("demo"));
 
@@ -84,13 +85,15 @@ public class IDMInitializer {
         Group sales = new Group("sales");
         identityManager.add(sales);
 
+        RelationshipManager relationshipManager = this.partitionManager.createRelationshipManager();
+
         // Make john a member of the "sales" group
-        addToGroup(this.relationshipManager, john, sales);
+        addToGroup(relationshipManager, john, sales);
 
         // Make mary a manager of the "sales" group
-        grantGroupRole(this.relationshipManager, mary, manager, sales);
+        grantGroupRole(relationshipManager, mary, manager, sales);
 
         // Grant the "superuser" application role to jane
-        grantRole(this.relationshipManager, jane, superuser);
+        grantRole(relationshipManager, jane, superuser);
     }
 }

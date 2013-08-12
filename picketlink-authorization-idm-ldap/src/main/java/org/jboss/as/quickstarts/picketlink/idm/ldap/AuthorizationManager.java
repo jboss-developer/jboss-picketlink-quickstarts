@@ -16,14 +16,19 @@
  */
 package org.jboss.as.quickstarts.picketlink.idm.ldap;
 
+import org.picketlink.Identity;
+import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.RelationshipManager;
+import org.picketlink.idm.model.Account;
+import org.picketlink.idm.model.sample.Role;
+import org.picketlink.idm.model.sample.SampleModel;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.picketlink.Identity;
-import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.model.Agent;
-import org.picketlink.idm.model.Role;
+
+import static org.picketlink.idm.model.sample.SampleModel.*;
 
 /**
  * <p>This bean class centralizes all authorization services for this application.</p>
@@ -40,6 +45,9 @@ public class AuthorizationManager {
 
     @Inject
     private IdentityManager identityManager;
+
+    @Inject
+    private RelationshipManager relationshipManager;
 
     public boolean isRisksManagementAllowed() {
         return isAdministrator() || (isProjectManager());
@@ -76,9 +84,9 @@ public class AuthorizationManager {
      * @return
      */
     private boolean hasRole(ApplicationRole applicationRole) {
-        Agent agent = getIdentity().getAgent();
-        Role role = this.identityManager.getRole(applicationRole.name());
+        Account agent = getIdentity().getAccount();
+        Role role = getRole(this.identityManager, applicationRole.name());
 
-        return this.identityManager.hasRole(agent, role);
+        return SampleModel.hasRole(this.relationshipManager, agent, role);
     }
 }

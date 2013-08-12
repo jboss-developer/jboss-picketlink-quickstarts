@@ -16,13 +16,14 @@
  */
 package org.jboss.as.quickstarts.picketlink.authentication.basic;
 
+import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.PartitionManager;
+import org.picketlink.idm.model.sample.User;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.model.SimpleUser;
-import org.picketlink.idm.model.User;
 
 /**
  * This startup bean creates a default user account when the application is started. Since we are not
@@ -34,13 +35,15 @@ import org.picketlink.idm.model.User;
 public class IDMInitializer {
 
     @Inject
-    private IdentityManager identityManager;
+    private PartitionManager partitionManager;
 
     @PostConstruct
     public void create() {
-        User user = new SimpleUser("client");
+        User user = new User("client");
 
-        this.identityManager.add(user);
+        IdentityManager identityManager = this.partitionManager.createIdentityManager();
+
+        identityManager.add(user);
     }
 
 }

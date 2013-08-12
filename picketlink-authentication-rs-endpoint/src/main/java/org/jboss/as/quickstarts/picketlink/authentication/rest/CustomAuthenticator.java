@@ -17,14 +17,14 @@
  */
 package org.jboss.as.quickstarts.picketlink.authentication.rest;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Inject;
 import org.picketlink.annotations.PicketLink;
 import org.picketlink.authentication.BaseAuthenticator;
 import org.picketlink.credential.DefaultLoginCredentials;
-import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.sample.User;
+
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 
 /**
  * <p>A simple authenticator that supports two credential types: username/password or a simple token.</p>
@@ -32,9 +32,6 @@ import org.picketlink.idm.model.sample.User;
 @RequestScoped
 @PicketLink
 public class CustomAuthenticator extends BaseAuthenticator {
-
-    @Inject
-    private IdentityManager identityManager;
 
     @Inject
     private DefaultLoginCredentials credentials;

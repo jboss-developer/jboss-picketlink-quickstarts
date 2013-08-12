@@ -22,26 +22,28 @@
 
 package org.jboss.as.quickstarts.picketlink.idm.ldap;
 
+import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.PartitionManager;
+import org.picketlink.idm.RelationshipManager;
+import org.picketlink.idm.credential.Password;
+import org.picketlink.idm.model.sample.Role;
+import org.picketlink.idm.model.sample.SampleModel;
+import org.picketlink.idm.model.sample.User;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.credential.Password;
-import org.picketlink.idm.model.Role;
-import org.picketlink.idm.model.SimpleRole;
-import org.picketlink.idm.model.SimpleUser;
-import org.picketlink.idm.model.User;
-import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.ADMINISTRATOR;
-import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.DEVELOPER;
-import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.PROJECT_MANAGER;
+
+import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.*;
+import static org.picketlink.idm.model.sample.SampleModel.*;
 
 @Startup
 @Singleton
 public class IDMInitializer {
 
     @Inject
-    private IdentityManager identityManager;
+    private PartitionManager partitionManager;
 
     /**
      * <p>Initializes the identity store with some default users and roles.</p>
@@ -54,28 +56,32 @@ public class IDMInitializer {
     }
 
     private void createUser(String loginName, ApplicationRole roleName) {
-        User user = this.identityManager.getUser(loginName);
+        IdentityManager identityManager = this.partitionManager.createIdentityManager();
+
+        User user = SampleModel.getUser(identityManager, loginName);
 
         if (user == null) {
-            user = new SimpleUser(loginName);
+            user = new User(loginName);
 
-            this.identityManager.add(user);
+            identityManager.add(user);
 
             Password password = new Password(loginName + "123");
 
-            this.identityManager.updateCredential(user, password);
+            identityManager.updateCredential(user, password);
         }
 
-        Role role = this.identityManager.getRole(roleName.name());
+        Role role = getRole(identityManager, roleName.name());
 
         if (role == null) {
-            role = new SimpleRole(roleName.name());
+            role = new Role(roleName.name());
 
-            this.identityManager.add(role);
+            identityManager.add(role);
         }
 
-        if (!this.identityManager.hasRole(user, role)) {
-            this.identityManager.grantRole(user, role);
+        RelationshipManager relationshipManager = this.partitionManager.createRelationshipManager();
+
+        if (!hasRole(relationshipManager, user, role)) {
+            grantRole(relationshipManager, user, role);
         }
     }
 

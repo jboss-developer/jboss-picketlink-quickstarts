@@ -16,13 +16,15 @@
  */
 package org.jboss.as.quickstarts.picketlink.authentication.digest;
 
+import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.PartitionManager;
+import org.picketlink.idm.credential.Digest;
+import org.picketlink.idm.model.sample.User;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.credential.Digest;
-import org.picketlink.idm.model.sample.User;
 
 /**
  * This startup bean creates a default user account when the application is started. Since we are not
@@ -37,7 +39,7 @@ import org.picketlink.idm.model.sample.User;
 public class IDMInitializer {
 
     @Inject
-    private IdentityManager identityManager;
+    private PartitionManager partitionManager;
 
     @PostConstruct
     public void create() {
@@ -47,7 +49,9 @@ public class IDMInitializer {
         user.setFirstName("Jane");
         user.setLastName("Doe");
 
-        this.identityManager.add(user);
+        IdentityManager identityManager = this.partitionManager.createIdentityManager();
+
+        identityManager.add(user);
 
         Digest digestCredential = new Digest();
 
@@ -55,6 +59,6 @@ public class IDMInitializer {
         digestCredential.setUsername(user.getLoginName());
         digestCredential.setPassword("abcd1234");
 
-        this.identityManager.updateCredential(user, digestCredential);
+        identityManager.updateCredential(user, digestCredential);
     }
 }

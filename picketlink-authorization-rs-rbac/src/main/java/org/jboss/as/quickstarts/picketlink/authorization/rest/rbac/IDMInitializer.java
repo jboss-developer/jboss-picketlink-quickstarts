@@ -16,29 +16,27 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.rest.rbac;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.inject.Inject;
 import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.sample.Role;
 import org.picketlink.idm.model.sample.User;
-import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.ADMINISTRATOR;
-import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.DEVELOPER;
-import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.PROJECT_MANAGER;
-import static org.picketlink.idm.model.sample.SampleModel.grantRole;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
+
+import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.*;
+import static org.picketlink.idm.model.sample.SampleModel.*;
 
 @Singleton
 @Startup
 public class IDMInitializer {
 
     @Inject
-    private IdentityManager identityManager;
-
-    @Inject
-    private RelationshipManager relationshipManager;
+    private PartitionManager partitionManager;
 
     @PostConstruct
     public void createUsers() {
@@ -50,16 +48,20 @@ public class IDMInitializer {
     private void createUser(String loginName, ApplicationRole roleName) {
         User user = new User(loginName);
 
-        this.identityManager.add(user);
+        IdentityManager identityManager = this.partitionManager.createIdentityManager();
+
+        identityManager.add(user);
 
         Password password = new Password(loginName + "123");
 
-        this.identityManager.updateCredential(user, password);
+        identityManager.updateCredential(user, password);
 
         Role role = new Role(roleName.name());
 
-        this.identityManager.add(role);
+        identityManager.add(role);
 
-        grantRole(this.relationshipManager, user, role);
+        RelationshipManager relationshipManager = this.partitionManager.createRelationshipManager();
+
+        grantRole(relationshipManager, user, role);
     }
 }

@@ -31,11 +31,6 @@
             <param-value>FORM</param-value>
         </init-param>
 
-        <!-- You can also provide the realm name. If this parameter is not set, defaults to 'PicketLink Default Realm' -->
-        <init-param>
-            <param-name>realmName</param-name>
-            <param-value>My Realm</param-value>
-        </init-param>
         <init-param>
             <param-name>form-login-page</param-name>
             <param-value>login.xhtml</param-value>
