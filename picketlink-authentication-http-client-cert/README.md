@@ -1,7 +1,7 @@
 picketlink-authentication-http-client-cert: PicketLink HTTP CLIENT-CERT Authentication
 ===============================
 Author: Pedro Igor
-Level: Beginner
+Level: Intermediate
 Technologies: CDI, PicketLink
 Summary: Basic example that demonstrates simple username/password authentication using the HTTP CLIENT-CERT scheme
 Target Product: EAP
@@ -13,39 +13,64 @@ What is it?
 
 This example demonstrates the use of *CDI 1.0* and *PicketLink* in *JBoss Enterprise Application Platform 6* or *JBoss AS 7*.
 
-You'll learn from this quickstart how to use PicketLink to authenticate users using the HTTP CLIENT-CERT scheme.
-
-The application is configured to provide public access for some resources(eg.: /index.html) and to protected others for
-authenticated users only(eg.: /protected/*).
-
-Identity data such as users, roles and groups, are managed using PicketLink IDM backed by a file-based identity store.
+This quickstart shows how to to use PicketLink to authenticate users using the HTTP CLIENT-CERT scheme. 
+The application is configured to provide public access for some resources through the `/index.html` and to provide access to other resources, like `/protected/*`, to authenticated users only.
+Identity data such as users, roles, and groups are managed using PicketLink IDM backed by a file-based identity store.
 This store is used by default when no specific configuration is provided.
 
-Before running this example, you must configure your server  installation to use SSL and to validate client certificates.
+Before you run this example, you must create certificates and configure the server to use SSL and validate client certificates.
 
-First, go to the following directory:
+The latest PicketLink documentation is available [here](http://docs.jboss.org/picketlink/2/latest/).
 
-    For Linux:   JBOSS_HOME/standalone/configuration
-    For Windows: JBOSS_HOME\standalone\configuration
+Create the Client Certicates
+------------------------
 
-Create a certificate for your server using the following command:
+1.  Open a command line and navigate to the JBoss server `configuration` directory:
 
-    keytool -genkey -alias server -keyalg RSA -keystore server.keystore -storepass change_it -validity 365
+        For Linux:   JBOSS_HOME/standalone/configuration
+        For Windows: JBOSS_HOME\standalone\configuration
+2. Create a certificate for your server using the following command:
 
-You'll be prompted for some additional information, you can provide the values your want.
+        keytool -genkey -alias server -keyalg RSA -keystore server.keystore -storepass change_it -validity 365
 
-Now, let's create the client certificate, which you'll use to authenticate against the server when accessing a resource
-through SSL.
+   You'll be prompted for some additional information, such as your name, organizational unit, and location. Enter any values you prefer.
+3. Create the client certificate, which is used to authenticate against the server when accessing a resource through SSL.
 
-    keytool -genkey -alias client -keystore client.keystore -storepass change_it -validity 365 -keyalg RSA -keysize 2048 -storetype pkcs12
+        keytool -genkey -alias client -keystore client.keystore -storepass change_it -validity 365 -keyalg RSA -keysize 2048 -storetype pkcs12
+4. Export the client certificate and create a truststore by importing this certificate:
 
-Now we need to export the client's certificate and create a truststore by importing this certificate:
+        keytool -exportcert -keystore client.keystore  -storetype pkcs12 -storepass change_it -alias client -keypass change_it -file client.cer
+        keytool -import -file client.cer -alias client -keystore client.truststore
+5. The certificates and keystores are now properly configured.
 
-    keytool -exportcert -keystore client.keystore  -storetype pkcs12 -storepass change_it -alias client -keypass change_it -file client.cer
-    keytool -import -file client.cer -alias client -keystore client.truststore
 
-Now that we have our certificates/keystores properly configured, you need to change your server installation to enable ssl.
-Add the following connector to the web subsystem:
+Configure the Server to Use SSL 
+--------------------------------
+
+Now that the certificates and keystores are properly configured, you must enable SSL in the server configuration. 
+
+### Configure the HTTPS Connector in the Web Subsystem by Running the JBoss CLI Script
+
+1. Start the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server by typing the following: 
+
+        For Linux:  JBOSS_HOME/bin/standalone.sh 
+        For Windows:  JBOSS_HOME\bin\standalone.bat
+2. Open a new command line, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
+
+        JBOSS_HOME/bin/jboss-cli.sh --connect --file=configure-https.cli
+This script adds and configures the `https` connector to the `web` subsystem in the server configuration. You should see the following result when you run the script:
+
+    {"outcome" => "success"}
+    {"outcome" => "success"}
+
+This command reloads the server configuration before completion. You don`t need to manually stop/start the server to the configuration take effect.
+
+### Configure the HTTPS Connector in the Web Subsystem by Manually Editing the Server Configuration File
+
+1.  If it is running, stop the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server.
+2.  Backup the file: `JBOSS_HOME/standalone/configuration/standalone.xml`
+3.  Open the `JBOSS_HOME/standalone/configuration/standalone.xml` file in an editor and locate the subsystem `urn:jboss:domain:web`.
+4.  Add the following XML to the `web` subsystem:
 
     <connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" enable-lookups="false" secure="true">
         <ssl name="localhost-ssl" key-alias="server" password="change_it"
@@ -55,17 +80,23 @@ Add the following connector to the web subsystem:
             ca-certificate-file="${jboss.server.config.dir}/client.truststore"/>
     </connector>
 
-You can now restart your server and check if it is responding on:
 
-    https://localhost:8443
+Test the Server SSL Configuration
+---------------------------------
 
-If everything is ok, you will be asked to trust the server certificate.
+To test the SSL configuration, access: <https://localhost:8443>
 
-Before accessing the application, please import the *client.cer*, which holds the client certificate, to your browser.
-When you access the application, the browser should ask you which certificate you want to use to authenticate with the server.
+If it is configured correctly, you should be asked to trust the server certificate.
+
+
+Import the Certificate into Your Browser
+---------------------------------
+
+Before you access the application, you must import the *client.cer*, which holds the client certificate, into your browser.
+
+When you access the application, the browser should ask you which certificate to use to authenticate with the server. 
 Select it and you're ready to go.
 
-The latest PicketLink documentation is available [here](http://docs.jboss.org/picketlink/2/latest/).
 
 System requirements
 -------------------
@@ -121,6 +152,30 @@ Undeploy the Archive
         mvn jboss-as:undeploy
 
 
+Remove the SSL Configuration
+----------------------------
+
+You can remove the security domain configuration by running the  `remove-https.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file. 
+
+### Remove the Security Domain Configuration by Running the JBoss CLI Script
+
+1. Start the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server by typing the following: 
+
+        For Linux:  JBOSS_HOME_SERVER_1/bin/standalone.sh
+        For Windows:  JBOSS_HOME_SERVER_1\bin\standalone.bat
+2. Open a new command line, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
+
+        JBOSS_HOME/bin/jboss-cli.sh --connect --file=remove-https.cli 
+This script removes the `https` connector from the `web` subsystem in the server configuration. You should see the following result when you run the script:
+
+        {"outcome" => "success"}
+
+
+### Remove the Security Domain Configuration Manually
+1. If it is running, stop the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server.
+2. Replace the `JBOSS_HOME/standalone/configuration/standalone.xml` file with the back-up copy of the file.
+
+
 Run the Quickstart in JBoss Developer Studio or Eclipse
 -------------------------------------
 You can also start the server and deploy the quickstarts from Eclipse using JBoss tools. For more information, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](../README.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts) 
@@ -133,3 +188,4 @@ If you want to debug the source code or look at the Javadocs of any library in t
 
         mvn dependency:sources
         mvn dependency:resolve -Dclassifier=javadoc
+        
