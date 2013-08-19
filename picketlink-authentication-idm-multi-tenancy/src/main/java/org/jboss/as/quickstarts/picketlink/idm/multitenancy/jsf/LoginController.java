@@ -1,4 +1,4 @@
-/*
+/**
  * JBoss, Home of Professional Open Source
  * Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
  * contributors by the @authors tag. See the copyright.txt in the
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.idm.totp.jsf;
+package org.jboss.as.quickstarts.picketlink.idm.multitenancy.jsf;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;

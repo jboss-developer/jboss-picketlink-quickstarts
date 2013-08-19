@@ -1,9 +1,9 @@
-picketlink-authentication-http-basic: PicketLink Multi-Tenancy Example
+picketlink-authentication-idm-multi-tenancy: PicketLink Multi-Tenancy Example
 ===============================
 Author: Pedro Igor
-Level: Beginner
+Level: Intermediate
 Technologies: CDI, PicketLink, JSF
-Summary: Basic example that demonstrates how to use multi-tenancy using Time-based One-Time Passwords(TOTP) with a JSF view layer
+Summary: Basic example that demonstrates how to use multi-tenancy using PicketLink with a JSF view layer
 Target Product: EAP
 Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
 
@@ -11,7 +11,7 @@ Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
 What is it?
 -----------
 
-This example demonstrates the use of *PicketLink* and *Identity Management (IdM) Multi-Tenancy* in *JBoss Enterprise Application Platform 6* or *JBoss AS 7*.
+This example demonstrates the use of *PicketLink* and *Identity Management (IdM) with Multi-Tenancy* in *JBoss Enterprise Application Platform 6* or *JBoss AS 7*.
 
 Multi-tenancy allows an application to be used equally but separately across different clients, or tenants.  PicketLink supports identity data partitioning where each tenant has its own data that is separated and protected from others. This is a critical requirement for Cloud-based/SaaS applications that serve many different clients and users.
 
@@ -31,7 +31,7 @@ directory where its resources are located.
                     wayne/
 
 Users from one company, or realm, can not have access to the directory or resources from another company. This authorization
-logic is provided by the `org.jboss.as.quickstarts.picketlink.idm.totp.jsf.RealmProtectionFilter`, which is a
+logic is provided by the `org.jboss.as.quickstarts.picketlink.idm.multitenancy.jsf.RealmProtectionFilter`, which is a
 simple `@WebFilter`.
 
 The latest PicketLink documentation is available [here](http://docs.jboss.org/picketlink/2/latest/).
