@@ -61,7 +61,7 @@ To run this quickstart using an embedded LDAP server:
 2. Execute the following command:
 
         mvn -Dtest=LDAPServer test
-3. The prompt does not return, but you should see the following messages:
+3. The prompt does not return and you should see the following messages indicating the embedded LDAP server has started successfully:
 
         Running LDAPServer
         Starting Apache DS server
@@ -69,7 +69,7 @@ To run this quickstart using an embedded LDAP server:
         Going to import LDIF:ldap/users.ldif
         Time taken = 6milisec
 
-If you get the output above is because the embedded LDAP server is now running. To terminate the server you can hit CTRL-C anytime.
+To terminate the embedded LDAP serve, hit CTRL-C.
 
 
 Build and Deploy the Quickstart
