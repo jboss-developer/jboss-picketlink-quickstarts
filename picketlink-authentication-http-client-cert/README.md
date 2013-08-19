@@ -58,10 +58,11 @@ Now that the certificates and keystores are properly configured, you must enable
 2. Open a new command line, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
 
         JBOSS_HOME/bin/jboss-cli.sh --connect --file=configure-https.cli
+
 This script adds and configures the `https` connector to the `web` subsystem in the server configuration. You should see the following result when you run the script:
 
-    {"outcome" => "success"}
-    {"outcome" => "success"}
+        {"outcome" => "success"}
+        {"outcome" => "success"}
 
 This command reloads the server configuration before completion. You don`t need to manually stop/start the server to the configuration take effect.
 
