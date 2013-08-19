@@ -73,13 +73,13 @@ This command reloads the server configuration before completion. You don`t need 
 3.  Open the `JBOSS_HOME/standalone/configuration/standalone.xml` file in an editor and locate the subsystem `urn:jboss:domain:web`.
 4.  Add the following XML to the `web` subsystem:
 
-    <connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" enable-lookups="false" secure="true">
-        <ssl name="localhost-ssl" key-alias="server" password="change_it"
-            certificate-key-file="${jboss.server.config.dir}/server.keystore"
-            protocol="TLSv1"
-            verify-client="want"
-            ca-certificate-file="${jboss.server.config.dir}/client.truststore"/>
-    </connector>
+        <connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" enable-lookups="false" secure="true">
+            <ssl name="localhost-ssl" key-alias="server" password="change_it"
+                certificate-key-file="${jboss.server.config.dir}/server.keystore"
+                protocol="TLSv1"
+                verify-client="want"
+                ca-certificate-file="${jboss.server.config.dir}/client.truststore"/>
+        </connector>
 
 
 Test the Server SSL Configuration
