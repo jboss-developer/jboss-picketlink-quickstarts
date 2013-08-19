@@ -16,15 +16,16 @@
  */
 package org.jboss.as.quickstarts.picketlink.deltaspike.authorization;
 
-import javax.enterprise.context.ApplicationScoped;
 import org.apache.deltaspike.security.api.authorization.Secures;
 import org.jboss.as.quickstarts.picketlink.deltaspike.authorization.annotations.Admin;
 import org.jboss.as.quickstarts.picketlink.deltaspike.authorization.annotations.Employee;
 import org.picketlink.Identity;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
-import static org.picketlink.idm.model.sample.SampleModel.getRole;
-import static org.picketlink.idm.model.sample.SampleModel.hasRole;
+
+import javax.enterprise.context.ApplicationScoped;
+
+import static org.picketlink.idm.model.basic.BasicModel.*;
 
 /**
  * Defines the authorization logic for the @Employee and @Admin security binding types

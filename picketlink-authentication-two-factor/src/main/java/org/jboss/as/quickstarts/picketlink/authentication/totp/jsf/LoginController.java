@@ -16,13 +16,6 @@
  */
 package org.jboss.as.quickstarts.picketlink.authentication.totp.jsf;
 
-import java.io.Serializable;
-import java.util.UUID;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
 import org.picketlink.Identity;
 import org.picketlink.common.util.Base32;
 import org.picketlink.credential.DefaultLoginCredentials;
@@ -31,8 +24,17 @@ import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.credential.TOTPCredential;
 import org.picketlink.idm.credential.TOTPCredentials;
 import org.picketlink.idm.model.Attribute;
-import org.picketlink.idm.model.sample.User;
-import static org.picketlink.idm.model.sample.SampleModel.getUser;
+import org.picketlink.idm.model.basic.User;
+
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.io.Serializable;
+import java.util.UUID;
+
+import static org.picketlink.idm.model.basic.BasicModel.*;
 
 /**
  * We control the authentication process from this bean, so that in the event of a failed authentication we can add an

@@ -26,9 +26,8 @@ import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
-import org.picketlink.idm.model.sample.Role;
-import org.picketlink.idm.model.sample.SampleModel;
-import org.picketlink.idm.model.sample.User;
+import org.picketlink.idm.model.basic.Role;
+import org.picketlink.idm.model.basic.User;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -36,7 +35,7 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 
 import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.*;
-import static org.picketlink.idm.model.sample.SampleModel.*;
+import static org.picketlink.idm.model.basic.BasicModel.*;
 
 @Startup
 @Singleton
@@ -58,7 +57,7 @@ public class IDMInitializer {
     private void createUser(String loginName, ApplicationRole roleName) {
         IdentityManager identityManager = this.partitionManager.createIdentityManager();
 
-        User user = SampleModel.getUser(identityManager, loginName);
+        User user = getUser(identityManager, loginName);
 
         if (user == null) {
             user = new User(loginName);

@@ -21,7 +21,7 @@ import org.picketlink.annotations.PicketLink;
 import org.picketlink.authentication.BaseAuthenticator;
 import org.picketlink.credential.DefaultLoginCredentials;
 import org.picketlink.idm.credential.Password;
-import org.picketlink.idm.model.sample.User;
+import org.picketlink.idm.model.basic.User;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;

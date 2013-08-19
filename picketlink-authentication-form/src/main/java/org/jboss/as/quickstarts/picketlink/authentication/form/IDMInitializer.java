@@ -19,7 +19,7 @@ package org.jboss.as.quickstarts.picketlink.authentication.form;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.credential.Password;
-import org.picketlink.idm.model.sample.User;
+import org.picketlink.idm.model.basic.User;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;

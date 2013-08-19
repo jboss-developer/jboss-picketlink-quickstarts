@@ -16,16 +16,17 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.idm.jpa;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import org.picketlink.Identity;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
-import org.picketlink.idm.model.sample.Group;
-import org.picketlink.idm.model.sample.Role;
-import org.picketlink.idm.model.sample.SampleModel;
-import static org.picketlink.idm.model.sample.SampleModel.getGroup;
-import static org.picketlink.idm.model.sample.SampleModel.getRole;
+import org.picketlink.idm.model.basic.BasicModel;
+import org.picketlink.idm.model.basic.Group;
+import org.picketlink.idm.model.basic.Role;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import static org.picketlink.idm.model.basic.BasicModel.*;
 
 /**
  * This is a utility bean that may be used by the view layer to determine whether the
@@ -48,17 +49,17 @@ public class AuthorizationChecker {
 
     public boolean hasApplicationRole(String roleName) {
         Role role = getRole(this.identityManager, roleName);
-        return SampleModel.hasRole(this.relationshipManager, this.identity.getAccount(), role);
+        return hasRole(this.relationshipManager, this.identity.getAccount(), role);
     }
 
     public boolean isMember(String groupName) {
         Group group = getGroup(this.identityManager, groupName);
-        return SampleModel.isMember(this.relationshipManager, this.identity.getAccount(), group);
+        return BasicModel.isMember(this.relationshipManager, this.identity.getAccount(), group);
     }
 
     public boolean hasGroupRole(String roleName, String groupName) {
         Group group = getGroup(this.identityManager, groupName);
         Role role = getRole(this.identityManager, roleName);
-        return SampleModel.hasGroupRole(this.relationshipManager, this.identity.getAccount(), role, group);
+        return BasicModel.hasGroupRole(this.relationshipManager, this.identity.getAccount(), role, group);
     }
 }

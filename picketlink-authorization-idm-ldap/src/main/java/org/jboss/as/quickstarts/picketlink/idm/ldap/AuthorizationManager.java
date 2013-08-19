@@ -20,15 +20,15 @@ import org.picketlink.Identity;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.model.Account;
-import org.picketlink.idm.model.sample.Role;
-import org.picketlink.idm.model.sample.SampleModel;
+import org.picketlink.idm.model.basic.BasicModel;
+import org.picketlink.idm.model.basic.Role;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import static org.picketlink.idm.model.sample.SampleModel.*;
+import static org.picketlink.idm.model.basic.BasicModel.*;
 
 /**
  * <p>This bean class centralizes all authorization services for this application.</p>
@@ -87,6 +87,6 @@ public class AuthorizationManager {
         Account agent = getIdentity().getAccount();
         Role role = getRole(this.identityManager, applicationRole.name());
 
-        return SampleModel.hasRole(this.relationshipManager, agent, role);
+        return BasicModel.hasRole(this.relationshipManager, agent, role);
     }
 }

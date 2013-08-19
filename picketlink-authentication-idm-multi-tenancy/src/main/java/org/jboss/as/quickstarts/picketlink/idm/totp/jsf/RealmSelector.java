@@ -17,15 +17,17 @@
  */
 package org.jboss.as.quickstarts.picketlink.idm.totp.jsf;
 
-import java.io.Serializable;
+import org.picketlink.annotations.PicketLink;
+import org.picketlink.idm.PartitionManager;
+import org.picketlink.idm.model.basic.Realm;
+
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.picketlink.annotations.PicketLink;
-import org.picketlink.idm.PartitionManager;
-import org.picketlink.idm.model.sample.Realm;
-import static org.jboss.as.quickstarts.picketlink.idm.totp.jsf.Resources.REALM;
+import java.io.Serializable;
+
+import static org.jboss.as.quickstarts.picketlink.idm.totp.jsf.Resources.*;
 
 /**
  * <p>We use this class to hold the current realm for a specific user.</p>

@@ -16,19 +16,21 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.rest.rbac;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
-import javax.interceptor.InvocationContext;
 import org.apache.deltaspike.security.api.authorization.Secures;
 import org.picketlink.Identity;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.model.Account;
-import org.picketlink.idm.model.sample.Role;
-import org.picketlink.idm.model.sample.SampleModel;
-import static org.picketlink.idm.model.sample.SampleModel.getRole;
+import org.picketlink.idm.model.basic.BasicModel;
+import org.picketlink.idm.model.basic.Role;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
+import javax.interceptor.InvocationContext;
+
+import static org.picketlink.idm.model.basic.BasicModel.*;
 
 /**
  * <p>This class centralizes all authorization services for this application.</p>
@@ -98,7 +100,7 @@ public class AuthorizationManager {
         Account account = getIdentity().getAccount();
         Role role = getRole(this.identityManager, roleName);
 
-        return SampleModel.hasRole(this.relationshipManager, account, role);
+        return BasicModel.hasRole(this.relationshipManager, account, role);
     }
 
     private Identity getIdentity() {

@@ -16,18 +16,18 @@
  */
 package org.jboss.as.quickstarts.picketlink.idm.totp.jsf;
 
+import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.PartitionManager;
+import org.picketlink.idm.credential.Password;
+import org.picketlink.idm.model.basic.Realm;
+import org.picketlink.idm.model.basic.User;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.PartitionManager;
-import org.picketlink.idm.credential.Password;
-import org.picketlink.idm.model.sample.Realm;
-import org.picketlink.idm.model.sample.User;
-import static org.jboss.as.quickstarts.picketlink.idm.totp.jsf.Resources.REALM.acme;
-import static org.jboss.as.quickstarts.picketlink.idm.totp.jsf.Resources.REALM.umbrella;
-import static org.jboss.as.quickstarts.picketlink.idm.totp.jsf.Resources.REALM.wayne;
+
+import static org.jboss.as.quickstarts.picketlink.idm.totp.jsf.Resources.REALM.*;
 
 @Startup
 @Singleton

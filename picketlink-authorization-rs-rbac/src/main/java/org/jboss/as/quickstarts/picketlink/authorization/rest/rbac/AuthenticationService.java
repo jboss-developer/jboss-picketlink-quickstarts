@@ -16,22 +16,23 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.rest.rbac;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import org.picketlink.Identity;
 import org.picketlink.credential.DefaultLoginCredentials;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.model.Account;
-import org.picketlink.idm.model.sample.Grant;
-import org.picketlink.idm.model.sample.Role;
+import org.picketlink.idm.model.basic.Grant;
+import org.picketlink.idm.model.basic.Role;
 import org.picketlink.idm.query.RelationshipQuery;
+
+import javax.inject.Inject;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *  <p>

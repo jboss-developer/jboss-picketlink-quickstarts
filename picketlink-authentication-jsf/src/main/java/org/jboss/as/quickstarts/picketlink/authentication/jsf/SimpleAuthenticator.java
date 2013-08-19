@@ -16,13 +16,14 @@
  */
 package org.jboss.as.quickstarts.picketlink.authentication.jsf;
 
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import org.picketlink.annotations.PicketLink;
 import org.picketlink.authentication.BaseAuthenticator;
 import org.picketlink.credential.DefaultLoginCredentials;
-import org.picketlink.idm.model.sample.User;
+import org.picketlink.idm.model.basic.User;
+
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 
 /**
  * A simple PicketLink authenticator that will accept a hard coded username/password value. The
