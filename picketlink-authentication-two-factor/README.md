@@ -1,4 +1,4 @@
-picketlink-authentication-http-basic: PicketLink Two-Factor Authentication
+picketlink-authentication-two-factor: PicketLink Two-Factor Authentication
 ===============================
 Author: Pedro Igor
 Level: Beginner
