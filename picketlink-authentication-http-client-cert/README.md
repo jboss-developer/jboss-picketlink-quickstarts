@@ -93,7 +93,7 @@ If it is configured correctly, you should be asked to trust the server certifica
 Import the Certificate into Your Browser
 ---------------------------------
 
-Before you access the application, you must import the *client.cer*, which holds the client certificate, into your browser.
+Before you access the application, you must import the *client.keystore*, which holds the client certificate, into your browser.
 
 When you access the application, the browser should ask you which certificate to use to authenticate with the server. 
 Select it and you're ready to go.
