@@ -93,10 +93,26 @@ If it is configured correctly, you should be asked to trust the server certifica
 Import the Certificate into Your Browser
 ---------------------------------
 
-Before you access the application, you must import the *client.keystore*, which holds the client certificate, into your browser.
+Before you access the application, you must import the *client.cer*, which holds the client certificate, into your browser.
 
-When you access the application, the browser should ask you which certificate to use to authenticate with the server. 
-Select it and you're ready to go.
+#### Import the Certificate into Google Chrome
+
+1. Click the Chrome menu icon (3 horizontal bars) in the upper right on the browser toolbar and choose 'Settings'. This takes you to <chrome://settings/>.
+2. At the bottom of the page, click on the 'Show advanced settings...' link.
+3. Find the section 'HTTPS/SSL' and click on the 'Manage certificates...' button.
+4. In the 'Certificate manager' dialog box, choose the 'Your Certificates' tab and click the 'Import' button.
+5. Navigate to the `JBOSS_HOME/standalone/configuration/` directory and select the `client.keystore` file. You will be prompted to enter the  password: `change_it`.
+5. The certificate is now installed in the Google Chrome browser.
+
+#### Import the Certificate into Mozilla Firefox
+
+1. Click the 'Edit' menu item on the browser menu and choose 'Preferences'.
+2. A new window will open. Select the 'Advanced' icon and after that the 'Certificates' tab.
+3. On the 'Certificates' tab, mark the option 'Ask me every time' and click the 'View Certificates' button.
+4. A new window will open. Select the 'Your Certificates' tab and click the 'Import' button.
+5. Navigate to the `JBOSS_HOME/standalone/configuration/` directory and select the `client.keystore` file. See the *Create the Client Certicates* section for more details.
+6. You will be prompted to enter the  password: `change_it`.
+7. The certificate is now installed in the Mozilla Firefox browser.
 
 
 System requirements
