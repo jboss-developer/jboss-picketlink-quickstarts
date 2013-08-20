@@ -63,6 +63,7 @@ This script adds and configures the `https` connector to the `web` subsystem in 
 
         {"outcome" => "success"}
         {"outcome" => "success"}
+        {"outcome" => "success"}
 
 This command reloads the server configuration before completion. You don`t need to manually stop/start the server to the configuration take effect.
 
@@ -185,6 +186,7 @@ You can remove the security domain configuration by running the  `remove-https.c
         JBOSS_HOME/bin/jboss-cli.sh --connect --file=remove-https.cli 
 This script removes the `https` connector from the `web` subsystem in the server configuration. You should see the following result when you run the script:
 
+        {"outcome" => "success"}
         {"outcome" => "success"}
 
 

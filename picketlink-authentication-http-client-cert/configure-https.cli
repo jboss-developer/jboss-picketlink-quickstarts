@@ -18,4 +18,4 @@
 //subsystem=web/connector=https/ssl=configuration:add(name="localhost-ssl",key-alias="server",password="change_it",certificate-key-file="${jboss.server.config.dir}/server.keystore",protocol="TLSv1", verify-client="want", ca-certificate-file="${jboss.server.config.dir}/client.truststore")
 
 # Reload the server configuration
-reload
+:reload
