@@ -22,6 +22,20 @@ Before you run this example, you must create certificates and configure the serv
 
 The latest PicketLink documentation is available [here](http://docs.jboss.org/picketlink/2/latest/).
 
+System requirements
+-------------------
+
+All you need to build this project is Java 6.0 (Java SDK 1.6) or better, Maven 3.0 or better.
+
+The application this project produces is designed to be run on JBoss Enterprise Application Platform 6 or JBoss AS 7.
+
+
+Configure Maven
+---------------
+
+If you have not yet done so, you must [Configure Maven](../README.md#configure-maven) before testing the quickstarts.
+
+
 Create the Client Certicates
 ------------------------
 
@@ -114,20 +128,6 @@ Before you access the application, you must import the *client.cer*, which holds
 5. Navigate to the `JBOSS_HOME/standalone/configuration/` directory and select the `client.keystore` file. See the *Create the Client Certicates* section for more details.
 6. You will be prompted to enter the  password: `change_it`.
 7. The certificate is now installed in the Mozilla Firefox browser.
-
-
-System requirements
--------------------
-
-All you need to build this project is Java 6.0 (Java SDK 1.6) or better, Maven 3.0 or better.
-
-The application this project produces is designed to be run on JBoss Enterprise Application Platform 6 or JBoss AS 7. 
-
- 
-Configure Maven
----------------
-
-If you have not yet done so, you must [Configure Maven](../README.md#configure-maven) before testing the quickstarts.
 
 
 Start JBoss Enterprise Application Platform 6 or JBoss AS 7 with the Web Profile
