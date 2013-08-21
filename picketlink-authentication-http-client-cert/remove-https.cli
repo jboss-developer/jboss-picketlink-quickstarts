@@ -17,4 +17,4 @@
 //subsystem=web/connector=https:remove
 
 # Reload the server configuration
-reload
+:reload
