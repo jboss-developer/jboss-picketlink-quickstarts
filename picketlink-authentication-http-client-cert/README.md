@@ -36,7 +36,7 @@ Create the Client Certicates
    You'll be prompted for some additional information, such as your name, organizational unit, and location. Enter any values you prefer.
 3. Create the client certificate, which is used to authenticate against the server when accessing a resource through SSL.
 
-        keytool -genkey -alias client -keystore client.keystore -storepass change_it -validity 365 -keyalg RSA -keysize 2048 -storetype pkcs12
+         keytool -genkey -alias client -keystore client.keystore -storepass change_it -validity 365 -keyalg RSA -keysize 2048 -storetype pkcs12 -dname "CN=client, OU=Org. Unit, O=Company, ST=NC, C=US"
 4. Export the client certificate and create a truststore by importing this certificate:
 
         keytool -exportcert -keystore client.keystore  -storetype pkcs12 -storepass change_it -alias client -keypass change_it -file client.cer
