@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: CDI, PicketLink, JSF
 Summary: Basic example that demonstrates how to use two-factor authentication using Time-based One-Time Passwords(TOTP) with a JSF view layer
 Target Product: EAP
-Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
+Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
 What is it?

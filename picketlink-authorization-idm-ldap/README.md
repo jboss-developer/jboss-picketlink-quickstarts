@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: CDI, PicketLink, JSF
 Summary: Basic example that demonstrates IDM-based authorization using a LDAP-based PicketLink IDM configuration
 Target Product: EAP
-Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
+Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
 What is it?

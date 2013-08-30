@@ -5,7 +5,7 @@ Level: Intermediate
 Technologies: CDI, PicketLink, Apache Deltaspike, JAX-RS
 Summary: Basic example that demonstrates how to use RBAC to your JAX-RS Endpoints
 Target Product: EAP
-Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
+Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
 What is it?

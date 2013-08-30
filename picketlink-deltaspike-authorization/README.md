@@ -6,7 +6,7 @@ Technologies: JSF, CDI, PicketLink, Deltaspike
 Summary: Demonstrate the creation of a custom authorization example using PicketLink and @SecurityBindingType from DeltaSpike
 Prerequisites: 
 Target Product: WFK
-Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
+Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?
 -----------

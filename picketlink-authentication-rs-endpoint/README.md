@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: CDI, PicketLink, JAX-RS
 Summary: Basic example that demonstrates how to create a JAX-RS Authentication Endpoint using PicketLink
 Target Product: EAP
-Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
+Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
 What is it?

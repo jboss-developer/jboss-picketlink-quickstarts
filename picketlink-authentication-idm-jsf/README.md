@@ -5,7 +5,7 @@ Level: Beginner
 Technologies: CDI, PicketLink, JSF
 Summary: Basic example that demonstrates simple username/password authentication using a default PicketLink IDM configuration with a JSF view layer
 Target Product: EAP
-Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
+Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?
 -----------
