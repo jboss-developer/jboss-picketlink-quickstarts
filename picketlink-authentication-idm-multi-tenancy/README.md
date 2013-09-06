@@ -48,7 +48,7 @@ The application this project produces is designed to be run on JBoss Enterprise 
 Configure Maven
 ---------------
 
-If you have not yet done so, you must [Configure Maven](../README.md#configure-maven) before testing the quickstarts.
+If you have not yet done so, you must [Configure Maven](http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#configure_maven) before testing the quickstarts.
 
 
 Start JBoss Enterprise Application Platform 6 or JBoss AS 7 with the Web Profile
