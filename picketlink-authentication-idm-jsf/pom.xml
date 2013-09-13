@@ -21,7 +21,7 @@
 
   <groupId>org.jboss.quickstarts.eap</groupId>
   <artifactId>jboss-as-picketlink-authentication-idm-jsf</artifactId>
-  <version>7.1.2-SNAPSHOT</version>
+  <version>6.2.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>JBoss EAP Quickstart: picketlink-authentication-idm-jsf</name>
   <description>JBoss EAP Quickstart: PicketLink IDM Simple Authentication with JSF</description>

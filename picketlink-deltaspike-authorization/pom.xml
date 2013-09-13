@@ -21,7 +21,7 @@
 
   <groupId>org.jboss.quickstarts.eap</groupId>
   <artifactId>jboss-as-picketlink-deltaspike-authorization</artifactId>
-  <version>7.1.2-SNAPSHOT</version>
+  <version>6.2.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>JBoss WFK Quickstart: picketlink-deltaspike-authorization</name>
   <description>PicketLink with DeltaSpike Authorization: shows a custom authorization example using security binding
@@ -52,7 +52,7 @@
     <version.jboss.bom.eap>6.2.0-redhat-1</version.jboss.bom.eap>
 
     <!-- Define the version of the JBoss WFK BOMs we want to import to specify tested stacks. -->
-    <version.jboss.wfk.bom>2.4.0-redhat-1</version.jboss.wfk.bom>
+    <version.jboss.bom.wfk>2.4.0-redhat-1</version.jboss.bom.wfk>
 
     <!-- Alternatively, comment out the above line, and un-comment the
         line below to use version 1.0.4.Final-redhat-3 which is a release certified
@@ -74,7 +74,7 @@
       <dependency>
         <groupId>org.jboss.bom.wfk</groupId>
         <artifactId>jboss-javaee-6.0-with-deltaspike</artifactId>
-        <version>${version.jboss.wfk.bom}</version>
+        <version>${version.jboss.bom.wfk}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

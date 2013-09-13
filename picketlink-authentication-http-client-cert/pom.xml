@@ -21,7 +21,7 @@
 
   <groupId>org.jboss.quickstarts.eap</groupId>
   <artifactId>jboss-as-picketlink-authentication-http-client-cert</artifactId>
-  <version>7.1.2-SNAPSHOT</version>
+  <version>6.2.0-SNAPSHOT</version>
   <packaging>war</packaging>
   <name>JBoss AS Quickstarts: PicketLink HTTP CLIENT-CERT Authentication</name>
   <description>JBoss AS Quickstarts: PicketLink HTTP CLIENT-CERT Authentication</description>
