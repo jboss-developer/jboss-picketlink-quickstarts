@@ -18,6 +18,9 @@ The PicketLink Subsystem is configured with a JPA-based identity management conf
 you don't need the PicketLink libraries inside your deployment (eg.: WEB-INF/lib). The only thing you need to do is add a
 *META-INF/jboss-deployment-structure.xml* file to the root directory of your application.
 
+It is important that you have the PicketLink modules properly installed and configured in your EAP installation. You can use
+the [PicketLink Installer] (http://www.picketlink.org/getstarted.html) for that.
+
 The latest PicketLink documentation is available [here](http://docs.jboss.org/picketlink/2/latest/).
 
 System requirements
