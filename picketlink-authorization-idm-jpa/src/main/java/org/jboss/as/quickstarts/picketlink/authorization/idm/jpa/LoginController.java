@@ -16,6 +16,8 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.idm.jpa;
 
+import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -31,12 +33,13 @@ import org.picketlink.Identity.AuthenticationResult;
  * @author Shane Bryzak
  * 
  */
+@Stateless
 @Named
 public class LoginController {
 
     @Inject
     private Identity identity;
-    
+
     @Inject
     private FacesContext facesContext;
 

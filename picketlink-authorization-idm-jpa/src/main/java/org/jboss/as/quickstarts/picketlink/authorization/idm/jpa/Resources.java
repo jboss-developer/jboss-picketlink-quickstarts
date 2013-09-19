@@ -16,6 +16,7 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.idm.jpa;
 
+import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
@@ -36,13 +37,11 @@ import org.picketlink.annotations.PicketLink;
  * private FacesContext facesContext;
  * </pre>
  */
+@Stateful
 public class Resources {
 
-    @Produces
-    @RequestScoped
-    public FacesContext produceFacesContext() {
-        return FacesContext.getCurrentInstance();
-    }
+    @PersistenceContext(unitName = "picketlink-default")
+    private EntityManager em;
 
     /*
      * Since we are using JPAIdentityStore to store identity-related data, we must provide it with an EntityManager via a
@@ -50,7 +49,13 @@ public class Resources {
      */
     @Produces
     @PicketLink
-    @PersistenceContext(unitName = "picketlink-default")
-    private EntityManager picketLinkEntityManager;
+    public EntityManager getPicketLinkEntityManager() {
+        return em;
+    }
 
+    @Produces
+    @RequestScoped
+    public FacesContext produceFacesContext() {
+        return FacesContext.getCurrentInstance();
+    }
 }
