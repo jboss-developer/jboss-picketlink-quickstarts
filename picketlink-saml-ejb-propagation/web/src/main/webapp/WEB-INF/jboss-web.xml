@@ -1,0 +1,3 @@
+<jboss-web>
+  <security-domain>picketlink-saml-ejb-propagation-web</security-domain>
+</jboss-web>

@@ -1,0 +1,19 @@
+<jboss-deployment-structure>
+  <sub-deployment name="jboss-as-picketlink-saml-ejb-propagation-sts.war">
+    <dependencies>
+      <module name="org.picketlink" />
+    </dependencies>
+  </sub-deployment>
+  <sub-deployment name="jboss-as-picketlink-saml-ejb-propagation-web.war">
+    <dependencies>
+      <module name="org.picketlink" />
+      <module name="org.jboss.remote-naming">
+        <imports>
+          <include path="/**" />
+        </imports>
+      </module>
+      <module name="org.jboss.ejb-client"/>
+      <module name="org.jboss.remoting3"/>
+    </dependencies>
+  </sub-deployment>
+</jboss-deployment-structure>
