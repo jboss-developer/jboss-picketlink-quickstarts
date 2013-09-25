@@ -22,10 +22,10 @@ import java.util.Set;
  * <p> Simple test {@code Servlet} that calls methods on a remote EJB3 beans and prints whether the client has access to
  * each method or not in the response. </p>
  *
- * @author <a href="mailto:sguilhen@redhat.com">Stefan Guilhen</a>
+ * @author Pedro Igor
  */
 public class TestServlet extends HttpServlet {
-    private static final long serialVersionUID = 2195802688711027241L;
+
     public static final String EJB_JNDI_URL = "jboss-as-picketlink-saml-ejb-propagation/jboss-as-picketlink-saml-ejb-propagation-ejb//EchoServiceImpl!org.picketlink.federation.wstrust.ejb.EchoService";
 
     /*
@@ -65,7 +65,7 @@ public class TestServlet extends HttpServlet {
             out.println("Calling EJB that requires a SAML assertion credential and a Role Manager...");
             out.println("Response: " + object.echoManager("Hi "));
         } catch (EJBAccessException ejbae) {
-            out.println("You are not allows to invoke method echoManager.");
+            out.println("You are not allowed to invoke method echoManager.");
         } catch (Exception ne) {
             throw new ServletException("Could not invoke EJB.", ne);
         } finally {
@@ -87,8 +87,8 @@ public class TestServlet extends HttpServlet {
         Hashtable<String, Object> env = new Hashtable<String, Object>();
 
         env.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
-        env.put("java.naming.factory.initial", "org.jboss.naming.remote.client.InitialContextFactory");
-        env.put("java.naming.provider.url", "remote://localhost:4447");
+        env.put(Context.INITIAL_CONTEXT_FACTORY, "org.jboss.naming.remote.client.InitialContextFactory");
+        env.put(Context.PROVIDER_URL, "remote://localhost:4447");
         env.put("jboss.naming.client.ejb.context", "true");
         env.put("jboss.naming.client.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
         env.put("javax.security.sasl.policy.noplaintext", "false");

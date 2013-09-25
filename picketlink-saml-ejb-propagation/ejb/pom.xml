@@ -30,8 +30,6 @@
     <version>6.2.0-redhat-SNAPSHOT</version>
   </parent>
 
-  <packaging>ejb</packaging>
-
   <artifactId>jboss-as-picketlink-saml-ejb-propagation-ejb</artifactId>
 
   <name>JBoss EAP Quickstart: picketlink-saml-ejb-propagation - ejb</name>
