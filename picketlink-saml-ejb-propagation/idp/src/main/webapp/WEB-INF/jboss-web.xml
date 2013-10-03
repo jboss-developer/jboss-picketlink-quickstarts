@@ -1,0 +1,6 @@
+<jboss-web>
+  <security-domain>idp</security-domain>
+  <valve>
+     <class-name>org.picketlink.identity.federation.bindings.tomcat.idp.IDPWebBrowserSSOValve</class-name>
+   </valve>
+</jboss-web>

@@ -1,22 +1,27 @@
 package org.picketlink.federation.wstrust.ejb;
 
-import org.jboss.security.SecurityContextAssociation;
+import org.picketlink.identity.federation.api.saml.v2.sig.SAML2Signature;
 import org.picketlink.identity.federation.core.saml.v2.util.DocumentUtil;
-import org.picketlink.identity.federation.core.wstrust.SamlCredential;
+import org.picketlink.identity.federation.core.util.KeyStoreUtil;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
 import javax.ejb.EJBAccessException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.security.auth.Subject;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.security.KeyPair;
+import java.security.KeyStore;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.util.Hashtable;
-import java.util.Set;
 
 /**
  * <p> Simple test {@code Servlet} that calls methods on a remote EJB3 beans and prints whether the client has access to
@@ -28,24 +33,13 @@ public class TestServlet extends HttpServlet {
 
     public static final String EJB_JNDI_URL = "jboss-as-picketlink-saml-ejb-propagation/jboss-as-picketlink-saml-ejb-propagation-ejb//EchoServiceImpl!org.picketlink.federation.wstrust.ejb.EchoService";
 
-    /*
-     * (non-Javadoc)
-     * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-     */
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // if logout was passed as a get parameter, perform the logout by invalidating the session.
-        if (req.getParameter("logout") != null) {
-            req.getSession().invalidate();
-            resp.sendRedirect("test");
-            return;
-        }
-
+    protected void service(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException, IOException {
         invokeEJB(req, resp);
     }
 
     private void invokeEJB(final HttpServletRequest req, final HttpServletResponse resp) throws ServletException {
-        Context context = createInitialContext();
+        Context context = createInitialContext(req);
 
         PrintWriter out = null;
 
@@ -69,20 +63,43 @@ public class TestServlet extends HttpServlet {
         } catch (Exception ne) {
             throw new ServletException("Could not invoke EJB.", ne);
         } finally {
-            if (context != null) {
-                try {
-                    context.close();
-                } catch (NamingException e) {
-                }
-            }
-
             if (out != null) {
                 out.close();
             }
         }
     }
 
-    private Context createInitialContext() throws ServletException {
+    private String getSignedAssertion(HttpServletRequest httpRequest) {
+        HttpSession session = httpRequest.getSession();
+
+        Document assertion = (Document) session.getAttribute(SAMLConstants.ASSERTION_SESSION_ATTRIBUTE_NAME);
+
+        return DocumentUtil.asString(signAssertion(assertion));
+    }
+
+    private Document signAssertion(final Document assertion) {
+        Document signedAssertion = null;
+
+        try {
+            Element assertionElement = assertion.getDocumentElement();
+            SAML2Signature signature = new SAML2Signature();
+            InputStream keyStoreIs = getClass().getResourceAsStream("/sts_keystore.jks");
+
+            KeyStore keyStore = KeyStoreUtil.getKeyStore(keyStoreIs, "testpass".toCharArray());
+
+            PrivateKey privateKey = (PrivateKey) keyStore.getKey("sts", "keypass".toCharArray());
+            PublicKey publicKey = KeyStoreUtil.getPublicKey(keyStore, "sts", "keypass".toCharArray());
+
+            String id = assertionElement.getAttribute("ID");
+
+            signedAssertion = signature.sign(assertion, id, new KeyPair(publicKey, privateKey));
+        } catch (Exception e) {
+            throw new RuntimeException("Error signing assertion.", e);
+        }
+        return signedAssertion;
+    }
+
+    private Context createInitialContext(final HttpServletRequest request) throws ServletException {
         // JNDI environment configuration properties
         Hashtable<String, Object> env = new Hashtable<String, Object>();
 
@@ -93,29 +110,17 @@ public class TestServlet extends HttpServlet {
         env.put("jboss.naming.client.connect.options.org.xnio.Options.SASL_POLICY_NOPLAINTEXT", "false");
         env.put("javax.security.sasl.policy.noplaintext", "false");
 
-        SamlCredential samlCredential = getSamlCredential();
+//        SamlCredential samlCredential = getSamlCredential();
 
         try {
             // provide the user principal and credential. The credential is the previously issued SAML assertion
             env.put(Context.SECURITY_PRINCIPAL, "admin");
-            env.put(Context.SECURITY_CREDENTIALS, DocumentUtil.getNodeAsString(samlCredential.getAssertionAsElement()));
+            env.put(Context.SECURITY_CREDENTIALS, getSignedAssertion(request));
 
             return new InitialContext(env);
         } catch (Exception e) {
             throw new ServletException("Could not create context.", e);
         }
-    }
-
-    private SamlCredential getSamlCredential() {
-        Subject subject = SecurityContextAssociation.getSubject();
-
-        Set<SamlCredential> credentials = subject.getPublicCredentials(SamlCredential.class);
-
-        if (credentials.isEmpty()) {
-            throw new RuntimeException("SAML Credential not found for Subject.");
-        }
-
-        return credentials.iterator().next();
     }
 
     /*

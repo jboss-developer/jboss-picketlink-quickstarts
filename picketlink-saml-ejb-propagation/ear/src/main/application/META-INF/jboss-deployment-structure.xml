@@ -4,6 +4,11 @@
       <module name="org.picketlink" />
     </dependencies>
   </sub-deployment>
+  <sub-deployment name="jboss-as-picketlink-saml-ejb-propagation-idp.war">
+    <dependencies>
+      <module name="org.picketlink" />
+    </dependencies>
+  </sub-deployment>
   <sub-deployment name="jboss-as-picketlink-saml-ejb-propagation-web.war">
     <dependencies>
       <module name="org.picketlink" />

@@ -25,6 +25,7 @@
   <modules>
     <module>ejb</module>
     <module>sts</module>
+    <module>idp</module>
     <module>web</module>
     <module>ear</module>
   </modules>
@@ -58,8 +59,6 @@
 
   <dependencyManagement>
     <dependencies>
-      <!-- Define the version of the EJB jar so that we don't need
-          to repeat ourselves in every module -->
       <dependency>
         <groupId>org.jboss.quickstarts.eap</groupId>
         <artifactId>jboss-as-picketlink-saml-ejb-propagation-ejb</artifactId>
@@ -67,8 +66,6 @@
         <type>ejb</type>
       </dependency>
 
-      <!-- Define the version of the WAR so that we don't need to repeat
-          ourselves in every module -->
       <dependency>
         <groupId>org.jboss.quickstarts.eap</groupId>
         <artifactId>jboss-as-picketlink-saml-ejb-propagation-web</artifactId>
@@ -80,6 +77,14 @@
       <dependency>
         <groupId>org.jboss.quickstarts.eap</groupId>
         <artifactId>jboss-as-picketlink-saml-ejb-propagation-sts</artifactId>
+        <version>${project.version}</version>
+        <type>war</type>
+        <scope>compile</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.jboss.quickstarts.eap</groupId>
+        <artifactId>jboss-as-picketlink-saml-ejb-propagation-idp</artifactId>
         <version>${project.version}</version>
         <type>war</type>
         <scope>compile</scope>

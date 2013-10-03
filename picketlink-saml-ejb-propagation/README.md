@@ -18,9 +18,11 @@ The example is composed of three maven projects, each with a shared parent. The 
 
 2. `sts`: This project contains the PicketLink Security Token Service, responsible to issue and validate SAML tokens using WS-Trust.
 
-3. `web`: This project contains a Servlet that propagates the SAML assertion when invoking an EJB.
+3. `idp`: This project contains the PicketLink Identity Provider, responsible for the SAML Web Browser SSO.
 
-4. `ear`: This project builds the EAR artifact and pulls in the ejb and web artifacts.
+4. `web`: This project contains a Service Provider with a Servlet that propagates the SAML assertion when invoking an EJB.
+
+5. `ear`: This project builds the EAR artifact and pulls in the ejb and web artifacts.
 
 The root `pom.xml` builds each of the subprojects in the above order and deploys the EAR archive to the server.
 
@@ -29,12 +31,14 @@ and use their SAML assertions to propagate the security context when invoking th
 
 The steps below summarize what you'll see from this example:
 
-1. The web application authenticate users using the PicketLink STS. For each user a token will be issued and stored for further access.
+1. The user tries to to access the web application and is redirect to the IDP.
 
-2. Once authenticated, the user can access the URL: http://localhost:8080/jboss-as-picketlink-saml-ejb-propagation/test. This URL is mapped to a Servlet that
+2. The user provide his credentials and is authenticated. After that the user is redirect back to the web application.
+
+3. Once authenticated, the user can access the URL: http://localhost:8080/jboss-as-picketlink-saml-ejb-propagation/test. This URL is mapped to a Servlet that
 knows how to invoke an EJB propagating the user's security context using his SAML assertion.
 
-3. The EJB has two protected methods. The *echo* method is allowed only for users with the *STSClient* role. The *echoManager* method is
+4. The EJB has two protected methods. The *echo* method is allowed only for users with the *STSClient* role. The *echoManager* method is
 allowed only for users with the "Manager" role. By default, users have only the *STSClient* role granted, what means that the invocation
 of the "echoManager* method will not be allowed.
 
@@ -63,20 +67,11 @@ Configuring the Security Domains
 
 Before deploying the application you must configure some security domains in your JBOSS_HOME/standalone/configuration/standalone.xml.
 
-Add the security domain for the web application:
+Add the security domain for the web application (Service Provider):
 
-        <security-domain name="picketlink-saml-ejb-propagation-web" cache-type="default">
+        <security-domain name="sp" cache-type="default">
             <authentication>
-                <login-module code="org.picketlink.identity.federation.core.wstrust.auth.STSIssuingLoginModule" flag="required" module="org.picketlink">
-                    <module-option name="endpointAddress" value="http://localhost:8080/picketlink-sts/PicketLinkSTS"/>
-                    <module-option name="serviceName" value="PicketLinkSTS"/>
-                    <module-option name="portName" value="PicketLinkSTSPort"/>
-                </login-module>
-                <login-module code="UsersRoles" flag="required">
-                    <module-option name="password-stacking" value="useFirstPass"/>
-                    <module-option name="usersProperties" value="${jboss.server.config.dir}/users.properties"/>
-                    <module-option name="rolesProperties" value="${jboss.server.config.dir}/roles.properties"/>
-                </login-module>
+                <login-module code="org.picketlink.identity.federation.bindings.jboss.auth.SAML2LoginModule" flag="required"/>
             </authentication>
         </security-domain>
 
@@ -91,13 +86,24 @@ Add the security domain for the PicketLink STS:
             </authentication>
         </security-domain>
 
+Add the security domain for the PicketLink Identity Provider:
+
+        <security-domain name="idp" cache-type="default">
+            <authentication>
+                <login-module code="UsersRoles" flag="required">
+                    <module-option name="usersProperties" value="${jboss.server.config.dir}/users.properties"/>
+                    <module-option name="rolesProperties" value="${jboss.server.config.dir}/roles.properties"/>
+                </login-module>
+            </authentication>
+        </security-domain>
+
 Add the security domain for the EJB:
 
         <security-domain name="picketlink-saml-ejb-propagation-ejb" cache-type="default">
             <authentication>
                 <login-module code="org.picketlink.identity.federation.bindings.jboss.auth.SAML2STSLoginModule" flag="required" module="org.picketlink">
                     <module-option name="configFile" value="${jboss.server.config.dir}/sts-config.properties"/>
-                    <module-option name="roleKey" value="role"/>
+                    <module-option name="roleKey" value="Role"/>
                     <module-option name="password-stacking" value="useFirstPass"/>
                 </login-module>
             </authentication>
@@ -109,7 +115,7 @@ Add the security domain for EJB Remoting:
             <authentication>
                 <login-module code="org.picketlink.identity.federation.bindings.jboss.auth.SAML2STSLoginModule" flag="required" module="org.picketlink">
                     <module-option name="configFile" value="${jboss.server.config.dir}/sts-config.properties"/>
-                    <module-option name="roleKey" value="role"/>
+                    <module-option name="roleKey" value="Role"/>
                     <module-option name="password-stacking" value="useFirstPass"/>
                 </login-module>
             </authentication>

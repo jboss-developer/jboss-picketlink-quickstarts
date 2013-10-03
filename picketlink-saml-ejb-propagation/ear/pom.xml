@@ -54,6 +54,11 @@
     </dependency>
     <dependency>
       <groupId>org.jboss.quickstarts.eap</groupId>
+      <artifactId>jboss-as-picketlink-saml-ejb-propagation-idp</artifactId>
+      <type>war</type>
+    </dependency>
+    <dependency>
+      <groupId>org.jboss.quickstarts.eap</groupId>
       <artifactId>jboss-as-picketlink-saml-ejb-propagation-ejb</artifactId>
       <type>ejb</type>
     </dependency>
@@ -89,6 +94,12 @@
               <groupId>org.jboss.quickstarts.eap</groupId>
               <artifactId>jboss-as-picketlink-saml-ejb-propagation-sts</artifactId>
               <contextRoot>/picketlink-sts</contextRoot>
+            </webModule>
+
+            <webModule>
+              <groupId>org.jboss.quickstarts.eap</groupId>
+              <artifactId>jboss-as-picketlink-saml-ejb-propagation-idp</artifactId>
+              <contextRoot>/idp</contextRoot>
             </webModule>
           </modules>
           <fileNameMapping>no-version</fileNameMapping>

@@ -1,0 +1,26 @@
+<PicketLink xmlns="urn:picketlink:identity-federation:config:2.1">
+  <PicketLinkSP xmlns="urn:picketlink:identity-federation:config:2.1"
+                ServerEnvironment="tomcat" BindingType="POST" SupportsSignatures="true">
+    <IdentityURL>http://localhost:8080/idp/</IdentityURL>
+    <ServiceURL>http://localhost:8080/jboss-as-picketlink-saml-ejb-propagation/</ServiceURL>
+    <KeyProvider ClassName="org.picketlink.identity.federation.core.impl.KeyStoreKeyManager">
+      <Auth Key="KeyStoreURL" Value="sts_keystore.jks"/>
+      <Auth Key="KeyStorePass" Value="testpass"/>
+      <Auth Key="SigningKeyAlias" Value="sts"/>
+      <Auth Key="SigningKeyPass" Value="keypass"/>
+      <ValidatingAlias Key="localhost" Value="sts"/>
+      <ValidatingAlias Key="127.0.0.1" Value="sts"/>
+    </KeyProvider>
+  </PicketLinkSP>
+  <Handlers xmlns="urn:picketlink:identity-federation:handler:config:2.1">
+    <Handler
+            class="org.picketlink.identity.federation.web.handlers.saml2.SAML2LogOutHandler"/>
+    <Handler class="org.picketlink.federation.wstrust.ejb.CustomSAML2AuthenticationHandler"/>
+    <Handler
+            class="org.picketlink.identity.federation.web.handlers.saml2.RolesGenerationHandler"/>
+    <Handler
+            class="org.picketlink.identity.federation.web.handlers.saml2.SAML2SignatureGenerationHandler"/>
+    <Handler
+            class="org.picketlink.identity.federation.web.handlers.saml2.SAML2SignatureValidationHandler"/>
+  </Handlers>
+</PicketLink>

@@ -1,5 +1,5 @@
 <PicketLinkSTS xmlns="urn:picketlink:identity-federation:config:1.0"
-               STSName="PicketLinkSTS" TokenTimeout="7200" EncryptToken="false">
+               STSName="PicketLinkSTS" TokenTimeout="50000" ClockSkew="0" EncryptToken="false">
   <KeyProvider ClassName="org.picketlink.identity.federation.core.impl.KeyStoreKeyManager">
     <Auth Key="KeyStoreURL" Value="sts_keystore.jks"/>
     <Auth Key="KeyStorePass" Value="testpass"/>
