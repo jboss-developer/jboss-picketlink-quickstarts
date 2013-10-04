@@ -114,7 +114,7 @@ public class TestServlet extends HttpServlet {
 
         try {
             // provide the user principal and credential. The credential is the previously issued SAML assertion
-            env.put(Context.SECURITY_PRINCIPAL, "admin");
+            env.put(Context.SECURITY_PRINCIPAL, request.getUserPrincipal().getName());
             env.put(Context.SECURITY_CREDENTIALS, getSignedAssertion(request));
 
             return new InitialContext(env);
