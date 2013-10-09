@@ -4,7 +4,6 @@ Author: Anil Saldhana
 Level: Beginner
 Technologies: CDI, PicketLink, JSF
 Summary: Basic example that demonstrates simple username/password authentication using the FORM Authentication with a JSF view layer
-Target Product: EAP
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
@@ -58,13 +57,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-picketlink-authentication-form.war` to the running instance of the server.
+4. This will deploy `target/picketlink-authentication-form.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/jboss-as-picketlink-authentication-form>. 
+The application will be running at the following URL: <http://localhost:8080/picketlink-authentication-form>. 
 
 
 Undeploy the Archive
@@ -79,7 +78,7 @@ Undeploy the Archive
 
 Run the Quickstart in JBoss Developer Studio or Eclipse
 -------------------------------------
-You can also start the server and deploy the quickstarts from Eclipse using JBoss tools. For more information, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](../README.md#useeclipse) 
+You can also start the server and deploy the quickstarts from Eclipse using JBoss tools. For more information, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#useeclipse)
 
 
 Debug the Application
