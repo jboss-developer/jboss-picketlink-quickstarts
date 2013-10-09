@@ -1,4 +1,4 @@
-picketlink-authentication-form: PicketLink FORM Authentication
+picketlink-authentication-form: PicketLink HTTP FORM Authentication
 ===============================
 Author: Anil Saldhana
 Level: Beginner

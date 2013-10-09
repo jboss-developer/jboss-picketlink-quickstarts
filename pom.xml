@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.picketlink.quickstarts</groupId>
+  <artifactId>picketlink-quickstarts-parent</artifactId>
+  <version>2.5.3-SNAPSHOT</version>
+
+  <packaging>pom</packaging>
+
+  <name>PicketLink Quickstarts Parent</name>
+  <description>PicketLink Quickstarts Parent</description>
+
+  <url>http://www.picketlink.org</url>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <distribution>repo</distribution>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+    </license>
+  </licenses>
+
+  <modules>
+    <module>picketlink-authentication-form</module>
+    <module>picketlink-authentication-http-basic</module>
+    <module>picketlink-authentication-http-client-cert</module>
+    <module>picketlink-authentication-http-digest</module>
+    <module>picketlink-authentication-idm-jsf</module>
+    <module>picketlink-authentication-idm-multi-tenancy</module>
+    <module>picketlink-authentication-jsf</module>
+    <module>picketlink-authentication-recaptcha</module>
+    <module>picketlink-authentication-rs-endpoint</module>
+    <module>picketlink-authentication-two-factor</module>
+    <module>picketlink-authorization-idm-jpa</module>
+    <module>picketlink-authorization-idm-ldap</module>
+    <module>picketlink-authorization-rs-rbac</module>
+    <module>picketlink-deltaspike-authorization</module>
+  </modules>
+
+  <properties>
+    <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+  </properties>
+
+  <build>
+    <plugins>
+      <!-- The JBoss AS plugin deploys your apps to a local JBoss AS container -->
+      <!-- Disabling it here means that we don't try to deploy this POM! -->
+      <plugin>
+        <groupId>org.jboss.as.plugins</groupId>
+        <artifactId>jboss-as-maven-plugin</artifactId>
+        <version>${version.jboss.maven.plugin}</version>
+        <inherited>true</inherited>
+        <configuration>
+          <skip>true</skip>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

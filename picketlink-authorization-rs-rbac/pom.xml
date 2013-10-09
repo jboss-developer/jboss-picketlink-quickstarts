@@ -19,14 +19,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.jboss.quickstarts.eap</groupId>
-  <artifactId>jboss-as-picketlink-authorization-rs-rbac</artifactId>
-  <version>6.2.0-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>JBoss EAP Quickstart: picketlink-authorization-rs-rbac</name>
-  <description>JBoss EAP Quickstart: PicketLink Role-based Access Control(RBAC) for JAX-RS Endpoints</description>
+  <groupId>org.picketlink.quickstarts</groupId>
+  <artifactId>picketlink-authorization-rs-rbac</artifactId>
+  <version>2.5.3-SNAPSHOT</version>
 
-  <url>http://jboss.org/jbossas</url>
+  <packaging>war</packaging>
+
+  <name>PicketLink Quickstart: picketlink-authorization-rs-rbac</name>
+  <description>PicketLink Quickstart: PicketLink Role-based Access Control(RBAC) for JAX-RS Endpoints</description>
+
+  <url>http://www.picketlink.org</url>
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -36,57 +39,31 @@
   </licenses>
 
   <properties>
-    <!-- Explicitly declaring the source encoding eliminates the following 
-      message: -->
-    <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
-      resources, i.e. build is platform dependent! -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     <!-- JBoss dependency versions -->
-
     <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
-    <!-- Define the version of the JBoss EAP BOMs we want to import to specify
-      tested stacks. -->
-    <version.jboss.bom.eap>6.2.0-build-1</version.jboss.bom.eap>
+    <!-- PicketLink dependency versions -->
+    <version.picketlink.javaee.bom>2.5.3-SNAPSHOT</version.picketlink.javaee.bom>
 
-    <!-- Define the version of the JBoss WFK BOMs we want to import to specify tested stacks. -->
-    <version.jboss.bom.wfk>2.4.0-redhat-1</version.jboss.bom.wfk>
-
-    <version.compiler.plugin>3.1</version.compiler.plugin>
+    <!-- maven-war-plugin -->
     <version.war.plugin>2.1.1</version.war.plugin>
 
     <!-- maven-compiler-plugin -->
+    <version.compiler.plugin>3.1</version.compiler.plugin>
     <maven.compiler.target>1.6</maven.compiler.target>
     <maven.compiler.source>1.6</maven.compiler.source>
-
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- Dependency Management for PicketLink and Apache Deltaspike. -->
       <dependency>
-        <groupId>org.jboss.bom.eap</groupId>
-        <artifactId>jboss-javaee-6.0-with-security</artifactId>
-        <version>${version.jboss.bom.eap}</version>
-        <type>pom</type>
+        <groupId>org.picketlink</groupId>
+        <artifactId>picketlink-javaee-6.0-with-deltaspike</artifactId>
+        <version>${version.picketlink.javaee.bom}</version>
         <scope>import</scope>
-      </dependency>
-
-  <!-- JBoss distributes a complete set of Java EE 6 APIs including
-   a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or
-   a collection) of artifacts. We use this here so that we always get the correct
-   versions of artifacts. Here we use the jboss-javaee-6.0-with-deltaspike stack
-   (you can read this as the JBoss stack of the Java EE 6 APIs with Deltaspike).
-   You can actually use this stack with any version of JBoss AS that implements
-   Java EE 6, not just JBoss AS 7! -->
-      <dependency>
-        <groupId>org.jboss.bom.wfk</groupId>
-        <artifactId>jboss-javaee-6.0-with-deltaspike</artifactId>
-        <version>${version.jboss.bom.wfk}</version>
         <type>pom</type>
-        <scope>import</scope>
       </dependency>
-
     </dependencies>
   </dependencyManagement>
 
@@ -113,14 +90,6 @@
     <dependency>
       <groupId>org.jboss.spec.javax.annotation</groupId>
       <artifactId>jboss-annotations-api_1.1_spec</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Import the JSF API, we use provided scope as the API is included in 
-      JBoss AS 7 -->
-    <dependency>
-      <groupId>org.jboss.spec.javax.faces</groupId>
-      <artifactId>jboss-jsf-api_2.1_spec</artifactId>
       <scope>provided</scope>
     </dependency>
 

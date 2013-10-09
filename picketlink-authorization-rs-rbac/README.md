@@ -4,7 +4,6 @@ Author: Pedro Igor
 Level: Intermediate
 Technologies: CDI, PicketLink, Apache Deltaspike, JAX-RS
 Summary: Basic example that demonstrates how to use RBAC to your JAX-RS Endpoints
-Target Product: WFK
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
@@ -62,13 +61,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-picketlink-authorization-rs-rbac.war` to the running instance of the server.
+4. This will deploy `target/picketlink-authorization-rs-rbac.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/jboss-as-picketlink-authorization-rs-rbac>. 
+The application will be running at the following URL: <http://localhost:8080/picketlink-authorization-rs-rbac>. 
 
 
 Undeploy the Archive

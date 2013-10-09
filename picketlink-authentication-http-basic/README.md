@@ -4,7 +4,6 @@ Author: Pedro Igor
 Level: Beginner
 Technologies: CDI, PicketLink, JSF
 Summary: Basic example that demonstrates simple username/password authentication using the HTTP Basic scheme with a JSF view layer
-Target Product: EAP
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
@@ -54,7 +53,7 @@ Start JBoss Enterprise Application Platform 6 or JBoss AS 7 with the Web Profile
 Build and Deploy the Quickstart
 -------------------------
 
-_NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See [Build and Deploy the Quickstarts](../README.md#build-and-deploy-the-quickstarts) for complete instructions and additional options._
+_NOTE: The following build command assumes you have configured your Maven user settings. If you have not, you must include Maven setting arguments on the command line. See [Build and Deploy the Quickstarts]((http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#build-and-deploy-the-quickstarts) for complete instructions and additional options._
 
 1. Make sure you have started the JBoss Server as described above.
 2. Open a command line and navigate to the root directory of this quickstart.
@@ -62,13 +61,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-picketlink-authentication-http-basic.war` to the running instance of the server.
+4. This will deploy `target/picketlink-authentication-http-basic.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/jboss-as-picketlink-authentication-http-basic>. 
+The application will be running at the following URL: <http://localhost:8080/picketlink-authentication-http-basic>. 
 
 
 Undeploy the Archive
@@ -83,7 +82,7 @@ Undeploy the Archive
 
 Run the Quickstart in JBoss Developer Studio or Eclipse
 -------------------------------------
-You can also start the server and deploy the quickstarts from Eclipse using JBoss tools. For more information, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](../README.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts) 
+You can also start the server and deploy the quickstarts from Eclipse using JBoss tools. For more information, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts]((http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts)
 
 
 Debug the Application

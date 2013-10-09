@@ -19,16 +19,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.jboss.quickstarts.eap</groupId>
-  <artifactId>jboss-as-picketlink-deltaspike-authorization</artifactId>
-  <version>6.2.0-SNAPSHOT</version>
+  <groupId>org.picketlink.quickstarts</groupId>
+  <artifactId>picketlink-deltaspike-authorization</artifactId>
+  <version>2.5.3-SNAPSHOT</version>
+
   <packaging>war</packaging>
-  <name>JBoss WFK Quickstart: picketlink-deltaspike-authorization</name>
+
+  <name>PicketLink Quickstart: picketlink-deltaspike-authorization</name>
   <description>PicketLink with DeltaSpike Authorization: shows a custom authorization example using security binding
     types from DeltaSpike
   </description>
 
-  <url>http://jboss.org/jbossas</url>
+  <url>http://www.picketlink.org</url>
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -38,53 +41,30 @@
   </licenses>
 
   <properties>
-    <!-- Explicitly declaring the source encoding eliminates the following
-        message: -->
-    <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered
-        resources, i.e. build is platform dependent! -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     <!-- JBoss dependency versions -->
-
     <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
-    <!-- Define the version of the JBoss EAP BOMs we want to import to specify tested stacks. -->
-    <version.jboss.bom.eap>6.2.0-build-1</version.jboss.bom.eap>
+    <!-- PicketLink dependency versions -->
+    <version.picketlink.javaee.bom>2.5.3-SNAPSHOT</version.picketlink.javaee.bom>
 
-    <!-- Define the version of the JBoss WFK BOMs we want to import to specify tested stacks. -->
-    <version.jboss.bom.wfk>2.4.0-redhat-1</version.jboss.bom.wfk>
-
-    <!-- Alternatively, comment out the above line, and un-comment the
-        line below to use version 1.0.4.Final-redhat-3 which is a release certified
-        to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6
-        maven repository. -->
-    <!-- <version.jboss.bom.eap>1.0.6.Final-redhat-3</version.jboss.bom.eap> -->
-
-    <!-- other plugin versions -->
-    <version.compiler.plugin>3.1</version.compiler.plugin>
+    <!-- maven-war-plugin -->
     <version.war.plugin>2.1.1</version.war.plugin>
 
     <!-- maven-compiler-plugin -->
+    <version.compiler.plugin>3.1</version.compiler.plugin>
     <maven.compiler.target>1.6</maven.compiler.target>
     <maven.compiler.source>1.6</maven.compiler.source>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- Dependency Management for PicketLink and Apache Deltaspike. -->
       <dependency>
-        <groupId>org.jboss.bom.wfk</groupId>
-        <artifactId>jboss-javaee-6.0-with-deltaspike</artifactId>
-        <version>${version.jboss.bom.wfk}</version>
-        <type>pom</type>
+        <groupId>org.picketlink</groupId>
+        <artifactId>picketlink-javaee-6.0-with-deltaspike</artifactId>
+        <version>${version.picketlink.javaee.bom}</version>
         <scope>import</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.jboss.bom.eap</groupId>
-        <artifactId>jboss-javaee-6.0-with-security</artifactId>
-        <version>${version.jboss.bom.eap}</version>
         <type>pom</type>
-        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -115,8 +95,8 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Import the JSF API, we use provided scope as the API is included
-        in JBoss AS 7 -->
+    <!-- Import the JSF API, we use provided scope as the API is included in
+      JBoss AS 7 -->
     <dependency>
       <groupId>org.jboss.spec.javax.faces</groupId>
       <artifactId>jboss-jsf-api_2.1_spec</artifactId>

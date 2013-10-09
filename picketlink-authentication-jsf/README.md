@@ -4,7 +4,6 @@ Author: Shane Bryzak
 Level: Beginner
 Technologies: CDI, PicketLink
 Summary: Basic example that demonstrates simple username/password authentication using PicketLink
-Target Product: EAP
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?
@@ -47,13 +46,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-picketlink-authentication.war` to the running instance of the server.
+4. This will deploy `target/picketlink-authentication-jsf.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/jboss-as-picketlink-authentication>. 
+The application will be running at the following URL: <http://localhost:8080/picketlink-authentication-jsf>.
 
 
 Undeploy the Archive

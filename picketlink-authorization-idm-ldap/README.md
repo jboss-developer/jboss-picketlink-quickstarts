@@ -4,7 +4,6 @@ Author: Pedro Igor
 Level: Beginner
 Technologies: CDI, PicketLink, JSF
 Summary: Basic example that demonstrates IDM-based authorization using a LDAP-based PicketLink IDM configuration
-Target Product: EAP
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
@@ -83,13 +82,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-picketlink-authorization-idm-ldap.war` to the running instance of the server.
+4. This will deploy `target/picketlink-authorization-idm-ldap.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/jboss-as-picketlink-authorization-idm-ldap>.
+The application will be running at the following URL: <http://localhost:8080/picketlink-authorization-idm-ldap>.
 
 
 Undeploy the Archive

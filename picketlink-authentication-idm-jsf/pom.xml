@@ -19,14 +19,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.jboss.quickstarts.eap</groupId>
-  <artifactId>jboss-as-picketlink-authentication-idm-jsf</artifactId>
-  <version>6.2.0-SNAPSHOT</version>
-  <packaging>war</packaging>
-  <name>JBoss EAP Quickstart: picketlink-authentication-idm-jsf</name>
-  <description>JBoss EAP Quickstart: PicketLink IDM Simple Authentication with JSF</description>
+  <groupId>org.picketlink.quickstarts</groupId>
+  <artifactId>picketlink-authentication-idm-jsf</artifactId>
+  <version>2.5.3-SNAPSHOT</version>
 
-  <url>http://jboss.org/jbossas</url>
+  <packaging>war</packaging>
+
+  <name>PicketLink Quickstart: picketlink-authentication-idm-jsf</name>
+  <description>PicketLink Quickstart: PicketLink IDM Simple Authentication with JSF</description>
+
+  <url>http://www.picketlink.org</url>
+
   <licenses>
     <license>
       <name>Apache License, Version 2.0</name>
@@ -36,36 +39,30 @@
   </licenses>
 
   <properties>
-    <!-- Explicitly declaring the source encoding eliminates the following 
-      message: -->
-    <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
-      resources, i.e. build is platform dependent! -->
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
     <!-- JBoss dependency versions -->
-
     <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
-    <!-- Define the version of the JBoss BOMs we want to import to specify 
-      tested stacks. -->
-    <version.jboss.bom.eap>6.2.0-build-1</version.jboss.bom.eap>
-    <version.compiler.plugin>3.1</version.compiler.plugin>
+    <!-- PicketLink dependency versions -->
+    <version.picketlink.javaee.bom>2.5.3-SNAPSHOT</version.picketlink.javaee.bom>
+
+    <!-- maven-war-plugin -->
     <version.war.plugin>2.1.1</version.war.plugin>
 
     <!-- maven-compiler-plugin -->
+    <version.compiler.plugin>3.1</version.compiler.plugin>
     <maven.compiler.target>1.6</maven.compiler.target>
     <maven.compiler.source>1.6</maven.compiler.source>
-
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!-- Dependency Management for PicketLink and Java EE 6.0. -->
       <dependency>
-        <groupId>org.jboss.bom.eap</groupId>
-        <artifactId>jboss-javaee-6.0-with-security</artifactId>
-        <version>${version.jboss.bom.eap}</version>
-        <type>pom</type>
+        <groupId>org.picketlink</groupId>
+        <artifactId>picketlink-javaee-6.0</artifactId>
+        <version>${version.picketlink.javaee.bom}</version>
         <scope>import</scope>
+        <type>pom</type>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -96,7 +93,7 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Import the JSF API, we use provided scope as the API is included in 
+    <!-- Import the JSF API, we use provided scope as the API is included in
       JBoss AS 7 -->
     <dependency>
       <groupId>org.jboss.spec.javax.faces</groupId>
@@ -104,7 +101,7 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Import the PicketLink API, we deploy this as library with the application, 
+    <!-- Import the PicketLink API, we deploy this as library with the application,
       and can compile against it -->
     <dependency>
       <groupId>org.picketlink</groupId>

@@ -4,7 +4,6 @@ Author: Shane Bryzak
 Level: Intermediate
 Technologies: CDI, PicketLink
 Summary: Basic example that demonstrates IDM-based authorization using a JPA-based PicketLink IDM configuration
-Target Product: EAP
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?
@@ -47,13 +46,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-picketlink-authorization-idm-jpa.war` to the running instance of the server.
+4. This will deploy `target/picketlink-authorization-idm-jpa.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/jboss-as-picketlink-authentication-idm-simple>. 
+The application will be running at the following URL: <http://localhost:8080/picketlink-authorization-idm-jpa>.
 
 
 Undeploy the Archive

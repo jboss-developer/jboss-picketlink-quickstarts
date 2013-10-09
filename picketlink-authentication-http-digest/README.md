@@ -4,7 +4,6 @@ Author: Pedro Igor
 Level: Beginner
 Technologies: CDI, PicketLink, JSF
 Summary: Basic example that demonstrates simple username/password authentication using the HTTP Digest scheme with a JSF view layer
-Target Product: EAP
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
@@ -58,13 +57,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-picketlink-authentication-http-digest.war` to the running instance of the server.
+4. This will deploy `target/picketlink-authentication-http-digest.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/jboss-as-picketlink-authentication-http-digest>. 
+The application will be running at the following URL: <http://localhost:8080/picketlink-authentication-http-digest>. 
 
 
 Undeploy the Archive

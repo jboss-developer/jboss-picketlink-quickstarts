@@ -5,7 +5,6 @@ Level: Intermediate
 Technologies: JSF, CDI, PicketLink, Deltaspike
 Summary: Demonstrate the creation of a custom authorization example using PicketLink and @SecurityBindingType from DeltaSpike
 Prerequisites: 
-Target Product: WFK
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?
@@ -55,13 +54,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 3. Type this command to build and deploy the archive:
 
         mvn clean package jboss-as:deploy
-4. This will deploy `target/jboss-as-picketlink-deltaspike-authorization.war` to the running instance of the server.
+4. This will deploy `target/picketlink-deltaspike-authorization.war` to the running instance of the server.
 
 
 Access the application
 ---------------------
 
-You can access the running application in a browser at the following URL: <localhost:8080/jboss-as-picketlink-deltaspike-authorization/>
+You can access the running application in a browser at the following URL: <localhost:8080/picketlink-deltaspike-authorization/>
 
 When you access the application you are redirected to a login form.  Once you have logged into the application using one of the two example user accounts you will see a page showing your username and two buttons. 
 

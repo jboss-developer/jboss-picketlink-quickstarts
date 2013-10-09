@@ -22,9 +22,11 @@
   <groupId>org.picketlink.quickstarts</groupId>
   <artifactId>picketlink-authentication-form</artifactId>
   <version>2.5.3-SNAPSHOT</version>
+
   <packaging>war</packaging>
-  <name>PicketLink Quickstarts: PicketLink FORM Authentication</name>
-  <description>PicketLink Quickstarts: PicketLink FORM Authentication</description>
+
+  <name>PicketLink Quickstart: picketlink-authentication-form</name>
+  <description>PicketLink Quickstart: PicketLink FORM Authentication</description>
 
   <url>http://www.picketlink.org</url>
 
@@ -43,17 +45,17 @@
     <!-- PicketLink dependency versions -->
     <version.picketlink.javaee.bom>2.5.3-SNAPSHOT</version.picketlink.javaee.bom>
 
-    <version.compiler.plugin>3.1</version.compiler.plugin>
+    <!-- maven-war-plugin -->
     <version.war.plugin>2.1.1</version.war.plugin>
 
     <!-- maven-compiler-plugin -->
+    <version.compiler.plugin>3.1</version.compiler.plugin>
     <maven.compiler.target>1.6</maven.compiler.target>
     <maven.compiler.source>1.6</maven.compiler.source>
   </properties>
 
   <dependencyManagement>
     <dependencies>
-
       <!-- Dependency Management for PicketLink and Java EE 6.0. -->
       <dependency>
         <groupId>org.picketlink</groupId>
