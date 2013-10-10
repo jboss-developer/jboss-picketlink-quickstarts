@@ -60,6 +60,7 @@ public class IDMConfiguration {
                         .bindDN("uid=admin,ou=system")
                         .bindCredential("secret")
                         .url(LDAP_URL)
+                        .supportCredentials(true)
                         .supportType(IdentityType.class)
                         .supportGlobalRelationship(Grant.class, GroupMembership.class)
                         .mapping(Agent.class)
