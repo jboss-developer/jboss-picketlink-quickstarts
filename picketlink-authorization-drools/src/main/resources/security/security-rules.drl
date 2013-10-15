@@ -1,0 +1,40 @@
+package PicketLinkPermissions;
+
+dialect 'mvel'
+
+import org.picketlink.idm.drools.PermissionCheck;
+
+// Allow all users to read the available roles
+
+rule ReadRoles
+  no-loop
+  activation-group "permissions"
+when
+  check: PermissionCheck(resource == "seam.role", operation == "read", granted == false)
+then
+  check.grant();
+end
+
+/*****************************************************************************************
+
+  The Following Rules are for Identity Management
+  
+******************************************************************************************/
+
+rule InvokeTestAction
+  no-loop
+  activation-group "permissions"
+when
+  check: PermissionCheck(resource == "TestAction", operation == "invoke", granted == false)
+then
+  check.grant();
+end
+
+rule ManageRoles
+  no-loop
+  activation-group "permissions"
+when
+  check: PermissionCheck(resource == "seam.role", granted == false)
+then
+
+end
