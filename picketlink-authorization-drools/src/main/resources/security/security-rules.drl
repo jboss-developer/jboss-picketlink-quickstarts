@@ -13,4 +13,3 @@ then
   check.grant();
 end
 
-end
