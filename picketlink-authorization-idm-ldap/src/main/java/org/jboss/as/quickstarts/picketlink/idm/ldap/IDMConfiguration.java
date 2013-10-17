@@ -18,18 +18,21 @@ package org.jboss.as.quickstarts.picketlink.idm.ldap;
 
 import org.picketlink.idm.config.IdentityConfiguration;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
+import org.picketlink.idm.ldap.internal.LDAPConstants;
 import org.picketlink.idm.model.IdentityType;
-import org.picketlink.idm.model.basic.Agent;
 import org.picketlink.idm.model.basic.Grant;
 import org.picketlink.idm.model.basic.Group;
 import org.picketlink.idm.model.basic.GroupMembership;
 import org.picketlink.idm.model.basic.Role;
-import org.picketlink.idm.model.basic.User;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
-import static org.picketlink.idm.ldap.internal.LDAPConstants.*;
+import static org.picketlink.idm.ldap.internal.LDAPConstants.CN;
+import static org.picketlink.idm.ldap.internal.LDAPConstants.CREATE_TIMESTAMP;
+import static org.picketlink.idm.ldap.internal.LDAPConstants.EMAIL;
+import static org.picketlink.idm.ldap.internal.LDAPConstants.GROUP_OF_NAMES;
+import static org.picketlink.idm.ldap.internal.LDAPConstants.SN;
 
 @ApplicationScoped
 public class IDMConfiguration {
@@ -50,7 +53,6 @@ public class IDMConfiguration {
      */
     @Produces
     public IdentityConfiguration configure() {
-        java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
         System.setProperty("javax.net.ssl.keyStore",  "/pedroigor/java/workspace_idea/jboss/picketlink/2.5/picketlink-quickstarts/picketlink-authorization-idm-ldap/keystore.jks");
         System.setProperty("javax.net.ssl.trustStore", "/pedroigor/java/workspace_idea/jboss/picketlink/2.5/picketlink-quickstarts/picketlink-authorization-idm-ldap/keystore.jks");
         System.setProperty("javax.net.ssl.trustStorePassword", "change_it");
@@ -70,16 +72,13 @@ public class IDMConfiguration {
                         .supportCredentials(true)
                         .supportType(IdentityType.class)
                         .supportGlobalRelationship(Grant.class, GroupMembership.class)
-                        .mapping(Agent.class)
-                            .baseDN(AGENT_DN_SUFFIX)
-                            .objectClasses("user")
-                            .attribute("loginName", CN, true)
-                            .readOnlyAttribute("createdDate", CREATE_TIMESTAMP)
-                        .mapping(User.class)
+                        .addCredentialHandler(MyUserPasswordCredentialHandler.class)
+                        .mapping(MyUser.class)
                             .baseDN(USER_DN_SUFFIX)
                             .objectClasses("user")
-                            .attribute("loginName", CN, true)
-                            .attribute("firstName", CN)
+                            .attribute("fullName", "CN", true)
+                            .attribute("loginName", "samAccountName")
+                            .attribute("firstName", LDAPConstants.GIVENNAME)
                             .attribute("lastName", SN)
                             .attribute("email", EMAIL)
                             .readOnlyAttribute("createdDate", CREATE_TIMESTAMP)

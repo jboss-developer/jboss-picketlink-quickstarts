@@ -22,14 +22,20 @@ import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.basic.Role;
 import org.picketlink.idm.model.basic.User;
+import org.picketlink.idm.query.IdentityQuery;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
+import java.util.List;
 
-import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.*;
-import static org.picketlink.idm.model.basic.BasicModel.*;
+import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.ADMINISTRATOR;
+import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.DEVELOPER;
+import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.PROJECT_MANAGER;
+import static org.picketlink.idm.model.basic.BasicModel.getRole;
+import static org.picketlink.idm.model.basic.BasicModel.grantRole;
+import static org.picketlink.idm.model.basic.BasicModel.hasRole;
 
 @Startup
 @Singleton
@@ -54,14 +60,17 @@ public class IDMInitializer {
         User user = getUser(identityManager, loginName);
 
         if (user == null) {
-            user = new User(loginName);
+            user = new MyUser(loginName);
+
+            user.setFirstName(loginName);
+            user.setLastName(" Smith");
 
             identityManager.add(user);
+
+            Password password = new Password(loginName + "123");
+
+            identityManager.updateCredential(user, password);
         }
-
-        Password password = new Password(loginName + "123");
-
-        identityManager.updateCredential(user, password);
 
         Role role = getRole(identityManager, roleName.name());
 
@@ -76,6 +85,20 @@ public class IDMInitializer {
         if (!hasRole(relationshipManager, user, role)) {
             grantRole(relationshipManager, user, role);
         }
+    }
+
+    private User getUser(final IdentityManager identityManager, final String loginName) {
+        IdentityQuery<MyUser> query = identityManager.createIdentityQuery(MyUser.class);
+
+        query.setParameter(MyUser.LOGIN_NAME, loginName);
+
+        List<MyUser> result = query.getResultList();
+
+        if (result.isEmpty()) {
+            return null;
+        }
+
+        return result.get(0);
     }
 
 }
