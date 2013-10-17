@@ -57,11 +57,11 @@ public class IDMInitializer {
             user = new User(loginName);
 
             identityManager.add(user);
-
-            Password password = new Password(loginName + "123");
-
-            identityManager.updateCredential(user, password);
         }
+
+        Password password = new Password(loginName + "123");
+
+        identityManager.updateCredential(user, password);
 
         Role role = getRole(identityManager, roleName.name());
 

@@ -34,12 +34,12 @@ import static org.picketlink.idm.ldap.internal.LDAPConstants.*;
 @ApplicationScoped
 public class IDMConfiguration {
 
-    private static final String BASE_DN = "dc=jboss,dc=org";
-    private static final String LDAP_URL = "ldap://localhost:10389";
-    private static final String ROLES_DN_SUFFIX = "ou=Roles,dc=jboss,dc=org";
-    private static final String GROUP_DN_SUFFIX = "ou=Groups,dc=jboss,dc=org";
-    private static final String USER_DN_SUFFIX = "ou=People,dc=jboss,dc=org";
-    private static final String AGENT_DN_SUFFIX = "ou=Agent,dc=jboss,dc=org";
+    private static final String BASE_DN = "o=picketlink,DC=jboss,DC=test1";
+    private static final String LDAP_URL = "ldaps://dev101.mw.lab.eng.bos.redhat.com:636";
+    private static final String ROLES_DN_SUFFIX = "ou=Roles,o=picketlink,DC=jboss,DC=test1";
+    private static final String GROUP_DN_SUFFIX = "ou=Groups,o=picketlink,DC=jboss,DC=test1";
+    private static final String USER_DN_SUFFIX = "ou=People,o=picketlink,DC=jboss,DC=test1";
+    private static final String AGENT_DN_SUFFIX = "ou=Agent,o=picketlink,DC=jboss,DC=test1";
 
     /**
      * <p>
@@ -50,6 +50,12 @@ public class IDMConfiguration {
      */
     @Produces
     public IdentityConfiguration configure() {
+        java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+        System.setProperty("javax.net.ssl.keyStore",  "/pedroigor/java/workspace_idea/jboss/picketlink/2.5/picketlink-quickstarts/picketlink-authorization-idm-ldap/keystore.jks");
+        System.setProperty("javax.net.ssl.trustStore", "/pedroigor/java/workspace_idea/jboss/picketlink/2.5/picketlink-quickstarts/picketlink-authorization-idm-ldap/keystore.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword", "change_it");
+        System.setProperty("javax.net.ssl.keyStorePassword", "change_it");
+
         IdentityConfigurationBuilder builder = new IdentityConfigurationBuilder();
 
         builder
@@ -57,21 +63,22 @@ public class IDMConfiguration {
                 .stores()
                     .ldap()
                         .baseDN(BASE_DN)
-                        .bindDN("uid=admin,ou=system")
-                        .bindCredential("secret")
+                        .bindDN("JBOSS1\\jbossqa")
+                        .bindCredential("jboss42")
                         .url(LDAP_URL)
+                        .activeDirectory(true)
                         .supportCredentials(true)
                         .supportType(IdentityType.class)
                         .supportGlobalRelationship(Grant.class, GroupMembership.class)
                         .mapping(Agent.class)
                             .baseDN(AGENT_DN_SUFFIX)
-                            .objectClasses("account")
-                            .attribute("loginName", UID, true)
+                            .objectClasses("user")
+                            .attribute("loginName", CN, true)
                             .readOnlyAttribute("createdDate", CREATE_TIMESTAMP)
                         .mapping(User.class)
                             .baseDN(USER_DN_SUFFIX)
-                            .objectClasses("inetOrgPerson", "organizationalPerson")
-                            .attribute("loginName", UID, true)
+                            .objectClasses("user")
+                            .attribute("loginName", CN, true)
                             .attribute("firstName", CN)
                             .attribute("lastName", SN)
                             .attribute("email", EMAIL)
