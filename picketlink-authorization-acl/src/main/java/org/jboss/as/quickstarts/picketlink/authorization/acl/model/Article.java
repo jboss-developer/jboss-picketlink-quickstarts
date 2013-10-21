@@ -25,11 +25,18 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.picketlink.idm.permission.annotations.AllowedPermission;
+import org.picketlink.idm.permission.annotations.AllowedPermissions;
+
 /**
  * Represents an article written by a user
  *
  * @author Shane Bryzak
  */
+@AllowedPermissions({
+    @AllowedPermission(operation = "update", mask = 1),
+    @AllowedPermission(operation = "delete", mask = 2)
+})
 @Entity
 public class Article implements Serializable {
 
@@ -42,6 +49,7 @@ public class Article implements Serializable {
     private Date updated;
 
     private String title;
+    private String author;
     private String content;
 
     public Long getId() {
@@ -76,6 +84,14 @@ public class Article implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getContent() {

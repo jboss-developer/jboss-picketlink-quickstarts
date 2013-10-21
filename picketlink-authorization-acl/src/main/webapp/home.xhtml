@@ -23,44 +23,68 @@
     This quickstart demonstrates the Persistent Permissions (i.e. ACLs) features provided by PicketLink.
   </p>
 
-<ui:fragment rendered="#{identity.loggedIn}">
-    <div>Congratulations! You are currently logged in as: <b>#{identity.account.loginName}</b></div>
+  <ui:fragment rendered="#{identity.loggedIn}">
+      <div>Congratulations! You are currently logged in as: <b>#{identity.account.loginName}</b></div>
 
-    <h:form>
-        <h:commandButton id="logout" value="Log out" action="#{identity.logout}"/>
-    </h:form>
-</ui:fragment>
+      <h:form>
+          <h:commandButton id="logout" value="Log out" action="#{identity.logout}"/>
+      </h:form>
+  </ui:fragment>
 
-<h:form id="loginForm" rendered="#{not identity.loggedIn}">
-    <h:messages globalOnly="true"/>
+  <h:form id="loginForm" rendered="#{not identity.loggedIn}">
+      <h:messages globalOnly="true"/>
 
-    <div class="loginRow">
-        <h:outputLabel for="name" value="Username" styleClass="loginLabel"/>
-        <h:inputText id="name" value="#{loginCredentials.userId}"/>
-    </div>
+      <div class="loginRow">
+          <h:outputLabel for="name" value="Username" styleClass="loginLabel"/>
+          <h:inputText id="name" value="#{loginCredentials.userId}"/>
+      </div>
 
-    <div class="loginRow">
-        <h:outputLabel for="password" value="Password" styleClass="loginLabel"/>
-        <h:inputSecret id="password" value="#{loginCredentials.password}" redisplay="true"/>
-    </div>
+      <div class="loginRow">
+          <h:outputLabel for="password" value="Password" styleClass="loginLabel"/>
+          <h:inputSecret id="password" value="#{loginCredentials.password}" redisplay="true"/>
+      </div>
 
-    <div class="loginRow">
+      <div class="loginRow">
 
-    </div>
+      </div>
 
-    <div class="buttons">
-        <h:commandButton id="login" value="Login" action="#{loginController.login}" styleClass="loginButton"/>
-    </div>
+      <div class="buttons">
+          <h:commandButton id="login" value="Login" action="#{loginController.login}" styleClass="loginButton"/>
+      </div>
 
-    <p>
-      Tip: you can login with any of the following username/password combinations:
-      <div>john/demo</div>
-      <div>mary/demo</div>
-    </p>  
+      <p>
+        Tip: you can login with any of the following username/password combinations:
+        <div>john/demo</div>
+        <div>mary/demo</div>
+      </p>  
 
-</h:form>
+  </h:form>
+
+
+  <ui:fragment rendered="#{identity.loggedIn}">
+
+    <h3>Articles</h3>
     
+    <ui:fragment rendered="#{empty articleSearch.articles}">
+      <p>No articles exist - why don't you create one?</p>
+    </ui:fragment>
 
-<br style="clear:both"/>
+    <ui:repeat value="#{articleSearch.articles}" var="article">
+      <br/>
+      <h:outputText value="#{article.title}"/>
+      
+      <div>by <h:outputText value="#{article.author}"/></div>
+      
+    </ui:repeat>
+    
+    <h:form>
+      <div>
+        <h:commandLink value="Create new article" action="#{articleController.createArticle}"/>
+      </div>
+    </h:form>
+
+  </ui:fragment>    
+
+  <br style="clear:both"/>
 
 </html>

@@ -26,6 +26,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.picketlink.idm.permission.annotations.AllowedPermission;
+import org.picketlink.idm.permission.annotations.AllowedPermissions;
+
 /**
  * A comment made by a user on an article
  *
@@ -33,6 +36,10 @@ import javax.persistence.TemporalType;
  *
  */
 @Entity
+@AllowedPermissions({
+    @AllowedPermission(operation = "update", mask = 1),
+    @AllowedPermission(operation = "delete", mask = 2)
+})
 public class Comment implements Serializable {
 
     private static final long serialVersionUID = -2908149218885884207L;

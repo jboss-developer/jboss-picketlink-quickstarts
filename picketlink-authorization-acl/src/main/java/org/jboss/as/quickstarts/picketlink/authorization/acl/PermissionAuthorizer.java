@@ -14,9 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.drools;
+package org.jboss.as.quickstarts.picketlink.authorization.acl;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import javax.interceptor.InvocationContext;
 
 import org.apache.deltaspike.security.api.authorization.Secures;
 import org.picketlink.Identity;
@@ -25,13 +27,14 @@ import org.picketlink.Identity;
  * Performs the business logic required for the declared security binding annotations
  *
  * @author Shane Bryzak
- *
  */
 @ApplicationScoped
 public class PermissionAuthorizer {
-    @Secures
-    @TimeRestricted
-    public boolean testTimeRestricted(Identity identity) {
-        return identity.hasPermission("TestAction", "invoke");
+
+    @Inject Identity identity;
+
+    @Secures @CanCreate
+    public boolean checkCanCreate(InvocationContext ctx) {
+        return identity.hasPermission(ctx.getMethod().getAnnotation(CanCreate.class).value(), "create");
     }
 }

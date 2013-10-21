@@ -154,6 +154,12 @@
       <artifactId>picketlink-idm-drools</artifactId>
       <version>${version.picketlink}</version>
     </dependency>
+    
+    <!--dependency>
+      <groupId>org.drools</groupId>
+      <artifactId>drools-jboss-integration</artifactId>
+      <version>6.0.0.CR4</version>
+    </dependency-->
 
     <!-- Import the PicketLink IDM Simple Schema, which provides some built-in JPA entities for
       the sample model -->

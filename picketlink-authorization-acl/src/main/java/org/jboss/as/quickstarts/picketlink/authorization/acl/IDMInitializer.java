@@ -21,13 +21,16 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import org.jboss.as.quickstarts.picketlink.authorization.acl.model.Article;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
+import org.picketlink.idm.PermissionManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.basic.BasicModel;
 import org.picketlink.idm.model.basic.Group;
 import org.picketlink.idm.model.basic.User;
+import org.picketlink.idm.permission.Permission;
 
 /**
  * This startup bean creates a number of default users, groups and roles when the application is started.
@@ -63,18 +66,11 @@ public class IDMInitializer {
         identityManager.add(mary);
         identityManager.updateCredential(mary, new Password("demo"));
 
-        // Create day shift group
-        Group dayShift = new Group("dayShift");
-        Group nightShift = new Group("nightShift");
-        identityManager.add(dayShift);
-        identityManager.add(nightShift);
 
-        RelationshipManager relationshipManager = this.partitionManager.createRelationshipManager();
+        PermissionManager permissionManager = partitionManager.createPermissionManager();
 
-        // Make john a member of the "dayShift" group
-        BasicModel.addToGroup(relationshipManager, john, dayShift);
-
-        // Make mary a manager of the "nightShift" group
-        BasicModel.addToGroup(relationshipManager, mary, nightShift);
+        // Grant both john and mary permission to create new articles
+        //permissionManager.grantPermission(new Permission(Article.class, john, "create"));
+        //permissionManager.grantPermission(new Permission(Article.class, mary, "create"));
     }
 }

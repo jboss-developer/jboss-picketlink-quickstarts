@@ -43,6 +43,11 @@ public class Resources {
     @PersistenceContext(unitName = "picketlink-default")
     private EntityManager em;
 
+    @Produces
+    public EntityManager getEntityManager() {
+        return em;
+    }
+
     /*
      * Since we are using JPAIdentityStore to store identity-related data, we must provide it with an EntityManager via a
      * producer method or field annotated with the @PicketLink qualifier.

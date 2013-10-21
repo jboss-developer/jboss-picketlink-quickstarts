@@ -19,11 +19,11 @@ package org.jboss.as.quickstarts.picketlink.authorization.acl;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+
 import org.picketlink.idm.config.IdentityConfiguration;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
 import org.picketlink.idm.jpa.model.sample.simple.AccountTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.AttributeTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.AttributedTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.GroupTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.IdentityTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.PartitionTypeEntity;
@@ -36,10 +36,8 @@ import org.picketlink.internal.EEJPAContextInitializer;
 
 /**
  * This bean produces the configuration for PicketLink IDM
- * 
- * 
- * @author Shane Bryzak
  *
+ * @author Shane Bryzak
  */
 @ApplicationScoped
 public class IDMConfiguration {
@@ -60,7 +58,7 @@ public class IDMConfiguration {
      * This method uses the IdentityConfigurationBuilder to create an IdentityConfiguration, which 
      * defines how PicketLink stores identity-related data.  In this particular example, a 
      * JPAIdentityStore is configured to allow the identity data to be stored in a relational database
-     * using JPA.
+     * using JPA.AttributedTypeEntity.class,
      */
     private void initConfig() {
         IdentityConfigurationBuilder builder = new IdentityConfigurationBuilder();
@@ -70,7 +68,6 @@ public class IDMConfiguration {
                 .stores()
                     .jpa()
                         .mappedEntity(
-                                AttributedTypeEntity.class,
                                 AccountTypeEntity.class,
                                 RoleTypeEntity.class,
                                 GroupTypeEntity.class,
