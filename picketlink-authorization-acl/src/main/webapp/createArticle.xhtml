@@ -25,7 +25,16 @@
 
   <ui:fragment rendered="#{identity.loggedIn}">
     <h:form>
-    
+      <div>
+        Title
+        <h:inputText value="#{articleController.article.title}"/>
+      </div>
+      
+      <h:inputTextarea value="#{articleController.article.content}" style="width:600px;height:400px"/>
+      
+      <div>
+        <h:commandButton value="Save Article" action="#{articleController.saveArticle}"/>
+      </div>
     </h:form>
 
   </ui:fragment>

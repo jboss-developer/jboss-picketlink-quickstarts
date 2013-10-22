@@ -19,6 +19,7 @@ package org.jboss.as.quickstarts.picketlink.authorization.acl;
 
 import java.io.Serializable;
 
+import javax.ejb.Stateful;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
@@ -38,6 +39,7 @@ import org.picketlink.idm.permission.Permission;
  */
 @Named
 @ConversationScoped
+@Stateful
 public class ArticleController implements Serializable {
     @Inject EntityManager em;
 
@@ -65,7 +67,7 @@ public class ArticleController implements Serializable {
         em.persist(article);
 
         // Grant the creating user permission to delete the article
-        permissionManager.grantPermission(new Permission(article, user, "delete"));
+        //permissionManager.grantPermission(new Permission(article, user, "delete"));
 
         conversation.end();
     }

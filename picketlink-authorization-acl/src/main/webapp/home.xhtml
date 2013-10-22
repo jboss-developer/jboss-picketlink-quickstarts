@@ -70,10 +70,11 @@
     </ui:fragment>
 
     <ui:repeat value="#{articleSearch.articles}" var="article">
-      <br/>
-      <h:outputText value="#{article.title}"/>
-      
-      <div>by <h:outputText value="#{article.author}"/></div>
+
+      <p>
+        <h:outputText value="#{article.title}"/>      
+        <div>by <h:outputText value="#{article.author}"/></div>
+      </p>
       
     </ui:repeat>
     

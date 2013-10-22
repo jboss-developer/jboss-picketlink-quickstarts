@@ -30,5 +30,16 @@
       <redirect/>
     </navigation-case>
   </navigation-rule>
+  
+  <navigation-rule>
+    <from-view-id>/createArticle.xhtml</from-view-id>
+    
+    <navigation-case>
+      <from-action>#{articleController.saveArticle}</from-action>
+      <if>#{true}</if>
+      <to-view-id>/home.xhtml</to-view-id>
+      <redirect/>
+    </navigation-case>
+  </navigation-rule>
 
 </faces-config>
