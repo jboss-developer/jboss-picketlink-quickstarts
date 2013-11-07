@@ -28,11 +28,11 @@ To run these quickstarts with the provided build scripts, you need the following
 
 1. To clone this Git repository, use the following command:
 
-        git clone git@github.com:picketlink/picketlink-quickstarts.git
+        git clone git@github.com:jboss-developer/jboss-picketlink-quickstarts.git
 
 2. If you want the quickstarts for a particular version (eg.: 2.5.2.Final) execute the following command:
 
-        cd picketlink-quickstarts
+        cd jboss-picketlink-quickstarts
         git checkout v2.5.2.Final
 
 ## Run the Quickstarts
