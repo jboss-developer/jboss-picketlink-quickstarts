@@ -60,7 +60,7 @@
         <version.picketlink.javaee.bom>2.5.3-SNAPSHOT</version.picketlink.javaee.bom>
 
         <!--PicketLink Dependencies -->
-        <picketlink.social.version>2.5.2.Final</picketlink.social.version>
+        <picketlink.social.version>2.5.3-SNAPSHOT</picketlink.social.version>
     </properties>
 
     <dependencyManagement>
