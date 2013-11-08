@@ -20,7 +20,7 @@
 
     <groupId>org.jboss.as.quickstarts</groupId>
     <artifactId>jboss-as-picketlink-authentication-twitter</artifactId>
-    <version>7.1.2-SNAPSHOT</version>
+    <version>2.5.3-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>JBoss AS Quickstarts: PicketLink Authentication with twitter</name>
     <description>JBoss AS Quickstarts: PicketLink Authentication with twitter</description>
@@ -57,8 +57,7 @@
         <maven.compiler.source>1.6</maven.compiler.source>
 
         <!--PicketLink Dependencies -->
-        <picketlink.social.version>2.5.1-SNAPSHOT</picketlink.social.version>
-        <twitter4j.core.version>3.0.3</twitter4j.core.version>
+        <picketlink.social.version>2.5.2.Final</picketlink.social.version>
     </properties>
 
     <dependencyManagement>
@@ -158,12 +157,6 @@
                 <artifactId>picketlink-federation</artifactId>
               </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>org.twitter4j</groupId>
-            <artifactId>twitter4j-core</artifactId>
-            <version>${twitter4j.core.version}</version>
         </dependency>
 
     </dependencies>
