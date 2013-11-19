@@ -21,7 +21,7 @@
 
   <groupId>org.picketlink.quickstarts</groupId>
   <artifactId>picketlink-authorization-acl</artifactId>
-  <version>2.5.3.Beta1</version>
+  <version>2.5.3-SNAPSHOT</version>
   <packaging>war</packaging>
 
   <name>PicketLink Quickstart: picketlink-authorization-acl</name>
@@ -49,10 +49,10 @@
     <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
     <!-- PicketLink dependency versions -->
-    <version.picketlink.javaee.deltaspike.bom>2.5.3.Beta1</version.picketlink.javaee.deltaspike.bom>
+    <version.picketlink.javaee.deltaspike.bom>2.5.3-SNAPSHOT</version.picketlink.javaee.deltaspike.bom>
     
     <!-- Delete this after the drools module has been added to the bom -->
-    <version.picketlink>2.5.3.Beta1</version.picketlink>
+    <version.picketlink>2.5.3-SNAPSHOT</version.picketlink>
 
     <!-- other plugin versions -->
     <version.compiler.plugin>3.1</version.compiler.plugin>
