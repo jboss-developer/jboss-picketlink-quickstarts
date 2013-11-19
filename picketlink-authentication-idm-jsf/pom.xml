@@ -21,7 +21,7 @@
 
   <groupId>org.picketlink.quickstarts</groupId>
   <artifactId>picketlink-authentication-idm-jsf</artifactId>
-  <version>2.5.3-SNAPSHOT</version>
+  <version>2.5.3.Beta1</version>
 
   <packaging>war</packaging>
 
@@ -43,7 +43,7 @@
     <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
     <!-- PicketLink dependency versions -->
-    <version.picketlink.javaee.bom>2.5.3-SNAPSHOT</version.picketlink.javaee.bom>
+    <version.picketlink.javaee.bom>2.5.3.Beta1</version.picketlink.javaee.bom>
 
     <!-- maven-war-plugin -->
     <version.war.plugin>2.1.1</version.war.plugin>
