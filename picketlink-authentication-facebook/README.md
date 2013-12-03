@@ -69,7 +69,7 @@ This script adds the system-property valuse to the the server configuration. You
 
         #1 /system-property=FB_CLIENT_ID:add(value="YOUR_CLIENT_ID")
         #2 /system-property=FB_CLIENT_SECRET:add(value="YOUR_CLIENT_SECRET_CODE")
-        #3 /system-property=FB_CLIENT_RETURN_URL:add(value="YOUR_RETURN_URL/")
+        #3 /system-property=FB_RETURN_URL:add(value="YOUR_RETURN_URL/")
         The batch executed successfully.
         {"outcome" => "success"}
 
@@ -88,7 +88,7 @@ This script adds the system-property valuse to the the server configuration. You
 
 		[standalone@localhost:9999 /] /system-property=FB_CLIENT_ID:add(value="YOUR_CLIENT_ID")
 		[standalone@localhost:9999 /] /system-property=FB_CLIENT_SECRET:add(value="YOUR_CLIENT_SECRET_CODE")
-		[standalone@localhost:9999 /] /system-property=FB_CLIENT_RETURN_URL:add(value="YOUR_RETURN_URL/")
+		[standalone@localhost:9999 /] /system-property=FB_RETURN_URL:add(value="YOUR_RETURN_URL/")
 			
 		[standalone@localhost:9999 /] :reload
 
@@ -166,7 +166,7 @@ This script removes the `test` queue from the `messaging` subsystem in the serve
 
         #1 /system-property=FB_CLIENT_ID:remove
         #2 /system-property=FB_CLIENT_SECRET:remove
-        #3 /system-property=FB_CLIENT_RETURN_URL:remove
+        #3 /system-property=FB_RETURN_URL:remove
         The batch executed successfully.
         {"outcome" => "success"}
 
