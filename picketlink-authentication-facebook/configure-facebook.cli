@@ -6,7 +6,8 @@ batch
 ###       with the values provided when you registered as a Facebook developer.
 /system-property=FB_CLIENT_ID:add(value="YOUR_CLIENT_ID")
 /system-property=FB_CLIENT_SECRET:add(value="YOUR_CLIENT_SECRET_CODE")
-/system-property=FB_CLIENT_RETURN_URL:add(value="YOUR_RETURN_URL")
+/system-property=FB_RETURN_URL:add(value="YOUR_RETURN_URL")
+
 
 # Run the batch commands
 run-batch
