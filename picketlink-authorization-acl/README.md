@@ -1,23 +1,23 @@
-picketlink-authorization-drools: PicketLink IDM Authorization Example using Drools
+picketlink-authorization-acl: PicketLink IDM Authorization Example using ACLs
 ===============================
 Author: Shane Bryzak
 Level: Intermediate
-Technologies: CDI, PicketLink, Drools
-Summary: Basic example that demonstrates IDM-based authorization using Drools to implement temporal-based security restrictions
+Technologies: CDI, PicketLink
+Summary: Basic example that demonstrates IDM-based authorization using the Permissions API to implement ACL-based resource restrictions
 Target Product: EAP
-Source: <https://github.com/picketlink/picketlink-eap-quickstarts/>
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 What is it?
 -----------
 
-This example demonstrates the use of *CDI 1.0*, *PicketLink IDM* and *Drools* in *JBoss Enterprise Application Platform 6* or *JBoss AS 7*.
+This example demonstrates the use of *CDI 1.0*, and *PicketLink IDM* *JBoss Enterprise Application Platform 6* or *WildFly 8*.
 
 System requirements
 -------------------
 
 All you need to build this project is Java 6.0 (Java SDK 1.6) or better, Maven 3.0 or better.
 
-The application this project produces is designed to be run on JBoss Enterprise Application Platform 6 or JBoss AS 7. 
+The application this project produces is designed to be run on JBoss Enterprise Application Platform 6 or JBoss WildFly 8. 
 
  
 Configure Maven
@@ -26,7 +26,7 @@ Configure Maven
 If you have not yet done so, you must [Configure Maven](http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#configure_maven) before testing the quickstarts.
 
 
-Start JBoss Enterprise Application Platform 6 or JBoss AS 7 with the Web Profile
+Start JBoss Enterprise Application Platform 6 or WildFly 8 with the Web Profile
 -------------------------
 
 1. Open a command line and navigate to the root of the JBoss server directory.
@@ -47,13 +47,13 @@ _NOTE: The following build command assumes you have configured your Maven user s
 
         mvn clean package jboss-as:deploy
 
-4. This will deploy `target/jboss-as-picketlink-authorization-drools.war` to the running instance of the server.
+4. This will deploy `target/jboss-as-picketlink-authorization-acl.war` to the running instance of the server.
 
 
 Access the application 
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/jboss-as-picketlink-authorization-drools>. 
+The application will be running at the following URL: <http://localhost:8080/picketlink-authorization-acl>. 
 
 
 Undeploy the Archive

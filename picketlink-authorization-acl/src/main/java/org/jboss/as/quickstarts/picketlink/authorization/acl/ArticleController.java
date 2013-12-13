@@ -30,7 +30,6 @@ import org.jboss.as.quickstarts.picketlink.authorization.acl.model.Article;
 import org.picketlink.Identity;
 import org.picketlink.idm.PermissionManager;
 import org.picketlink.idm.model.basic.User;
-import org.picketlink.idm.permission.Permission;
 
 /**
  * Action bean for Article related operations
@@ -67,7 +66,7 @@ public class ArticleController implements Serializable {
         em.persist(article);
 
         // Grant the creating user permission to delete the article
-        //permissionManager.grantPermission(new Permission(article, user, "delete"));
+        permissionManager.grantPermission(user, article, "delete");
 
         conversation.end();
     }

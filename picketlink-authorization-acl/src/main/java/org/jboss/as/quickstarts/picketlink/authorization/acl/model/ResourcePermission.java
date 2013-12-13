@@ -22,14 +22,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import org.picketlink.idm.jpa.annotations.PermissionAssignee;
+import org.picketlink.idm.jpa.annotations.OwnerReference;
 import org.picketlink.idm.jpa.annotations.PermissionOperation;
 import org.picketlink.idm.jpa.annotations.PermissionResourceClass;
 import org.picketlink.idm.jpa.annotations.PermissionResourceIdentifier;
 import org.picketlink.idm.jpa.annotations.entity.PermissionManaged;
 
 /**
- * This entity stores object permissions, as configured by the @PermissionManaged annotation.  As
+ * This entity stores resource permissions, as configured by the @PermissionManaged annotation.  As
  * the annotation does not specify a value for its resourceClasses member, it may be used to store
  * permissions for resources of all types.
  *
@@ -37,14 +37,14 @@ import org.picketlink.idm.jpa.annotations.entity.PermissionManaged;
  */
 @Entity
 @PermissionManaged
-public class Permission implements Serializable {
+public class ResourcePermission implements Serializable {
 
     private static final long serialVersionUID = -7409821749592191950L;
 
     @Id @GeneratedValue
     private Long id;
 
-    @PermissionAssignee
+    @OwnerReference
     private String assignee;
 
     @PermissionResourceClass
