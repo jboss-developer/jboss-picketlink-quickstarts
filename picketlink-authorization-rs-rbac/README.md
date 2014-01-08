@@ -24,6 +24,8 @@ invocations to those services are also protected from unauthorized users.
 At the server side, we're using security annotations from Apache Deltaspike. We just need to annotate our
 REST methods with a specific annotation that tells which roles are allowed.
 
+Please note that the PicketLink Identity bean is session scoped. Which means that subsequent calls from the same user/browser does not require a new authentication.
+
 The latest PicketLink documentation is available [here](http://docs.jboss.org/picketlink/2/latest/).
 
 System requirements
