@@ -20,7 +20,7 @@
 
     <groupId>org.jboss.as.quickstarts</groupId>
     <artifactId>jboss-as-picketlink-authentication-facebook</artifactId>
-    <version>2.5.3-SNAPSHOT</version>
+    <version>2.6.0.Beta2</version>
     <packaging>war</packaging>
     <name>JBoss AS Quickstarts: PicketLink Authentication with facebook</name>
     <description>JBoss AS Quickstarts: PicketLink Authentication with facebook</description>
