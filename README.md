@@ -42,6 +42,27 @@ The root folder of each individual quickstart contains a README file with specif
 * [Start the JBoss server](#start-the-jboss-server)
 * [Build and deploy the quickstarts](#build-and-deploy-the-quickstarts)
 
+## About the PicketLink Federation Quickstarts
+
+The *PicketLink Federation Quickstarts* provide a lot of examples about how to use *PicketLink Federation SAML Support* to enable SSO for your organization and applications.
+Before running them you need to understand how they are related with each other.
+
+| SAML Configuration                        | Identity Provider                                 | Service Provider(s)                                                                                      |
+| -------------                             |:-------------------------------------------------:| --------------------------------------------------------------------------------------------------------:|
+| Basic                                     | picketlink-federation-saml-idp-basic              | picketlink-federation-saml-sp-post-basic, picketlink-federation-saml-sp-redirect-basic                   |
+| Encryption                                | picketlink-federation-saml-idp-with-encryption    | picketlink-federation-saml-sp-with-encryption                                                            |
+| Metadata                                  | picketlink-federation-saml-idp-with-metadata      | picketlink-federation-saml-sp-with-metadata                                                              |
+| Signatures                                | picketlink-federation-saml-idp-with-signature     | picketlink-federation-saml-sp-post-with-signature, picketlink-federation-saml-sp-redirect-with-signature |
+| HTTP CLIENT_CERT and FORM Authentication  | picketlink-federation-saml-idp-ssl                | picketlink-federation-saml-sp-post-basic, picketlink-federation-saml-sp-redirect-basic                   |
+| IDP Servlet Filter                        | picketlink-federation-saml-idp-servlet-filter     | picketlink-federation-saml-sp-post-with-signature, picketlink-federation-saml-sp-redirect-with-signature |
+
+The table above describes what are the Identity Provider and Service Providers required to test a specific configuration. It is important that you respect these dependencies to get the
+functionality properly working. Each configuration has its own IdP and SPs, you must deploy them together.
+
+### Using SAML Tracer Firefox Add-On to Debug the SAML SSO Flow
+
+If you want to understand even better how IdPs and SPs communicate with each other, you may want to configure the [SAML Tracer Add-On](https://addons.mozilla.org/en-US/firefox/addon/saml-tracer/) to your Mozilla Firefox.
+This is a nice way to debug and view SAML Messages, so you can take a look about how the IdP and SP exchange messages when establishing a SSO session.
 
 ### Start the JBoss Server
 
