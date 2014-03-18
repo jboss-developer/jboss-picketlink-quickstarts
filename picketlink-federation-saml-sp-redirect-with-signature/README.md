@@ -118,7 +118,17 @@ _NOTE: The following build command assumes you have configured your Maven user s
 4. This will deploy `target/picketlink-federation-saml-sp-redirect-with-signature.war` to the running instance of the server.
 
 
-Access the application 
+Building for WildFly
+---------------------
+
+By default, the build will package the quickstart with all the necessary configuration to deploy in JBoss Enterprise Application Platform 6 or JBoss AS 7.
+
+If you want to package and deploy the quickstart for WildFly you must use the following command:
+
+        mvn -Dtarget.container=wildfly clean install jboss-as:deploy
+
+
+Access the application
 ---------------------
 
 The application will be running at the following URL: <http://localhost:8080/employee-sig>.

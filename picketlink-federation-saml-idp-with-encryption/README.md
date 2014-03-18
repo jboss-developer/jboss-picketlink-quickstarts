@@ -138,6 +138,16 @@ _NOTE: The following build command assumes you have configured your Maven user s
 4. This will deploy `target/picketlink-federation-saml-idp-with-encryption.war` to the running instance of the server.
 
 
+Building for WildFly
+---------------------
+
+By default, the build will package the quickstart with all the necessary configuration to deploy in JBoss Enterprise Application Platform 6 or JBoss AS 7.
+
+If you want to package and deploy the quickstart for WildFly you must use the following command:
+
+        mvn -Dtarget.container=wildfly clean install jboss-as:deploy
+
+
 Access the application 
 ---------------------
 
