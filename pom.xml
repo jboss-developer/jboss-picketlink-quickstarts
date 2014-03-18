@@ -17,61 +17,73 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.picketlink.quickstarts</groupId>
-  <artifactId>picketlink-quickstarts-parent</artifactId>
-  <version>2.6.0-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.picketlink.quickstarts</groupId>
+    <artifactId>picketlink-quickstarts-parent</artifactId>
+    <version>2.6.0-SNAPSHOT</version>
 
-  <packaging>pom</packaging>
+    <packaging>pom</packaging>
 
-  <name>PicketLink Quickstarts Parent</name>
-  <description>PicketLink Quickstarts Parent</description>
+    <name>PicketLink Quickstarts Parent</name>
+    <description>PicketLink Quickstarts Parent</description>
 
-  <url>http://www.picketlink.org</url>
+    <url>http://www.picketlink.org</url>
 
-  <licenses>
-    <license>
-      <name>Apache License, Version 2.0</name>
-      <distribution>repo</distribution>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-    </license>
-  </licenses>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
 
-  <modules>
-    <module>picketlink-authentication-form</module>
-    <module>picketlink-authentication-http-basic</module>
-    <module>picketlink-authentication-http-client-cert</module>
-    <module>picketlink-authentication-http-digest</module>
-    <module>picketlink-authentication-idm-jsf</module>
-    <module>picketlink-authentication-idm-multi-tenancy</module>
-    <module>picketlink-authentication-jsf</module>
-    <module>picketlink-authentication-recaptcha</module>
-    <module>picketlink-authentication-rs-endpoint</module>
-    <module>picketlink-authentication-two-factor</module>
-    <module>picketlink-authorization-idm-jpa</module>
-    <module>picketlink-authorization-idm-ldap</module>
-    <module>picketlink-authorization-rs-rbac</module>
-    <module>picketlink-deltaspike-authorization</module>
-  </modules>
+    <modules>
+        <module>picketlink-authentication-form</module>
+        <module>picketlink-authentication-http-basic</module>
+        <module>picketlink-authentication-http-client-cert</module>
+        <module>picketlink-authentication-http-digest</module>
+        <module>picketlink-authentication-idm-jsf</module>
+        <module>picketlink-authentication-idm-multi-tenancy</module>
+        <module>picketlink-authentication-jsf</module>
+        <module>picketlink-authentication-recaptcha</module>
+        <module>picketlink-authentication-rs-endpoint</module>
+        <module>picketlink-authentication-two-factor</module>
+        <module>picketlink-authorization-idm-jpa</module>
+        <module>picketlink-authorization-idm-ldap</module>
+        <module>picketlink-authorization-rs-rbac</module>
+        <module>picketlink-deltaspike-authorization</module>
 
-  <properties>
-    <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
-  </properties>
+        <module>picketlink-federation-saml-idp-basic</module>
+        <module>picketlink-federation-saml-idp-with-signature</module>
+        <module>picketlink-federation-saml-idp-with-encryption</module>
+        <module>picketlink-federation-saml-idp-with-ssl</module>
+        <module>picketlink-federation-saml-idp-with-metadata</module>
+        <module>picketlink-federation-saml-idp-servlet-filter</module>
+        <module>picketlink-federation-saml-sp-post-basic</module>
+        <module>picketlink-federation-saml-sp-post-with-signature</module>
+        <module>picketlink-federation-saml-sp-with-encryption</module>
+        <module>picketlink-federation-saml-sp-with-metadata</module>
+        <module>picketlink-federation-saml-sp-redirect-basic</module>
+        <module>picketlink-federation-saml-sp-redirect-with-signature</module>
+    </modules>
 
-  <build>
-    <plugins>
-      <!-- The JBoss AS plugin deploys your apps to a local JBoss AS container -->
-      <!-- Disabling it here means that we don't try to deploy this POM! -->
-      <plugin>
-        <groupId>org.jboss.as.plugins</groupId>
-        <artifactId>jboss-as-maven-plugin</artifactId>
-        <version>${version.jboss.maven.plugin}</version>
-        <inherited>true</inherited>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+    <properties>
+        <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+    </properties>
 
+    <build>
+        <plugins>
+          <!-- The JBoss AS plugin deploys your apps to a local JBoss AS container -->
+          <!-- Disabling it here means that we don't try to deploy this POM! -->
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>${version.jboss.maven.plugin}</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

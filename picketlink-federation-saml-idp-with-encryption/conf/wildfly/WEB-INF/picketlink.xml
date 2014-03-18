@@ -1,0 +1,39 @@
+<PicketLink xmlns="urn:picketlink:identity-federation:config:2.1">
+	<PicketLinkIDP xmlns="urn:picketlink:identity-federation:config:2.1"
+                   SupportsSignatures="true"
+                   Encrypt="true"
+                   AttributeManager="org.picketlink.identity.federation.bindings.wildfly.idp.UndertowAttributeManager"
+                   RoleGenerator="org.picketlink.identity.federation.bindings.wildfly.idp.UndertowRoleGenerator">
+		<IdentityURL>${idp-enc.url::http://localhost:8080/idp-enc/}</IdentityURL>
+		<Trust>
+			<Domains>localhost,jboss.com,jboss.org,redhat.com,amazonaws.com</Domains>
+		</Trust>
+		<KeyProvider
+			ClassName="org.picketlink.identity.federation.core.impl.KeyStoreKeyManager">
+			<Auth Key="KeyStoreURL" Value="/jbid_test_keystore.jks" />
+			<!-- <Auth Key="KeyStorePass" Value="store123" /> -->
+			<Auth Key="KeyStorePass" Value="MASK-O1P+U1Domeec8lCaoIkTGg==" />
+			<!-- <Auth Key="SigningKeyPass" Value="test123" /> -->
+			<Auth Key="SigningKeyPass" Value="MASK-AJbh4WmHwy8=" />
+			<Auth Key="SigningKeyAlias" Value="servercert" />
+			<Auth Key="salt" Value="18273645" />
+			<Auth Key="iterationCount" Value="11" />
+			<ValidatingAlias Key="localhost" Value="servercert" />
+			<ValidatingAlias Key="127.0.0.1" Value="servercert" />
+		</KeyProvider>
+	</PicketLinkIDP>
+	<Handlers xmlns="urn:picketlink:identity-federation:handler:config:2.1">
+		<Handler
+			class="org.picketlink.identity.federation.web.handlers.saml2.SAML2IssuerTrustHandler" />
+		<Handler
+			class="org.picketlink.identity.federation.web.handlers.saml2.SAML2LogOutHandler" />
+		<Handler
+			class="org.picketlink.identity.federation.web.handlers.saml2.SAML2AuthenticationHandler" />
+		<Handler
+			class="org.picketlink.identity.federation.web.handlers.saml2.RolesGenerationHandler" />
+		<Handler
+			class="org.picketlink.identity.federation.web.handlers.saml2.SAML2EncryptionHandler" />
+      	<Handler
+            class="org.picketlink.identity.federation.web.handlers.saml2.SAML2SignatureValidationHandler" />
+	</Handlers>
+</PicketLink>

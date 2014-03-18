@@ -1,0 +1,20 @@
+<jboss-web>
+    <!-- You must have a security-domain configured in your JBoss EAP instance. The security-domain is necessary to provide user
+    authentication and roles mappings. -->
+    <security-domain>idp</security-domain>
+
+    <!-- Here we just define the context path of the deployment. -->
+    <context-root>idp-metadata</context-root>
+
+    <!-- You must configure one of the PicketLink Authenticators to get enable SAML-based SSO. Identity Providers and Service Providers
+     have different authenticators. In this case we're configuring an Identity Provider, so we authenticator above is required. -->
+    <valve>
+        <class-name>org.picketlink.identity.federation.bindings.tomcat.idp.IDPWebBrowserSSOValve</class-name>
+
+        <!-- SAML Metadata support is configured by defining a specific ConfigurationProvider that knows how to load the IdP configuration by reading a SAML Metadata XML file. -->
+        <param>
+            <param-name>configProvider</param-name>
+     	    <param-value>org.picketlink.identity.federation.web.config.IDPMetadataConfigurationProvider</param-value>
+        </param>
+   </valve>
+</jboss-web>
