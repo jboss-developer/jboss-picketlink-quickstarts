@@ -4,7 +4,7 @@
     <security-domain>idp</security-domain>
 
     <!-- Here we just define the context path of the deployment. -->
-    <context-root>idp</context-root>
+    <context-root>idp-filter</context-root>
 
     <!-- You must configure one of the PicketLink Authenticators to get enable SAML-based SSO. Identity Providers and Service Providers
      have different authenticators. In this case we're configuring an Identity Provider, so we authenticator above is required. -->

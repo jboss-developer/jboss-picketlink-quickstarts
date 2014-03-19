@@ -51,13 +51,13 @@ You can configure the server `system-property` values by running the  `configure
 
 _NOTE - Before you begin:_
 
-1. If it is running, stop the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server.
+1. If it is running, stop the JBoss Enterprise Application Platform 6 or WildFly Server.
 2. Backup the file: `JBOSS_HOME/standalone/configuration/standalone.xml`
 3. After you have completed testing this quickstart, you can replace this file to restore the server to its original configuration.
 
 #### Configure the Facebook system-properties by Running the JBoss CLI Script
 
-1. Start the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server by typing the following: 
+1. Start the JBoss Enterprise Application Platform 6 or WildFly Server by typing the following:
 
         For Linux:  JBOSS_HOME/bin/standalone.sh 
         For Windows:  JBOSS_HOME\bin\standalone.bat
@@ -76,7 +76,7 @@ This script adds the system-property valuse to the the server configuration. You
 
 ### Configure the Facebook system-properties Using the JBoss CLI Interactively
 
-1. Start the JBoss Enterprise Application Platform 6 or JBoss AS 7 server by typing the following: 
+1. Start the JBoss Enterprise Application Platform 6 or WildFly server by typing the following:
 
 		For Linux:  JBOSS_HOME_SERVER_1/bin/standalone.sh
 		For Windows:  JBOSS_HOME_SERVER_1\bin\standalone.bat
@@ -96,7 +96,7 @@ You should see `{"outcome" => "success"}` after each command.
 
 ### Configure the Facebook system-properties by Manually Editing the Server Configuration File
 
-1.  If it is running, stop the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server.
+1.  If it is running, stop the JBoss Enterprise Application Platform 6 or WildFly Server.
 2.  Backup the file: `JBOSS_HOME/standalone/configuration/standalone.xml`
 3.  Open the file: `JBOSS_HOME/standalone/configuration/standalone.xml`
 4.  Add the following XML, right after </extensions>. Be sure to replace  `YOUR_CLIENT_ID`, `YOUR_CLIENT_SECRET_CODE`, and `YOUR_RETURN_URL` with the values provided when you registered as a Facebook developer. 
@@ -130,7 +130,8 @@ _NOTE: The following build command assumes you have configured your Maven user s
 2. Open a command line and navigate to the root directory of this quickstart.
 3. Type this command to build and deploy the archive:
 
-        mvn clean package jboss-as:deploy
+        For EAP 6:     mvn clean package jboss-as:deploy
+        For WildFly:   mvn -Pwildfly clean package wildfly:deploy
 
 4. This will deploy `target/jboss-as-picketlink-authentication-facebook.war` to the running instance of the server.
 
@@ -148,8 +149,8 @@ Undeploy the Archive
 2. Open a command line and navigate to the root directory of this quickstart.
 3. When you are finished testing, type this command to undeploy the archive:
 
-        mvn jboss-as:undeploy
-
+        For EAP 6:     mvn jboss-as:undeploy
+        For WildFly:   mvn -Pwildfly  wildfly:undeploy
 
 You can remove the Facebook system-properties  by running the  `remove-facebook.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file. 
 

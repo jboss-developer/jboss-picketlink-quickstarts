@@ -10,7 +10,7 @@ Source: <https://github.com/picketlink/picketlink-quickstarts/>
 What is it?
 -----------
 
-This example demonstrates the use of *CDI 1.0* and *PicketLink* in *JBoss Enterprise Application Platform 6* or *JBoss AS 7*.
+This example demonstrates the use of *CDI 1.0* and *PicketLink* in *JBoss Enterprise Application Platform 6* or *WildFly*.
 
 This quickstart shows how to to use PicketLink to authenticate users using the HTTP CLIENT-CERT scheme. 
 The application is configured to provide public access for some resources through the `/index.html` and to provide access to other resources, like `/protected/*`, to authenticated users only.
@@ -26,7 +26,7 @@ System requirements
 
 All you need to build this project is Java 6.0 (Java SDK 1.6) or better, Maven 3.0 or better.
 
-The application this project produces is designed to be run on JBoss Enterprise Application Platform 6 or JBoss AS 7.
+The application this project produces is designed to be run on JBoss Enterprise Application Platform 6 or WildFly.
 
 
 Configure Maven
@@ -64,7 +64,7 @@ Now that the certificates and keystores are properly configured, you must enable
 
 ### Configure the HTTPS Connector in the Web Subsystem by Running the JBoss CLI Script
 
-1. Start the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server by typing the following: 
+1. Start the JBoss Enterprise Application Platform 6 or WildFly Server by typing the following:
 
         For Linux:  JBOSS_HOME/bin/standalone.sh 
         For Windows:  JBOSS_HOME\bin\standalone.bat
@@ -82,7 +82,7 @@ This command reloads the server configuration before completion. You don`t need 
 
 ### Configure the HTTPS Connector in the Web Subsystem by Manually Editing the Server Configuration File
 
-1.  If it is running, stop the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server.
+1.  If it is running, stop the JBoss Enterprise Application Platform 6 or WildFly Server.
 2.  Backup the file: `JBOSS_HOME/standalone/configuration/standalone.xml`
 3.  Open the `JBOSS_HOME/standalone/configuration/standalone.xml` file in an editor and locate the subsystem `urn:jboss:domain:web`.
 4.  Add the following XML to the `web` subsystem:
@@ -129,7 +129,7 @@ Before you access the application, you must import the *client.cer*, which holds
 7. The certificate is now installed in the Mozilla Firefox browser.
 
 
-Start JBoss Enterprise Application Platform 6 or JBoss AS 7 with the Web Profile
+Start JBoss Enterprise Application Platform 6 or WildFly with the Web Profile
 -------------------------
 
 1. Open a command line and navigate to the root of the JBoss server directory.
@@ -148,7 +148,8 @@ _NOTE: The following build command assumes you have configured your Maven user s
 2. Open a command line and navigate to the root directory of this quickstart.
 3. Type this command to build and deploy the archive:
 
-        mvn clean package jboss-as:deploy
+        For EAP 6:     mvn clean package jboss-as:deploy
+        For WildFly:   mvn -Pwildfly clean package wildfly:deploy
 
 4. This will deploy `target/picketlink-authentication-http-client-cert.war` to the running instance of the server.
 
@@ -166,7 +167,8 @@ Undeploy the Archive
 2. Open a command line and navigate to the root directory of this quickstart.
 3. When you are finished testing, type this command to undeploy the archive:
 
-        mvn jboss-as:undeploy
+        For EAP 6:     mvn jboss-as:undeploy
+        For WildFly:   mvn -Pwildfly wildfly:undeploy
 
 
 Remove the SSL Configuration
@@ -176,7 +178,7 @@ You can remove the security domain configuration by running the  `remove-https.c
 
 ### Remove the Security Domain Configuration by Running the JBoss CLI Script
 
-1. Start the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server by typing the following: 
+1. Start the JBoss Enterprise Application Platform 6 or WildFly Server by typing the following:
 
         For Linux:  JBOSS_HOME_SERVER_1/bin/standalone.sh
         For Windows:  JBOSS_HOME_SERVER_1\bin\standalone.bat
@@ -190,7 +192,7 @@ This script removes the `https` connector from the `web` subsystem in the server
 
 
 ### Remove the Security Domain Configuration Manually
-1. If it is running, stop the JBoss Enterprise Application Platform 6 or JBoss AS 7 Server.
+1. If it is running, stop the JBoss Enterprise Application Platform 6 or WildFly Server.
 2. Replace the `JBOSS_HOME/standalone/configuration/standalone.xml` file with the back-up copy of the file.
 
 

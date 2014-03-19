@@ -39,10 +39,14 @@
   </licenses>
 
   <properties>
-    <!-- JBoss dependency versions -->
-    <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+        <!-- JBoss AS dependency versions -->
+      <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
-    <!-- PicketLink dependency versions -->
+      <!-- WildFly dependency versions -->
+      <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
+
+
+      <!-- PicketLink dependency versions -->
     <version.picketlink.javaee.bom>2.6.0-SNAPSHOT</version.picketlink.javaee.bom>
 
     <!-- maven-war-plugin -->
@@ -131,5 +135,23 @@
       </plugin>
     </plugins>
   </build>
+
+    <profiles>
+        <profile>
+            <id>wildfly</id>
+            <properties>
+                <target.container>wildfly</target.container>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <version>${version.wildfly.maven.plugin}</version>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>

@@ -16,14 +16,13 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.idm.jpa;
 
-import javax.ejb.Stateful;
+import org.picketlink.annotations.PicketLink;
+
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import org.picketlink.annotations.PicketLink;
 
 /**
  * This class uses CDI to alias Java EE resources, such as the {@link FacesContext}, to CDI beans
@@ -37,7 +36,6 @@ import org.picketlink.annotations.PicketLink;
  * private FacesContext facesContext;
  * </pre>
  */
-@Stateful
 public class Resources {
 
     @PersistenceContext(unitName = "picketlink-default")

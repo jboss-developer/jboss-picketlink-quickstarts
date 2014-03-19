@@ -68,7 +68,8 @@
     </modules>
 
     <properties>
-        <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+        <version.jbossas.maven.plugin>7.4.Final</version.jbossas.maven.plugin>
+        <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
     </properties>
 
     <build>
@@ -78,7 +79,16 @@
             <plugin>
                 <groupId>org.jboss.as.plugins</groupId>
                 <artifactId>jboss-as-maven-plugin</artifactId>
-                <version>${version.jboss.maven.plugin}</version>
+                <version>${version.jbossas.maven.plugin}</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>${version.wildfly.maven.plugin}</version>
                 <inherited>true</inherited>
                 <configuration>
                     <skip>true</skip>

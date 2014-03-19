@@ -10,7 +10,7 @@ Source: <https://github.com/picketlink/picketlink-quickstarts/>
 What is it?
 -----------
 
-This example demonstrates the use of *CDI 1.0* and *PicketLink* in *JBoss Enterprise Application Platform 6* or *JBoss AS 7*.
+This example demonstrates the use of *CDI 1.0* and *PicketLink* in *JBoss Enterprise Application Platform 6* or *WildFly*.
 
 You'll learn from this quickstart how to use PicketLink to authenticate users using the HTTP Basic scheme.
 
@@ -31,7 +31,7 @@ System requirements
 
 All you need to build this project is Java 6.0 (Java SDK 1.6) or better, Maven 3.0 or better.
 
-The application this project produces is designed to be run on JBoss Enterprise Application Platform 6 or JBoss AS 7. 
+The application this project produces is designed to be run on JBoss Enterprise Application Platform 6 or WildFly.
 
  
 Configure Maven
@@ -40,7 +40,7 @@ Configure Maven
 If you have not yet done so, you must [Configure Maven](http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#configure_maven) before testing the quickstarts.
 
 
-Start JBoss Enterprise Application Platform 6 or JBoss AS 7 with the Web Profile
+Start JBoss Enterprise Application Platform 6 or WildFly with the Web Profile
 -------------------------
 
 1. Open a command line and navigate to the root of the JBoss server directory.
@@ -59,7 +59,8 @@ _NOTE: The following build command assumes you have configured your Maven user s
 2. Open a command line and navigate to the root directory of this quickstart.
 3. Type this command to build and deploy the archive:
 
-        mvn clean package jboss-as:deploy
+        For EAP 6:     mvn clean package jboss-as:deploy
+        For WildFly:   mvn -Pwildfly clean package wildfly:deploy
 
 4. This will deploy `target/picketlink-authentication-http-basic.war` to the running instance of the server.
 
@@ -77,7 +78,8 @@ Undeploy the Archive
 2. Open a command line and navigate to the root directory of this quickstart.
 3. When you are finished testing, type this command to undeploy the archive:
 
-        mvn jboss-as:undeploy
+        For EAP 6:     mvn jboss-as:undeploy
+        For WildFly:   mvn -Pwildfly wildfly:undeploy
 
 
 Run the Quickstart in JBoss Developer Studio or Eclipse
