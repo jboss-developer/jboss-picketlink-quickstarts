@@ -133,14 +133,14 @@ In some cases, you may want to build the application to test for compile errors 
 3. Use this command to build and deploy the archive:
 
         For EAP 6:     mvn clean package jboss-as:deploy
-        For WildFly:   mvn clean package wildfly:deploy
+        For WildFly:   mvn -Pwildfly clean package wildfly:deploy
 
 #### Undeploy an Archive
 
 The command to undeploy the quickstart is simply:
 
         For EAP 6:     mvn jboss-as:undeploy
-        For WildFly:   mvn wildfly:undeploy
+        For WildFly:   mvn -Pwildfly wildfly:undeploy
 
 PicketLink Documentation
 ------------
