@@ -44,8 +44,15 @@ public class TermsOfServiceFilter implements Filter {
      */
     protected String tosParameter = "tos";
 
+    /**
+     * The TOS HTML/JSP Page
+     */
     protected String tosPage = "/termsofservice.html";
 
+    /**
+     * The HTML/JSP Page that is displayed when the user
+     * disagrees to the Terms of Service
+     */
     protected String tosDisagreedPage = "/termsofservice-disagreed.html";
 
     @Override
@@ -103,16 +110,35 @@ public class TermsOfServiceFilter implements Filter {
     public void destroy() {
     }
 
+    /**
+     * Send the request to the page
+     * @param httpServletRequest
+     * @param response
+     * @param page
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void sendToPage(HttpServletRequest httpServletRequest, HttpServletResponse response, String page) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = httpServletRequest.getRequestDispatcher(page);
         requestDispatcher.forward(httpServletRequest,response);
     }
+
+    /**
+     * Save the user's TOS choice in the store
+     * @param httpServletRequest
+     * @param storeValue
+     */
     protected void saveTosChoiceInStore(HttpServletRequest httpServletRequest, boolean storeValue){
         //In this case, we save it in the session -  but in real world, you send it to DB or LDAP
         HttpSession httpSession = httpServletRequest.getSession(false);
         httpSession.setAttribute("TOS",storeValue);
     }
 
+    /**
+     * Check whether we need to display the Terms of Service Page
+     * @param httpServletRequest
+     * @return
+     */
     protected boolean shouldDisplayTermsOfServicePage(HttpServletRequest httpServletRequest){
         //Here we check the session if the TOS attribute has been set. In real world,
         //the authentication process should set this attribute in the session from DB/LDAP
@@ -128,11 +154,20 @@ public class TermsOfServiceFilter implements Filter {
         return true;
     }
 
+    /**
+     * Save the current request in the user's session
+     * @param httpServletRequest
+     */
     protected void saveRequest(HttpServletRequest httpServletRequest){
         HttpSession session = httpServletRequest.getSession(false);
         session.setAttribute("TERMS_OF_SERVICE",httpServletRequest);
     }
 
+    /**
+     * Restore the request using the cached request
+     * @param httpServletRequest
+     * @return
+     */
     protected HttpServletRequest restoreRequest(HttpServletRequest httpServletRequest){
         HttpSession session = httpServletRequest.getSession(false);
         return (HttpServletRequest) session.getAttribute("TERMS_OF_SERVICE");
