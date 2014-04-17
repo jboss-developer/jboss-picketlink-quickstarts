@@ -34,8 +34,8 @@
 		</web-resource-collection>
 	</security-constraint>
 
-	<!-- Define the Login Configuration for this Application -->
-	<login-config>
+    <!-- Define the Login Configuration for this Application -->
+    <login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>Tomcat SALES Application</realm-name>
 		<form-login-config>
