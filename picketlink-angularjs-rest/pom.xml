@@ -69,6 +69,8 @@
         <scope>import</scope>
         <type>pom</type>
       </dependency>
+
+      <!-- Dependency Management for Java EE 6.0 -->
       <dependency>
         <groupId>org.jboss.bom</groupId>
         <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
@@ -81,48 +83,7 @@
 
   <dependencies>
 
-    <!-- Import the EJB API, we use provided scope as the API is included in
-               JBoss AS 7 -->
-    <dependency>
-      <groupId>org.jboss.spec.javax.ejb</groupId>
-      <artifactId>jboss-ejb-api_3.1_spec</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Import the CDI API, we use provided scope as the API is included in
-               JBoss AS 7 -->
-    <dependency>
-      <groupId>javax.enterprise</groupId>
-      <artifactId>cdi-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>javax.validation</groupId>
-        <artifactId>validation-api</artifactId>
-        <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>org.jboss.spec.javax.ws.rs</groupId>
-        <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
-        <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>org.hibernate.javax.persistence</groupId>
-        <artifactId>hibernate-jpa-2.0-api</artifactId>
-        <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jboss.spec.javax.json</groupId>
-	  <artifactId>jboss-json-api_1.0_spec</artifactId>
-      <version>1.0.0.Final</version>
-      <scope>provided</scope>
-    </dependency>
-
-      <!-- PicketLink dependencies -->
+    <!-- PicketLink dependencies -->
     <dependency>
         <groupId>org.picketlink</groupId>
         <artifactId>picketlink-api</artifactId>
@@ -177,6 +138,43 @@
 	</dependency>
 
     <dependency>
+      <groupId>org.jboss.spec.javax.ejb</groupId>
+      <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.jboss.spec.javax.ws.rs</groupId>
+        <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
+        <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+        <groupId>org.hibernate.javax.persistence</groupId>
+        <artifactId>hibernate-jpa-2.0-api</artifactId>
+        <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.spec.javax.json</groupId>
+	  <artifactId>jboss-json-api_1.0_spec</artifactId>
+      <version>1.0.0.Final</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
         <groupId>org.hibernate</groupId>
         <artifactId>hibernate-validator</artifactId>
         <scope>provided</scope>
@@ -199,7 +197,6 @@
         <artifactId>mail</artifactId>
         <scope>provided</scope>
     </dependency>
-
   </dependencies>
 
   <build>

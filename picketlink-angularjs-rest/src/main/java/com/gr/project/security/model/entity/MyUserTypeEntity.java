@@ -42,6 +42,9 @@ public class MyUserTypeEntity extends IdentityTypeEntity {
     private String loginName;
 
     @AttributeValue
+    private String activationCode;
+
+    @AttributeValue
     @OneToOne (cascade = CascadeType.ALL)
     private Person person;
 
@@ -51,6 +54,14 @@ public class MyUserTypeEntity extends IdentityTypeEntity {
 
     public void setLoginName(String loginName) {
         this.loginName = loginName;
+    }
+
+    public String getActivationCode() {
+        return this.activationCode;
+    }
+
+    public void setActivationCode(String activationCode) {
+        this.activationCode = activationCode;
     }
 
     public Person getPerson() {

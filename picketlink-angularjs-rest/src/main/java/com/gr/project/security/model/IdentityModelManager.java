@@ -35,6 +35,7 @@ import org.picketlink.idm.query.IdentityQuery;
 
 import javax.inject.Inject;
 import java.util.List;
+import java.util.UUID;
 
 import static com.gr.project.security.model.ApplicationRole.ADMINISTRATOR;
 import static org.picketlink.idm.model.basic.BasicModel.hasRole;
@@ -108,8 +109,7 @@ public class IdentityModelManager {
 
         disableAccount(newUser);
 
-        // String activationCode = UUID.randomUUID().toString();
-        String activationCode = "12345"; // testing purposes
+        String activationCode = UUID.randomUUID().toString();
 
         newUser.setActivationCode(activationCode); // we set an activation code for future use.
 
@@ -240,5 +240,7 @@ public class IdentityModelManager {
         if (user.getId() != null) {
             this.identityManager.update(user);
         }
+
+        issueToken(user);
     }
 }

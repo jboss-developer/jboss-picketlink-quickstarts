@@ -12,11 +12,6 @@ public class StringResourceProducer {
 		return "UTF-8";
 	}
 	
-	@Produces @Named("default.return.message.parameter")
-	public String getMessageReturnParameter() {
-		return "message";
-	}
-	
 	@Produces @Named("resource.wildcard")
 	public String getWildcardResource() {
 		return "*";

@@ -21,7 +21,13 @@
  */
 package com.gr.project.security.service;
 
-import static com.gr.project.security.model.ApplicationRole.USER;
+import com.gr.project.model.Email;
+import com.gr.project.rest.MessageBuilder;
+import com.gr.project.security.authentication.credential.Token;
+import com.gr.project.security.model.IdentityModelManager;
+import com.gr.project.security.model.MyUser;
+import com.gr.project.security.model.Registration;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -35,14 +41,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.hibernate.validator.constraints.NotEmpty;
-
-import com.gr.project.model.Email;
-import com.gr.project.rest.MessageBuilder;
-import com.gr.project.security.authentication.credential.Token;
-import com.gr.project.security.model.IdentityModelManager;
-import com.gr.project.security.model.MyUser;
-import com.gr.project.security.model.Registration;
+import static com.gr.project.security.model.ApplicationRole.USER;
 
 /**
  * <p>RESTFul endpoint responsible for:</p>
@@ -66,10 +65,6 @@ public class RegistrationService {
     @Inject
     @Named("ACTIVATION_CODE_ATTRIBUTE_NAME")
     private String ACTIVATION_CODE_ATTRIBUTE_NAME;
-
-    @Inject
-    @Named("default.return.message.parameter")
-    private String MESSAGE_RESPONSE_PARAMETER;
 
     @Inject
     private IdentityModelManager identityModelManager;
@@ -128,7 +123,7 @@ public class RegistrationService {
 
 
     private void sendNotification(Registration request, String activationCode) {
-        Email email = new Email("Please complete the signup", "http://localhost:8080/Project/#/activate/" + activationCode, request.getEmail());
+        Email email = new Email("Please complete the signup", "http://localhost:8080/picketlink-angularjs-rest/#/activate/" + activationCode, request.getEmail());
 
         event.fire(email);
     }

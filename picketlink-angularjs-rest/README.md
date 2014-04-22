@@ -10,7 +10,31 @@ Source: <https://github.com/picketlink/picketlink-quickstarts/>
 What is it?
 -----------
 
-Before you run this example, you must create certificates and configure the server to use SSL and validate client certificates.
+This example demonstrates the use of *PicketLink* in HTML5 + AngularJS + RESTful applications in *JBoss Enterprise Application Platform 6* or *WildFly*.
+
+The application provides an authentication and registration page. Once the user is registered, he must activate his account by
+accessing the following URL:
+
+    https://localhost:8443/Project/#/activate/[ACTIVATION_CODE]
+
+The activation code is sent to the e-mail provided during the registration process. You can also activate an account by log in as adminstrator.
+Only administrators are allowed to enable/disable accounts:
+
+    Username: admin@picketlink.org
+    Password: admin
+
+Once the account is activated, the user is able to *Sign In* using his email and password.
+
+This application demonstrates how you can use PicketLink to:
+
+* Secure HTML5-based applications using AngularJS at the frontend
+* Secure RESTful endpoints based on RBAC and Security Annotations
+* Token-based Authentication using JSON Web Token and JSON Web Signature
+* Provide a custom credential type and handler
+* Provide your own types to represent your users
+
+Before you run this example, you must create certificates and configure the server to use SSL and validate client certificates. You must also
+provide a Mail configuration in your server in order to send the activation code to new users.
 
 The latest PicketLink documentation is available [here](http://docs.jboss.org/picketlink/2/latest/).
 

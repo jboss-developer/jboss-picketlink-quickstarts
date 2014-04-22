@@ -24,7 +24,6 @@ package com.gr.project.security.model;
 import com.gr.project.model.Person;
 import org.picketlink.idm.model.AbstractIdentityType;
 import org.picketlink.idm.model.Account;
-import org.picketlink.idm.model.Attribute;
 import org.picketlink.idm.model.annotation.AttributeProperty;
 import org.picketlink.idm.model.annotation.Unique;
 import org.picketlink.idm.query.AttributeParameter;
@@ -45,12 +44,10 @@ public class MyUser extends AbstractIdentityType implements Account {
 
 	private static final long serialVersionUID = 1L;
 
-    private static final String ACTIVATION_CODE_ATTRIBUTE_NAME = "ActivationCode";
-
     /**
      * <p>Can be used to query users by their activation code.</p>
      */
-    public static final AttributeParameter ACTIVATION_CODE = QUERY_ATTRIBUTE.byName(ACTIVATION_CODE_ATTRIBUTE_NAME);
+    public static final AttributeParameter ACTIVATION_CODE = QUERY_ATTRIBUTE.byName("activationCode");
 
     /**
      * <p>Can be used to query users by their login name.</p>
@@ -60,6 +57,9 @@ public class MyUser extends AbstractIdentityType implements Account {
     @AttributeProperty
     @Unique
     private String loginName;
+
+    @AttributeProperty
+    private String activationCode;
 
     @AttributeProperty
     private Person person;
@@ -89,20 +89,14 @@ public class MyUser extends AbstractIdentityType implements Account {
     }
 
     public void setActivationCode(String activationCode) {
-        setAttribute(new Attribute<String>(ACTIVATION_CODE_ATTRIBUTE_NAME, activationCode));
+        this.activationCode = activationCode;
     }
 
     public void invalidateActivationCode() {
-        removeAttribute(ACTIVATION_CODE_ATTRIBUTE_NAME);
+        this.activationCode = null;
     }
 
     public String getActivationCode() {
-        Attribute<String> attribute = getAttribute(ACTIVATION_CODE_ATTRIBUTE_NAME);
-
-        if (attribute == null) {
-            return null;
-        }
-
-        return attribute.getValue();
+        return this.activationCode;
     }
 }
