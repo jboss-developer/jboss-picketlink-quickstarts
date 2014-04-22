@@ -116,7 +116,7 @@ Final undertow subsystem should look like this one:
         </handlers>
     </subsystem>
 
-2) Edit standalone.xml, search for **security-realms**
+2. Edit standalone.xml, search for **security-realms**
 
 Add following security-realm:
 
@@ -205,13 +205,13 @@ Configuring the Mail Service in the Mail Subsystem by Running the JBoss CLI Scri
 
 In order to configure the email JNDI resource please follow this instructions:
 
-1. Edit standalone.xml, search for **subsystem xmlns="urn:jboss:domain:mail:2.0"** and add following mail-session as follows:
+1) Edit standalone.xml, search for **subsystem xmlns="urn:jboss:domain:mail:2.0"** and add following mail-session in the **socket-binding-group**:
 
-	<mail-session name="App" jndi-name="java:/mail/gmail">
-		<smtp-server outbound-socket-binding-ref="mail-smtp-gmail" ssl="true" username="YOUR_GMAIL_EMAIL" password="YOUR_GMAIL_PASSWORD"/>
-	</mail-session>
+        <mail-session name="App" jndi-name="java:/mail/gmail">
+            <smtp-server outbound-socket-binding-ref="mail-smtp-gmail" ssl="true" username="YOUR_GMAIL_EMAIL" password="YOUR_GMAIL_PASSWORD"/>
+        </mail-session>
 
-The final mail subsystem should be:
+The final one should be like this one:
 
 	<subsystem xmlns="urn:jboss:domain:mail:2.0">
 		<mail-session name="default" jndi-name="java:jboss/mail/Default">
@@ -222,13 +222,11 @@ The final mail subsystem should be:
 		</mail-session>
 	</subsystem>
 
-2. Search for **outbound-socket-binding name="mail-smtp"** and add the following outbound-socket-binding
+2) Search for **outbound-socket-binding name="mail-smtp"** and add the following outbound-socket-binding in the **socket-binding-group**:
 
-	<outbound-socket-binding name="mail-smtp-gmail">
-		<remote-destination host="smtp.gmail.com" port="465"/>
-	</outbound-socket-binding>
-
-in the **socket-binding-group**.
+        <outbound-socket-binding name="mail-smtp-gmail">
+            <remote-destination host="smtp.gmail.com" port="465"/>
+        </outbound-socket-binding>
 
 The final one should be like this one :
 
@@ -248,6 +246,7 @@ The final one should be like this one :
 			<remote-destination host="smtp.gmail.com" port="465"/>
 		</outbound-socket-binding>
 	</socket-binding-group>
+
 
 Start JBoss Enterprise Application Platform 6 or WildFly with the Web Profile
 -------------------------
