@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+
+	<filter>
+        <filter-name>AuthenticationFilter</filter-name>
+        <filter-class>org.picketlink.authentication.web.AuthenticationFilter</filter-class>
+
+        <!-- As we're using a token to authenticate users in each request, we need a stateless authentication model. And not use at all session cookies on the server. -->
+        <init-param>
+            <param-name>statelessAuthentication</param-name>
+            <param-value>true</param-value>
+        </init-param>
+	</filter>
+
+    <!-- Protect RESTful endpoints -->
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+	<!-- Force SSL usage -->
+	<security-constraint>
+		<web-resource-collection>
+			<web-resource-name>JaxRsActivator</web-resource-name>
+			<url-pattern>/*</url-pattern>
+		</web-resource-collection>
+		<user-data-constraint>
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+	
+</web-app>

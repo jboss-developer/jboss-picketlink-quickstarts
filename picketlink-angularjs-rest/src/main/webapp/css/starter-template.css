@@ -1,0 +1,14 @@
+body {
+    padding-top: 50px;
+}
+.starter-template {
+    padding: 40px 15px;
+    text-align: center;
+}
+
+#messages {
+    float: left;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+}
