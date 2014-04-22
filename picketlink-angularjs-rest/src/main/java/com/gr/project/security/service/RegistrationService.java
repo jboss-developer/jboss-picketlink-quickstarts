@@ -22,7 +22,7 @@
 package com.gr.project.security.service;
 
 import com.gr.project.model.Email;
-import com.gr.project.rest.MessageBuilder;
+import com.gr.project.util.MessageBuilder;
 import com.gr.project.security.authentication.credential.Token;
 import com.gr.project.security.model.IdentityModelManager;
 import com.gr.project.security.model.MyUser;

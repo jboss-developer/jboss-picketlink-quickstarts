@@ -1,12 +1,12 @@
 package com.gr.project.security.service;
 
 import com.gr.project.model.Person;
-import com.gr.project.rest.MessageBuilder;
 import com.gr.project.security.authorization.AllowedRole;
 import com.gr.project.security.model.ApplicationRole;
 import com.gr.project.security.model.IdentityModelManager;
 import com.gr.project.security.model.MyUser;
 import com.gr.project.util.EntityValidator;
+import com.gr.project.util.MessageBuilder;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response;
 @javax.ejb.Stateless
 @Path("/admin")
 @AllowedRole(ApplicationRole.ADMINISTRATOR)
-public class AdminService {
+public class AccountService {
 
     @Inject
     private IdentityModelManager identityModelManager;
@@ -30,7 +30,7 @@ public class AdminService {
     @POST
     @Path("enableAccount")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response enableAccount(@NotNull Person passedUser) {
+    public Response enable(@NotNull Person passedUser) {
         MessageBuilder message;
 
         try {
@@ -60,7 +60,7 @@ public class AdminService {
     @POST
     @Path("disableAccount")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response disableAccount(@NotNull Person passedUser) {
+    public Response disable(@NotNull Person passedUser) {
         MessageBuilder message;
 
         try {

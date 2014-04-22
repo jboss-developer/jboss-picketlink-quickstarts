@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.gr.project.rest;
+package com.gr.project;
 
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;

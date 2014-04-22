@@ -22,7 +22,7 @@
 
 package com.gr.project.security.service;
 
-import com.gr.project.rest.MessageBuilder;
+import com.gr.project.util.MessageBuilder;
 import com.gr.project.security.model.IdentityModelManager;
 import com.gr.project.security.model.MyUser;
 import org.picketlink.Identity;

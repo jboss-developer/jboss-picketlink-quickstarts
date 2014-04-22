@@ -16,7 +16,7 @@
  */
 package com.gr.project.security.util;
 
-import com.gr.project.rest.MessageBuilder;
+import com.gr.project.util.MessageBuilder;
 import org.apache.deltaspike.security.api.authorization.AccessDeniedException;
 import org.picketlink.Identity;
 
@@ -27,9 +27,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
-import static com.gr.project.rest.MessageBuilder.accessDenied;
-import static com.gr.project.rest.MessageBuilder.authenticationRequired;
-import static com.gr.project.rest.MessageBuilder.badRequest;
+import static com.gr.project.util.MessageBuilder.accessDenied;
+import static com.gr.project.util.MessageBuilder.authenticationRequired;
+import static com.gr.project.util.MessageBuilder.badRequest;
 import static org.picketlink.Identity.Stateless;
 
 /**
