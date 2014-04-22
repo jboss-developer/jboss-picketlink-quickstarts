@@ -222,7 +222,7 @@ The final mail subsystem should be:
 		</mail-session>
 	</subsystem>
 
-2. Search for **outbound-socket-binding name="mail-smtp"** and add the following outbound-socket-binding:
+2. Search for **outbound-socket-binding name="mail-smtp"** and add the following outbound-socket-binding
 
 	<outbound-socket-binding name="mail-smtp-gmail">
 		<remote-destination host="smtp.gmail.com" port="465"/>
