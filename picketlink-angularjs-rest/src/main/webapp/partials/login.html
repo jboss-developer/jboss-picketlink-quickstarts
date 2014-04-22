@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row">
+    <div class="offset4 span4">
+	    <form class=well form-inline" ng-submit="login()" role="form">
+	    	<label class="control-label">Sign In</label>
+	    	<label class="control-label">If you're already registered, just provide your credentials. Otherwise, please <a href="#signup"> Sign Up </a> </label>
+		    <div class="form-group">
+		        <label for="userId">User Name:</label>
+		        <input type="text" name="userId" id="userId" ng-model="newUser.userId" class="form-control" placeholder="Your User Name or E-mail" required/>
+		    </div>
+		    <div class="form-group">
+		        <label for="password">Password:</label>
+		        <input type="password" name="password" id="password" ng-model="newUser.password" class="form-control" placeholder="Your Password" required/>
+		    </div>
+		    <input type="submit" id="login" value="Sign In" class="btn btn-default"/>
+		    <p><small>Hint: If you want to sign in as an administrator use: <i>admin@picketlink.org/admin</i></small></p>
+		</form>
+	</div>
+	
+  </div>
+</div>
