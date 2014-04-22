@@ -10,7 +10,7 @@ Source: <https://github.com/picketlink/picketlink-quickstarts/>
 What is it?
 -----------
 
-This example demonstrates the use of *PicketLink* in HTML5 + AngularJS + RESTful applications in *JBoss Enterprise Application Platform 6* or *WildFly*.
+This example demonstrates the use of *PicketLink* in HTML5 + AngularJS + RESTful applications in *JBoss Enterprise Application Platform* or *WildFly*.
 
 The application provides an authentication and registration page. Once the user is registered, he must activate his account by
 accessing the following URL:
@@ -52,10 +52,10 @@ Configure Maven
 If you have not yet done so, you must [Configure Maven](http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#configure_maven) before testing the quickstarts.
 
 
-Create the Client Certicates
+Create the Server Certicate
 ------------------------
 
-1.  Open a command line and navigate to the JBoss server `configuration` directory:
+1. Open a command line and navigate to the JBoss server `configuration` directory:
 
         For Linux:   JBOSS_HOME/standalone/configuration
         For Windows: JBOSS_HOME\standalone\configuration
@@ -64,24 +64,16 @@ Create the Client Certicates
         keytool -genkey -alias server -keyalg RSA -keystore server.keystore -storepass change_it -validity 365
 
    You'll be prompted for some additional information, such as your name, organizational unit, and location. Enter any values you prefer.
-3. Create the client certificate, which is used to authenticate against the server when accessing a resource through SSL.
-
-         keytool -genkey -alias client -keystore client.keystore -storepass change_it -validity 365 -keyalg RSA -keysize 2048 -storetype pkcs12 -dname "CN=client, OU=Org. Unit, O=Company, ST=NC, C=US"
-4. Export the client certificate and create a truststore by importing this certificate:
-
-        keytool -exportcert -keystore client.keystore  -storetype pkcs12 -storepass change_it -alias client -keypass change_it -file client.cer
-        keytool -import -file client.cer -alias client -keystore client.truststore
-5. The certificates and keystores are now properly configured.
+3. The certificates and keystores are now properly configured.
 
 
-Configure the Server to Use SSL 
---------------------------------
+## Configure the Server to Use SSL
 
 Now that the certificates and keystores are properly configured, you must enable SSL in the server configuration. 
 
-### Configure the HTTPS Connector in the Web Subsystem by Running the JBoss CLI Script
+### Configure the HTTPS Connector in the Web Subsystem by Running the JBoss CLI Script (JBoss Enterprise Application Platform)
 
-1. Start the JBoss Enterprise Application Platform 6 or WildFly Server by typing the following:
+1. Start the WildFly Server by typing the following:
 
         For Linux:  JBOSS_HOME/bin/standalone.sh 
         For Windows:  JBOSS_HOME\bin\standalone.bat
@@ -97,21 +89,84 @@ This script adds and configures the `https` connector to the `web` subsystem in 
 
 This command reloads the server configuration before completion. You don`t need to manually stop/start the server to the configuration take effect.
 
-### Configure the HTTPS Connector in the Web Subsystem by Manually Editing the Server Configuration File
+### Configure the HTTPS Connector in the Web Subsystem by Running the JBoss CLI Script (WildFly)
 
-1.  If it is running, stop the JBoss Enterprise Application Platform 6 or WildFly Server.
-2.  Backup the file: `JBOSS_HOME/standalone/configuration/standalone.xml`
-3.  Open the `JBOSS_HOME/standalone/configuration/standalone.xml` file in an editor and locate the subsystem `urn:jboss:domain:web`.
-4.  Add the following XML to the `web` subsystem:
+In order to configure SSL support on Wildfly please follow this instructions:
 
-        <connector name="https" protocol="HTTP/1.1" scheme="https" socket-binding="https" enable-lookups="false" secure="true">
-            <ssl name="localhost-ssl" key-alias="server" password="change_it"
-                certificate-key-file="${jboss.server.config.dir}/server.keystore"
-                protocol="TLSv1"
-                verify-client="want"
-                ca-certificate-file="${jboss.server.config.dir}/client.truststore"/>
-        </connector>
+1. Edit standalone.xml, search for **"urn:jboss:domain:undertow:1.0"** and add following listener: **https-listener name="default-https" socket-binding="https" security-realm="ssl-realm"**
+Final undertow subsystem should look like this one:
 
+	<subsystem xmlns="urn:jboss:domain:undertow:1.0">
+		<buffer-caches>
+			<buffer-cache name="default" buffer-size="1024" buffers-per-region="1024" max-regions="10"/>
+        </buffer-caches>
+        <server name="default-server">
+			<http-listener name="default" socket-binding="http"/>
+            <https-listener name="default-https" socket-binding="https" security-realm="ssl-realm"/>
+            <host name="default-host" alias="localhost">
+				<location name="/" handler="welcome-content"/>
+            </host>
+        </server>
+        <servlet-container name="default" default-buffer-cache="default" stack-trace-on-error="local-only">
+			<jsp-config/>
+            <persistent-sessions/>
+        </servlet-container>
+        <handlers>
+			<file name="welcome-content" path="${jboss.home.dir}/welcome-content" directory-listing="true"/>
+        </handlers>
+    </subsystem>
+
+2) Edit standalone.xml, search for **security-realms**
+
+Add following security-realm:
+
+	<security-realm name="ssl-realm">
+		<server-identities>
+			<ssl>
+			<keystore path="server.keystore" relative-to="jboss.server.config.dir"
+			keystore-password="SUPER_SECRET_PASS" alias="server" key-password="SUPER_SECRET_PASS"
+			/>
+			</ssl>
+		</server-identities>
+		<authentication>
+			<local default-user="$local"/>
+			<properties path="mgmt-users.properties" relative-to="jboss.server.config.dir"/>
+		</authentication>
+	</security-realm>
+
+Final security realms should look like:
+
+	<security-realms>
+		<security-realm name="ManagementRealm">
+			<authentication>
+				<local default-user="$local"/>
+				<properties path="mgmt-users.properties" relative-to="jboss.server.config.dir"/>
+			</authentication>
+			<authorization map-groups-to-roles="false">
+				<properties path="mgmt-groups.properties" relative-to="jboss.server.config.dir"/>
+			</authorization>
+		</security-realm>
+		<security-realm name="ssl-realm">
+			<server-identities>
+				<ssl>
+					<keystore path="server.keystore" relative-to="jboss.server.config.dir" keystore-password="SUPER_SECRET_PASS" alias="server" key-password="SUPER_SECRET_PASS" />
+				</ssl>
+			</server-identities>
+			<authentication>
+				<local default-user="$local"/>
+				<properties path="mgmt-users.properties" relative-to="jboss.server.config.dir"/>
+			</authentication>
+		</security-realm>
+		<security-realm name="ApplicationRealm">
+			<authentication>
+				<local default-user="$local" allowed-users="*"/>
+				<properties path="application-users.properties" relative-to="jboss.server.config.dir"/>
+			</authentication>
+			<authorization>
+				<properties path="application-roles.properties" relative-to="jboss.server.config.dir"/>
+			</authorization>
+		</security-realm>
+	</security-realms>
 
 Test the Server SSL Configuration
 ---------------------------------
@@ -120,26 +175,24 @@ To test the SSL configuration, access: <https://localhost:8443>
 
 If it is configured correctly, you should be asked to trust the server certificate.
 
-Configuring the Mail Service
+Configuring the Mail Service in the Mail Subsystem by Running the JBoss CLI Script
 ----------------------------
 
-In order to configure the email JNDI resource please follow this instructions:
+1. Start the WildFly Server by typing the following:
 
-* Edit standalone.xml, search for the mail subsystem:
+        For Linux:  JBOSS_HOME/bin/standalone.sh
+        For Windows:  JBOSS_HOME\bin\standalone.bat
+2. Open a new command line, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
 
-add following mail-session as follows:
+        JBOSS_HOME/bin/jboss-cli.sh --connect --file=configure-mail.cli
 
-	<mail-session name="App" jndi-name="java:/mail/gmail">
-		<smtp-server outbound-socket-binding-ref="mail-smtp-gmail" ssl="true" username="YOUR_GMAIL_EMAIL" password="YOUR_GMAIL_PASSWORD"/>
-	</mail-session>
+This script adds and configures the `https` connector to the `web` subsystem in the server configuration. You should see the following result when you run the script:
 
-* search for **outbound-socket-binding name="mail-smtp"**
+        {"outcome" => "success"}
+        {"outcome" => "success"}
+        {"outcome" => "success"}
 
-Add the following outbound-socket-binding:
-
-	<outbound-socket-binding name="mail-smtp-gmail">
-		<remote-destination host="smtp.gmail.com" port="465"/>
-	</outbound-socket-binding>
+This command reloads the server configuration before completion. You don`t need to manually stop/start the server to the configuration take effect.
 
 Start JBoss Enterprise Application Platform 6 or WildFly with the Web Profile
 -------------------------
@@ -166,8 +219,7 @@ _NOTE: The following build command assumes you have configured your Maven user s
 4. This will deploy `target/picketlink-angularjs-rest.war` to the running instance of the server.
 
 
-Access the application 
----------------------
+## Access the application
 
 The application will be running at the following URL: <https://localhost:8443/picketlink-angularjs-rest>.
 

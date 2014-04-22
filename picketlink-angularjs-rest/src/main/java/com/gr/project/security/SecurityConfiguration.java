@@ -21,15 +21,20 @@
  */
 package com.gr.project.security;
 
+import com.gr.project.model.Person;
 import com.gr.project.security.authentication.credential.TokenCredentialHandler;
+import com.gr.project.security.model.ApplicationRole;
+import com.gr.project.security.model.IdentityModelUtils;
 import com.gr.project.security.model.MyUser;
 import com.gr.project.security.model.entity.MyUserTypeEntity;
 import com.gr.project.security.model.entity.TokenCredentialTypeEntity;
 import org.picketlink.IdentityConfigurationEvent;
 import org.picketlink.PartitionManagerCreateEvent;
+import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
 import org.picketlink.idm.config.SecurityConfigurationException;
+import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.credential.handler.PasswordCredentialHandler;
 import org.picketlink.idm.jpa.model.sample.simple.AttributeTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.GroupTypeEntity;
@@ -41,6 +46,7 @@ import org.picketlink.idm.jpa.model.sample.simple.RelationshipTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.RoleTypeEntity;
 import org.picketlink.idm.model.Attribute;
 import org.picketlink.idm.model.basic.Realm;
+import org.picketlink.idm.model.basic.Role;
 import org.picketlink.internal.EEJPAContextInitializer;
 
 import javax.ejb.Stateless;
@@ -50,6 +56,10 @@ import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
+
+import static com.gr.project.security.model.IdentityModelUtils.createRole;
+import static com.gr.project.security.model.IdentityModelUtils.findByLoginName;
+import static org.picketlink.idm.model.basic.BasicModel.grantRole;
 
 /**
  * @author Pedro Igor
@@ -90,6 +100,20 @@ public class SecurityConfiguration {
 
     public void configureDefaultPartition(@Observes PartitionManagerCreateEvent event) {
         PartitionManager partitionManager = event.getPartitionManager();
+
+        createDefaultPartition(partitionManager);
+        createDefaultRoles(partitionManager);
+        createAdminAccount(partitionManager);
+    }
+
+    private void createDefaultRoles(PartitionManager partitionManager) {
+        IdentityManager identityManager = partitionManager.createIdentityManager();
+
+        createRole(ApplicationRole.ADMINISTRATOR, identityManager);
+        createRole(ApplicationRole.USER, identityManager);
+    }
+
+    private void createDefaultPartition(PartitionManager partitionManager) {
         Realm partition = partitionManager.getPartition(Realm.class, Realm.DEFAULT_REALM);
 
         if (partition == null) {
@@ -127,4 +151,31 @@ public class SecurityConfiguration {
         return this.keyStore;
     }
 
+    public void createAdminAccount(PartitionManager partitionManager) {
+        IdentityManager identityManager = partitionManager.createIdentityManager();
+        String email = "admin@picketlink.org";
+
+        // if admin exists dont create again
+        if(findByLoginName(email, identityManager) != null) {
+            return;
+        }
+
+        Person person = new Person();
+
+        person.setFirstName("Almight");
+        person.setLastName("Administrator");
+        person.setEmail(email);
+
+        MyUser admin = new MyUser(person.getEmail());
+
+        admin.setPerson(person);
+
+        identityManager.add(admin);
+
+        identityManager.updateCredential(admin, new Password("admin"));
+
+        Role adminRole = IdentityModelUtils.getRole(ApplicationRole.ADMINISTRATOR, identityManager);
+
+        grantRole(partitionManager.createRelationshipManager(), admin, adminRole);
+    }
 }

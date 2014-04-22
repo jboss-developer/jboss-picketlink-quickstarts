@@ -13,9 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Add the https connector with the necessary ssl configuration
-//subsystem=web/connector=https:add(protocol="HTTP/1.1",scheme="https",socket-binding="https",enable-lookups="false",secure="true")
-//subsystem=web/connector=https/ssl=configuration:add(name="localhost-ssl",key-alias="server",password="change_it",certificate-key-file="${jboss.server.config.dir}/server.keystore",protocol="TLSv1")
+# Add the mail session with the necessary ssl configuration
+/subsystem=mail/mail-session="java:/mail/gmail":add(jndi-name="java:/mail/gmail")
+/subsystem=mail/mail-session="java\:/mail/gmail"/server=smtp:add(outbound-socket-binding-ref="mail-smtp-gmail",ssl="true",username="pigor.craveiro@gmail.com",password="uombkgidkgwvmaef")
+/socket-binding-group=standard-sockets/remote-destination-outbound-socket-binding=mail-smtp-gmail:add(host="smtp.gmail.com",port="465")
 
 # Reload the server configuration
 :reload

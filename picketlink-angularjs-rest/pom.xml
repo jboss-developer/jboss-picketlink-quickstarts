@@ -221,22 +221,42 @@
     </plugins>
   </build>
 
-    <profiles>
-        <profile>
-            <id>wildfly</id>
-            <properties>
-                <target.container>wildfly</target.container>
-            </properties>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
-                        <version>${version.wildfly.maven.plugin}</version>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-    </profiles>
+  <profiles>
+    <!-- This profile provides some additional configuration when packaging for JBoss EAP. Since JSON API is JEE7+, we need to manually
+    include the libraries inside the deployment. -->
+    <profile>
+        <id>default</id>
+        <activation>
+            <activeByDefault>true</activeByDefault>
+        </activation>
+        <dependencies>
+            <dependency>
+              <groupId>org.jboss.spec.javax.json</groupId>
+              <artifactId>jboss-json-api_1.0_spec</artifactId>
+              <version>1.0.0.Final</version>
+            </dependency>
+            <dependency>
+              <groupId>org.glassfish</groupId>
+              <artifactId>javax.json</artifactId>
+              <version>1.0.4</version>
+            </dependency>
+        </dependencies>
+    </profile>
+    <profile>
+        <id>wildfly</id>
+        <properties>
+            <target.container>wildfly</target.container>
+        </properties>
+        <build>
+            <plugins>
+                <plugin>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>${version.wildfly.maven.plugin}</version>
+                </plugin>
+            </plugins>
+        </build>
+    </profile>
+  </profiles>
 
 </project>

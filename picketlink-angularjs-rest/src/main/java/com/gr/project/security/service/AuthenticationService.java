@@ -90,6 +90,11 @@ public class AuthenticationService {
 
     private Response returnToken(Account account) {
         String token = this.identityModelManager.getToken(account);
+
+        if (token == null) {
+            token = this.identityModelManager.issueToken(account).getToken();
+        }
+
         return MessageBuilder.ok().token(token).build();
     }
 }

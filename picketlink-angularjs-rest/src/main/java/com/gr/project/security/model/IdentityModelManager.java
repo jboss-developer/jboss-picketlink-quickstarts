@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.gr.project.security.model.ApplicationRole.ADMINISTRATOR;
+import static com.gr.project.security.model.IdentityModelUtils.getRole;
 import static org.picketlink.idm.model.basic.BasicModel.hasRole;
 
 /**
@@ -62,35 +63,6 @@ public class IdentityModelManager {
 
     @Inject
     private TokenManager tokenManager;
-
-    public void createAdminAccount() {
-    	
-    	// if admin exists dont create again
-    	if(findByLoginName("admin@picketlink.org") != null) {
-    		return;
-    	}
-    	
-        Registration registration = new Registration();
-
-        registration.setEmail("admin@picketlink.org");
-
-        if (findByLoginName(registration.getEmail()) != null) {
-            return;
-        }
-
-        registration.setFirstName("Almight");
-        registration.setLastName("Administrator");
-        registration.setPassword("admin");
-        registration.setPasswordConfirmation("admin");
-
-        createAccount(registration);
-
-        MyUser admin = findByLoginName(registration.getEmail());
-
-        activateAccount(admin);
-
-        grantRole(admin, ADMINISTRATOR);
-    }
 
     public MyUser createAccount(Registration request) {
         if (!request.isValid()) {
@@ -133,8 +105,8 @@ public class IdentityModelManager {
     }
 
     public void grantRole(MyUser account, ApplicationRole role) {
-        Role adminRole = BasicModel.getRole(this.identityManager, role.name());
-        BasicModel.grantRole(this.relationshipManager, account, adminRole);
+        Role storedRole = BasicModel.getRole(this.identityManager, role.name());
+        BasicModel.grantRole(this.relationshipManager, account, storedRole);
     }
 
     public Token activateAccount(String activationCode) {
@@ -157,21 +129,7 @@ public class IdentityModelManager {
     }
 
     public MyUser findByLoginName(String loginName) {
-        if (loginName == null) {
-            throw new IllegalArgumentException("Invalid login name.");
-        }
-
-        IdentityQuery<MyUser> query = identityManager.createIdentityQuery(MyUser.class);
-
-        query.setParameter(MyUser.USER_NAME, loginName);
-
-        List<MyUser> result = query.getResultList();
-
-        if (!result.isEmpty()) {
-            return result.get(0);
-        }
-
-        return null;
+        return IdentityModelUtils.findByLoginName(loginName, this.identityManager);
     }
 
     public MyUser findUserByActivationCode(String activationCode) {
@@ -201,23 +159,8 @@ public class IdentityModelManager {
         return storage.getToken();
     }
 
-    public Role getRole(ApplicationRole role) {
-        return BasicModel.getRole(this.identityManager, role.name());
-    }
-
-    public Role createRole(ApplicationRole applicationRole) {
-        Role role = getRole(applicationRole);
-
-        if (role == null) {
-            role = new Role(applicationRole.name());
-            this.identityManager.add(role);
-        }
-
-        return role;
-    }
-
     public void disableAccount(MyUser user) {
-        if (hasRole(this.relationshipManager, user, getRole(ADMINISTRATOR))) {
+        if (hasRole(this.relationshipManager, user, getRole(ADMINISTRATOR, this.identityManager))) {
             throw new IllegalArgumentException("Administrators can not be disabled.");
         }
 
@@ -230,7 +173,7 @@ public class IdentityModelManager {
     }
 
     public void enableAccount(MyUser user) {
-        if (hasRole(this.relationshipManager, user, getRole(ADMINISTRATOR))) {
+        if (hasRole(this.relationshipManager, user, getRole(ADMINISTRATOR, this.identityManager))) {
             throw new IllegalArgumentException("Administrators can not be enabled.");
         }
 
@@ -241,6 +184,6 @@ public class IdentityModelManager {
             this.identityManager.update(user);
         }
 
-        issueToken(user);
+
     }
 }
