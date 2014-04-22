@@ -7,7 +7,6 @@
         <tr>
             <th>Id</th>
             <th>Email</th>
-            <th>REST URL</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -15,7 +14,6 @@
     <tr ng-repeat="user in users | orderBy:orderBy">
         <td>{{user.id}}</td>
         <td>{{user.email}}</td>
-        <td> <a href="rest/users/{{user.id}}">/rest/users/{{user.id}}</a> </td>
         <td>
             <input type="button" ng-click="enableAccount(this)" name="enableAccount" id="activate" value="Enable" />
             <input type="button" ng-click="disableAccount(this)" name="disableAccount" id="deactivate" value="Disable" />
