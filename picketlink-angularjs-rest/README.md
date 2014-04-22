@@ -178,6 +178,12 @@ If it is configured correctly, you should be asked to trust the server certifica
 Configuring the Mail Service in the Mail Subsystem by Running the JBoss CLI Script (JBoss Enterprise Application Platform)
 ----------------------------
 
+Before configuring the mail service, please generate a application specific password as described in this article:
+
+    https://support.google.com/accounts/answer/185833?hl=en
+
+You must also change the *configure-mail.cli* script to provide your own GMail username and the application specific password.
+
 1. Start the WildFly Server by typing the following:
 
         For Linux:  JBOSS_HOME/bin/standalone.sh
