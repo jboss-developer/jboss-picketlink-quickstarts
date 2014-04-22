@@ -175,7 +175,7 @@ To test the SSL configuration, access: <https://localhost:8443>
 
 If it is configured correctly, you should be asked to trust the server certificate.
 
-Configuring the Mail Service in the Mail Subsystem by Running the JBoss CLI Script
+Configuring the Mail Service in the Mail Subsystem by Running the JBoss CLI Script (JBoss Enterprise Application Platform)
 ----------------------------
 
 1. Start the WildFly Server by typing the following:
@@ -193,6 +193,55 @@ This script adds and configures the `https` connector to the `web` subsystem in 
         {"outcome" => "success"}
 
 This command reloads the server configuration before completion. You don`t need to manually stop/start the server to the configuration take effect.
+
+Configuring the Mail Service in the Mail Subsystem by Running the JBoss CLI Script (WildFly)
+----------------------------
+
+In order to configure the email JNDI resource please follow this instructions:
+
+1. Edit standalone.xml, search for **subsystem xmlns="urn:jboss:domain:mail:2.0"** and add following mail-session as follows:
+
+	<mail-session name="App" jndi-name="java:/mail/gmail">
+		<smtp-server outbound-socket-binding-ref="mail-smtp-gmail" ssl="true" username="YOUR_GMAIL_EMAIL" password="YOUR_GMAIL_PASSWORD"/>
+	</mail-session>
+
+The final mail subsystem should be:
+
+	<subsystem xmlns="urn:jboss:domain:mail:2.0">
+		<mail-session name="default" jndi-name="java:jboss/mail/Default">
+			<smtp-server outbound-socket-binding-ref="mail-smtp"/>
+		</mail-session>
+		<mail-session name="App" jndi-name="java:/mail/gmail">
+			<smtp-server outbound-socket-binding-ref="mail-smtp-gmail" ssl="true" username="YOUR_GMAIL_EMAIL" password="YOUR_GMAIL_PASSWORD"/>
+		</mail-session>
+	</subsystem>
+
+2. Search for **outbound-socket-binding name="mail-smtp"** and add the following outbound-socket-binding:
+
+	<outbound-socket-binding name="mail-smtp-gmail">
+		<remote-destination host="smtp.gmail.com" port="465"/>
+	</outbound-socket-binding>
+
+in the **socket-binding-group**.
+
+The final one should be like this one :
+
+	<socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
+		<socket-binding name="management-native" interface="management" port="${jboss.management.native.port:9999}"/>
+		<socket-binding name="management-http" interface="management" port="${jboss.management.http.port:9990}"/>
+		<socket-binding name="management-https" interface="management" port="${jboss.management.https.port:9993}"/>
+		<socket-binding name="ajp" port="${jboss.ajp.port:8009}"/>
+		<socket-binding name="http" port="${jboss.http.port:8080}"/>
+		<socket-binding name="https" port="${jboss.https.port:8443}"/>
+		<socket-binding name="txn-recovery-environment" port="4712"/>
+		<socket-binding name="txn-status-manager" port="4713"/>
+		<outbound-socket-binding name="mail-smtp">
+			<remote-destination host="localhost" port="25"/>
+		</outbound-socket-binding>
+		<outbound-socket-binding name="mail-smtp-gmail">
+			<remote-destination host="smtp.gmail.com" port="465"/>
+		</outbound-socket-binding>
+	</socket-binding-group>
 
 Start JBoss Enterprise Application Platform 6 or WildFly with the Web Profile
 -------------------------
@@ -240,7 +289,7 @@ Remove the SSL Configuration
 
 You can remove the security domain configuration by running the  `remove-https.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file. 
 
-### Remove the Security Domain Configuration by Running the JBoss CLI Script
+### Remove the SSL Configuration by Running the JBoss CLI Script
 
 1. Start the JBoss Enterprise Application Platform 6 or WildFly Server by typing the following:
 
@@ -255,9 +304,25 @@ This script removes the `https` connector from the `web` subsystem in the server
         {"outcome" => "success"}
 
 
-### Remove the Security Domain Configuration Manually
+### Remove the SSL Configuration Manually
 1. If it is running, stop the JBoss Enterprise Application Platform 6 or WildFly Server.
 2. Replace the `JBOSS_HOME/standalone/configuration/standalone.xml` file with the back-up copy of the file.
+
+
+Remove the Mail Configuration by Running the JBoss CLI Script
+----------------------------
+
+1. Start the JBoss Enterprise Application Platform 6 or WildFly Server by typing the following:
+
+        For Linux:  JBOSS_HOME_SERVER_1/bin/standalone.sh
+        For Windows:  JBOSS_HOME_SERVER_1\bin\standalone.bat
+2. Open a new command line, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
+
+        JBOSS_HOME/bin/jboss-cli.sh --connect --file=remove-mail.cli
+You should see the following result when you run the script:
+
+        {"outcome" => "success"}
+        {"outcome" => "success"}
 
 
 Run the Quickstart in JBoss Developer Studio or Eclipse
