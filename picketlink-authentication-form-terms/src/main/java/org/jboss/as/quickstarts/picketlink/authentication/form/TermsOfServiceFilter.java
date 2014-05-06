@@ -17,6 +17,8 @@
  */
 package org.jboss.as.quickstarts.picketlink.authentication.form;
 
+import org.picketlink.common.util.StringUtil;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -28,6 +30,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * An implementation of {@link javax.servlet.Filter} that is used to display
@@ -55,6 +59,11 @@ public class TermsOfServiceFilter implements Filter {
      */
     protected String tosDisagreedPage = "/termsofservice-disagreed.html";
 
+    /**
+     * Exclude URL Patterns that this filter should ignore
+     */
+    protected List<String> excludePatterns = new ArrayList<String>();
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         String tosValue = filterConfig.getInitParameter("tosParameter");
@@ -70,12 +79,28 @@ public class TermsOfServiceFilter implements Filter {
         if(tosDisagreedPageValue != null && tosDisagreedPageValue.isEmpty() == false){
             tosDisagreedPage = tosDisagreedPageValue;
         }
+        String excludePatternsValue = filterConfig.getInitParameter("excludePatterns");
+        if(excludePatternsValue != null && excludePatternsValue.isEmpty() == false){
+            excludePatterns.addAll(StringUtil.tokenize(excludePatternsValue,","));
+        }else{
+            excludePatterns.add("/images");
+            excludePatterns.add("/css");
+        }
     }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpServletResponse httpServletResponse = (HttpServletResponse) response;
+
+        //See if we are exclude patterns
+        String path = httpServletRequest.getRequestURI().toString();
+        for(String pattern: excludePatterns){
+            if(path.contains(pattern)){
+                chain.doFilter(request,response);
+                return;
+            }
+        }
 
         //Check if we are coming from the tos page
         String tosClick = httpServletRequest.getParameter(tosParameter);
