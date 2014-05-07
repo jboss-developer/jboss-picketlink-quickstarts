@@ -1,0 +1,16 @@
+# Batch script to add and configure the quickstart-domain security domain in the JBoss server
+
+# Start batching commands
+batch
+
+# Add and configure the security domain, then add the UsersRoles JAAS LoginModule.
+/subsystem=security/security-domain=idp:add(cache-type=default)
+/subsystem=security/security-domain=idp/authentication=classic:add
+/subsystem=security/security-domain=idp/authentication=classic/login-module=UsersRoles:add(code=UsersRoles,flag=required,module-options=[usersProperties=users.properties,rolesProperties=roles.properties])
+
+# Run the batch commands
+run-batch
+
+# Reload the server configuration
+:reload
+
