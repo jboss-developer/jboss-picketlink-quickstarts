@@ -63,7 +63,7 @@ public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
 
     @Override
     public void extractCredential(HttpServletRequest request, DefaultLoginCredentials creds) {
-        String header = getTokenHader(request);
+        String header = getTokenHeader(request);
 
         if (header != null) {
             creds.setCredential(new TokenCredential(header));
@@ -103,12 +103,12 @@ public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
      */
 //    @Override
     public boolean isProtected(HttpServletRequest request) {
-        return getTokenHader(request) != null;
+        return getTokenHeader(request) != null;
     }
     
     
 
-    private String getTokenHader(HttpServletRequest request) {
+    private String getTokenHeader(HttpServletRequest request) {
         return request.getHeader(AUTHORIZATION_TOKEN_HEADER_NAME);
     }
 }
