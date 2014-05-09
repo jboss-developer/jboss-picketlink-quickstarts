@@ -51,7 +51,7 @@ import java.io.IOException;
 @PicketLink
 public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
 
-    public static final String AUTHORIZATION_TOKEN_HEADER_NAME = "x-session-token";
+    public static final String AUTHORIZATION_TOKEN_HEADER_NAME = "Authorization";
 
     @Inject
     private Instance<Identity> identityInstance;
@@ -109,6 +109,12 @@ public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
     
 
     private String getTokenHeader(HttpServletRequest request) {
-        return request.getHeader(AUTHORIZATION_TOKEN_HEADER_NAME);
+        String header = request.getHeader(AUTHORIZATION_TOKEN_HEADER_NAME);
+
+        if (header != null) {
+            return header.substring("Token".length() + 1);
+        }
+
+        return header;
     }
 }

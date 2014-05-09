@@ -77,7 +77,7 @@ angular.module('PicketLinkSecurityModule', ['ngResource', 'ngRoute']).config(
                 if(token != null && token != '' && token != 'undefined') {
                     console.log("[INFO] Securing request.");
                     console.log("[INFO] Setting x-session-token header: " + token);
-                    requestConfig.headers['x-session-token'] = token;
+                    requestConfig.headers['Authorization'] = 'Token ' + token;
                 }
             };
         };
