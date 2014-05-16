@@ -22,7 +22,7 @@
 package com.gr.project.security;
 
 import com.gr.project.model.Person;
-import com.gr.project.security.authentication.credential.TokenCredentialHandler;
+import com.gr.project.security.authentication.credential.JWSCredentialHandler;
 import com.gr.project.security.model.ApplicationRole;
 import com.gr.project.security.model.IdentityModelUtils;
 import com.gr.project.security.model.MyUser;
@@ -92,7 +92,7 @@ public class SecurityConfiguration {
                             TokenCredentialTypeEntity.class,
                             AttributeTypeEntity.class,
                             MyUserTypeEntity.class)
-                        .addCredentialHandler(TokenCredentialHandler.class)
+                        .addCredentialHandler(JWSCredentialHandler.class)
                         .addContextInitializer(this.contextInitializer)
                         .setCredentialHandlerProperty(PasswordCredentialHandler.SUPPORTED_ACCOUNT_TYPES_PROPERTY, MyUser.class)
                         .supportAllFeatures();

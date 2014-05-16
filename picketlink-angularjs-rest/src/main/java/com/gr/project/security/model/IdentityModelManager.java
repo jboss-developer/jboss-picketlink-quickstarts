@@ -23,16 +23,17 @@ package com.gr.project.security.model;
 
 import com.gr.project.model.Person;
 import com.gr.project.security.authentication.TokenManager;
-import com.gr.project.security.authentication.credential.Token;
-import com.gr.project.security.authentication.credential.TokenCredentialStorage;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
+import org.picketlink.idm.credential.Token;
+import org.picketlink.idm.credential.storage.TokenCredentialStorage;
 import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.BasicModel;
 import org.picketlink.idm.model.basic.Role;
 import org.picketlink.idm.query.IdentityQuery;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
@@ -53,6 +54,7 @@ import static org.picketlink.idm.model.basic.BasicModel.hasRole;
  *
  * @author Pedro Igor
  */
+@Stateless
 public class IdentityModelManager {
 
     @Inject

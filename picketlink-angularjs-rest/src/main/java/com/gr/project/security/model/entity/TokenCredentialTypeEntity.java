@@ -21,7 +21,7 @@
  */
 package com.gr.project.security.model.entity;
 
-import com.gr.project.security.authentication.credential.TokenCredentialStorage;
+import org.picketlink.idm.credential.storage.TokenCredentialStorage;
 import org.picketlink.idm.jpa.annotations.CredentialProperty;
 import org.picketlink.idm.jpa.annotations.entity.ManagedCredential;
 import org.picketlink.idm.jpa.model.sample.simple.AbstractCredentialTypeEntity;
@@ -30,7 +30,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
- * <p>{@link javax.persistence.Entity} representing a {@link com.gr.project.security.authentication.credential.Token}.</p>
+ * <p>{@link javax.persistence.Entity} representing a {@link org.picketlink.idm.credential.Token}.</p>
  *
  * @author Pedro Igor
  */

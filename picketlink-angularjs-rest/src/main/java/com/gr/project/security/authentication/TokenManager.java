@@ -21,8 +21,8 @@
  */
 package com.gr.project.security.authentication;
 
-import com.gr.project.security.authentication.credential.Token;
 import org.picketlink.idm.PartitionManager;
+import org.picketlink.idm.credential.Token;
 import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.Realm;
 import org.picketlink.json.jose.JWSBuilder;

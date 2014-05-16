@@ -21,11 +21,14 @@
  */
 package com.gr.project.security.authentication;
 
-import com.gr.project.security.authentication.credential.TokenCredential;
+import com.gr.project.security.model.IdentityModelManager;
 import org.picketlink.Identity;
 import org.picketlink.annotations.PicketLink;
+import org.picketlink.authentication.web.BasicAuthenticationScheme;
 import org.picketlink.authentication.web.HTTPAuthenticationScheme;
 import org.picketlink.credential.DefaultLoginCredentials;
+import org.picketlink.idm.credential.TokenCredential;
+import org.picketlink.idm.model.Account;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
@@ -34,6 +37,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+
+import static org.picketlink.Identity.Stateless;
 
 /**
  * <p>A custom {@link org.picketlink.authentication.web.HTTPAuthenticationScheme} that knows how to extract a header from
@@ -54,7 +59,17 @@ public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
     public static final String AUTHORIZATION_TOKEN_HEADER_NAME = "Authorization";
 
     @Inject
+    @Stateless
     private Instance<Identity> identityInstance;
+
+    @Inject
+    private Instance<DefaultLoginCredentials> credentialsInstance;
+
+    @Inject
+    private BasicAuthenticationScheme basicAuthenticationScheme;
+
+    @Inject
+    private IdentityModelManager identityModelManager;
 
     @Override
     public void initialize(FilterConfig config) {
@@ -63,10 +78,14 @@ public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
 
     @Override
     public void extractCredential(HttpServletRequest request, DefaultLoginCredentials creds) {
-        String header = getTokenHeader(request);
+        this.basicAuthenticationScheme.extractCredential(request, creds);
 
-        if (header != null) {
-            creds.setCredential(new TokenCredential(header));
+        if (creds.getCredential() == null) {
+            String token = getToken(request);
+
+            if (token != null) {
+                creds.setCredential(new TokenCredential(token));
+            }
         }
     }
 
@@ -81,11 +100,23 @@ public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
      */
     @Override
     public void challengeClient(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        if (getToken(request) != null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        } else {
+            this.basicAuthenticationScheme.challengeClient(request, response);
+        }
     }
 
     @Override
     public boolean postAuthentication(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (getToken(request) == null) {
+            if (this.identityInstance.get().isLoggedIn()) {
+                response.setStatus(HttpServletResponse.SC_OK);
+                response.getWriter().print("{\"token\":\"" + returnToken(this.identityInstance.get().getAccount()) + "\"}");
+                return false;
+            }
+        }
+
         return true;
     }
 
@@ -103,16 +134,26 @@ public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
      */
     @Override
     public boolean isProtected(HttpServletRequest request) {
-        return getTokenHeader(request) != null;
+        return this.credentialsInstance.get().getCredential() != null;
     }
 
-    private String getTokenHeader(HttpServletRequest request) {
-        String header = request.getHeader(AUTHORIZATION_TOKEN_HEADER_NAME);
+    private String getToken(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader(AUTHORIZATION_TOKEN_HEADER_NAME);
 
-        if (header != null) {
-            return header.substring("Token".length() + 1);
+        if (authorizationHeader != null && authorizationHeader.contains("Token")) {
+            return authorizationHeader.substring("Token".length() + 1);
         }
 
-        return header;
+        return null;
+    }
+
+    private String returnToken(Account account) {
+        String token = this.identityModelManager.getToken(account);
+
+        if (token == null) {
+            token = this.identityModelManager.issueToken(account).getToken();
+        }
+
+        return token;
     }
 }
