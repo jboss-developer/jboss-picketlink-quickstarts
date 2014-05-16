@@ -79,8 +79,6 @@ public class IdentityModelManager {
 
         newUser.setPerson(person);
 
-        disableAccount(newUser);
-
         String activationCode = UUID.randomUUID().toString();
 
         newUser.setActivationCode(activationCode); // we set an activation code for future use.
@@ -88,6 +86,8 @@ public class IdentityModelManager {
         this.identityManager.add(newUser);
 
         updatePassword(newUser, request.getPassword());
+
+        disableAccount(newUser);
 
         return newUser;
     }

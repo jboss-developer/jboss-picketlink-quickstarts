@@ -101,12 +101,10 @@ public class JWSAuthenticationScheme implements HTTPAuthenticationScheme {
      * @param request
      * @return
      */
-//    @Override
+    @Override
     public boolean isProtected(HttpServletRequest request) {
         return getTokenHeader(request) != null;
     }
-    
-    
 
     private String getTokenHeader(HttpServletRequest request) {
         String header = request.getHeader(AUTHORIZATION_TOKEN_HEADER_NAME);
