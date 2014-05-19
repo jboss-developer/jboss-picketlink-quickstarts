@@ -19,36 +19,27 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package com.gr.project.security.model.entity;
+package com.gr.project.security;
 
-import org.picketlink.idm.credential.storage.TokenCredentialStorage;
-import org.picketlink.idm.jpa.annotations.CredentialProperty;
-import org.picketlink.idm.jpa.annotations.entity.ManagedCredential;
-import org.picketlink.idm.jpa.model.sample.simple.AbstractCredentialTypeEntity;
+import org.picketlink.annotations.PicketLink;
+import org.picketlink.authentication.web.TokenAuthenticationScheme;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 
 /**
- * <p>{@link javax.persistence.Entity} representing a {@link org.picketlink.idm.credential.Token}.</p>
- *
  * @author Pedro Igor
  */
-@ManagedCredential(TokenCredentialStorage.class)
-@Entity
-public class TokenCredentialTypeEntity extends AbstractCredentialTypeEntity {
+@ApplicationScoped
+public class AuthenticationConfiguration {
 
-	private static final long serialVersionUID = 3208265179514358055L;
+    @Inject
+    private TokenAuthenticationScheme tokenAuthenticationScheme;
 
-	@CredentialProperty
-    @Column(columnDefinition = "TEXT")
-    private String token;
-
-    public String getToken() {
-        return this.token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+    @Produces
+    @PicketLink
+    public TokenAuthenticationScheme configureTokenAuthenticationScheme() {
+        return this.tokenAuthenticationScheme;
     }
 }

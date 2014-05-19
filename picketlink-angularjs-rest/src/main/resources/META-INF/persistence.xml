@@ -29,7 +29,7 @@
 		<class>org.picketlink.idm.jpa.model.sample.simple.PartitionTypeEntity</class>
 		<class>org.picketlink.idm.jpa.model.sample.simple.AttributeTypeEntity</class>
 		<class>org.picketlink.idm.jpa.model.sample.simple.PasswordCredentialTypeEntity</class>
-        <class>com.gr.project.security.model.entity.TokenCredentialTypeEntity</class>
+        <class>org.picketlink.idm.jpa.model.sample.simple.TokenCredentialTypeEntity</class>
 		
 		<properties>
 			<!-- Properties for Hibernate -->

@@ -22,12 +22,11 @@
 package com.gr.project.security.model;
 
 import com.gr.project.model.Person;
-import com.gr.project.security.authentication.TokenManager;
+import com.gr.project.security.authentication.JWSTokenProvider;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.credential.Token;
-import org.picketlink.idm.credential.storage.TokenCredentialStorage;
 import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.BasicModel;
 import org.picketlink.idm.model.basic.Role;
@@ -64,7 +63,7 @@ public class IdentityModelManager {
     private RelationshipManager relationshipManager;
 
     @Inject
-    private TokenManager tokenManager;
+    private JWSTokenProvider tokenProvider;
 
     public MyUser createAccount(Registration request) {
         if (!request.isValid()) {
@@ -98,14 +97,6 @@ public class IdentityModelManager {
         this.identityManager.updateCredential(account, new Password(password));
     }
 
-    public Token issueToken(Account account) {
-        Token token = this.tokenManager.issue(account);
-
-        this.identityManager.updateCredential(account, token);
-
-        return token;
-    }
-
     public void grantRole(MyUser account, ApplicationRole role) {
         Role storedRole = BasicModel.getRole(this.identityManager, role.name());
         BasicModel.grantRole(this.relationshipManager, account, storedRole);
@@ -124,10 +115,6 @@ public class IdentityModelManager {
         this.identityManager.update(user);
 
         return issueToken(user);
-    }
-
-    public void activateAccount(MyUser user) {
-        activateAccount(user.getActivationCode());
     }
 
     public MyUser findByLoginName(String loginName) {
@@ -149,16 +136,6 @@ public class IdentityModelManager {
         }
 
         return null;
-    }
-
-    public String getToken(Account account) {
-        TokenCredentialStorage storage = this.identityManager.retrieveCurrentCredential(account, TokenCredentialStorage.class);
-
-        if (storage == null) {
-            return null;
-        }
-
-        return storage.getToken();
     }
 
     public void disableAccount(MyUser user) {
@@ -187,5 +164,9 @@ public class IdentityModelManager {
         }
 
 
+    }
+
+    private Token issueToken(Account account) {
+        return this.tokenProvider.issue(account);
     }
 }

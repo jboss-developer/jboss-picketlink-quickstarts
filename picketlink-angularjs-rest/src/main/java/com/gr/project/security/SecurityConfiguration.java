@@ -22,20 +22,22 @@
 package com.gr.project.security;
 
 import com.gr.project.model.Person;
-import com.gr.project.security.authentication.credential.JWSCredentialHandler;
+import com.gr.project.security.authentication.JWSTokenProvider;
 import com.gr.project.security.model.ApplicationRole;
 import com.gr.project.security.model.IdentityModelUtils;
 import com.gr.project.security.model.MyUser;
 import com.gr.project.security.model.entity.MyUserTypeEntity;
-import com.gr.project.security.model.entity.TokenCredentialTypeEntity;
 import org.picketlink.IdentityConfigurationEvent;
 import org.picketlink.PartitionManagerCreateEvent;
+import org.picketlink.annotations.PicketLink;
+import org.picketlink.authentication.web.TokenAuthenticationScheme;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
 import org.picketlink.idm.config.SecurityConfigurationException;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.credential.handler.PasswordCredentialHandler;
+import org.picketlink.idm.credential.handler.TokenCredentialHandler;
 import org.picketlink.idm.jpa.model.sample.simple.AttributeTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.GroupTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.IdentityTypeEntity;
@@ -44,6 +46,7 @@ import org.picketlink.idm.jpa.model.sample.simple.PasswordCredentialTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.RelationshipIdentityTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.RelationshipTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.RoleTypeEntity;
+import org.picketlink.idm.jpa.model.sample.simple.TokenCredentialTypeEntity;
 import org.picketlink.idm.model.Attribute;
 import org.picketlink.idm.model.basic.Realm;
 import org.picketlink.idm.model.basic.Role;
@@ -51,6 +54,7 @@ import org.picketlink.internal.EEJPAContextInitializer;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -70,6 +74,9 @@ public class SecurityConfiguration {
     public static final String KEYSTORE_FILE_PATH = "/keystore.jks";
 
     private KeyStore keyStore;
+
+    @Inject
+    private JWSTokenProvider tokenProvider;
 
     @Inject
     private EEJPAContextInitializer contextInitializer;
@@ -92,8 +99,8 @@ public class SecurityConfiguration {
                             TokenCredentialTypeEntity.class,
                             AttributeTypeEntity.class,
                             MyUserTypeEntity.class)
-                        .addCredentialHandler(JWSCredentialHandler.class)
                         .addContextInitializer(this.contextInitializer)
+                        .setCredentialHandlerProperty(TokenCredentialHandler.TOKEN_PROVIDER, this.tokenProvider)
                         .setCredentialHandlerProperty(PasswordCredentialHandler.SUPPORTED_ACCOUNT_TYPES_PROPERTY, MyUser.class)
                         .supportAllFeatures();
     }
