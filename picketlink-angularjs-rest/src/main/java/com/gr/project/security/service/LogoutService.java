@@ -36,7 +36,7 @@ import javax.ws.rs.Path;
  *
  */
 @Stateless
-@Path("/logout")
+@Path("/private/logout")
 public class LogoutService {
 
     @Inject

@@ -30,6 +30,7 @@ import org.picketlink.idm.credential.storage.TokenCredentialStorage;
 import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.Realm;
 import org.picketlink.idm.query.IdentityQuery;
+import org.picketlink.json.JsonException;
 import org.picketlink.json.jose.JWS;
 import org.picketlink.json.jose.JWSBuilder;
 
@@ -71,6 +72,11 @@ public class JWSTokenProvider implements Token.Provider {
         }
 
         return null;
+    }
+
+    @Override
+    public Token create(Object value) {
+        return new Token(value.toString());
     }
 
     @Override
@@ -139,12 +145,22 @@ public class JWSTokenProvider implements Token.Provider {
     }
 
     @Override
+    public boolean supports(Token token) {
+        return unMarshall(token) != null;
+    }
+
+    @Override
     public <T extends TokenCredentialStorage> T getTokenStorage(Account account, Token token) {
         return null;
     }
 
     private JWS unMarshall(Token token) {
-        return new JWSBuilder().build(token.getToken(), getPublicKey());
+        try {
+            return new JWSBuilder().build(token.getToken(), getPublicKey());
+        } catch (JsonException ignore) {
+        }
+
+        return null;
     }
 
     private byte[] getPublicKey() {

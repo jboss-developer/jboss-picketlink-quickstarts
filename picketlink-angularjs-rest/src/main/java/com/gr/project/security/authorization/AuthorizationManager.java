@@ -22,22 +22,8 @@
 
 package com.gr.project.security.authorization;
 
-import static org.picketlink.idm.model.basic.BasicModel.getRole;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Instance;
-import javax.enterprise.inject.spi.BeanManager;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.interceptor.InvocationContext;
-import javax.servlet.http.HttpServletRequest;
-
+import com.gr.project.security.authorization.annotation.UserLoggedIn;
+import com.gr.project.security.model.ApplicationRole;
 import org.apache.deltaspike.security.api.authorization.AccessDeniedException;
 import org.apache.deltaspike.security.api.authorization.Secures;
 import org.picketlink.Identity;
@@ -48,8 +34,21 @@ import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.BasicModel;
 import org.picketlink.idm.model.basic.Role;
 
-import com.gr.project.security.authorization.annotation.UserLoggedIn;
-import com.gr.project.security.model.ApplicationRole;
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Instance;
+import javax.enterprise.inject.spi.BeanManager;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.interceptor.InvocationContext;
+import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import static com.gr.project.security.model.ApplicationRole.ADMINISTRATOR;
+import static org.picketlink.idm.model.basic.BasicModel.getRole;
 
 /**
  * <p>
@@ -71,7 +70,6 @@ public class AuthorizationManager {
     @Inject
     @Stateless
     private Identity identity;
-    
 
     @Inject
     private Instance<IdentityManager> identityManager;
@@ -118,7 +116,7 @@ public class AuthorizationManager {
     @AllowedRole
     public boolean checkDeclaredRoles(InvocationContext invocationContext, BeanManager manager) throws Exception {
         // administrators can access everything
-        if (hasRole(ApplicationRole.ADMINISTRATOR.name())) {
+        if (hasRole(ADMINISTRATOR.name())) {
             return true;
         }
 
@@ -147,13 +145,17 @@ public class AuthorizationManager {
     
     public boolean isAdmin() {
         if (isUserLoggedIn()) {
-            IdentityManager identityManager = getIdentityManager();
-            RelationshipManager relationshipManager = getRelationshipManager();
-
-            return BasicModel.hasRole(relationshipManager, identity.getAccount(), BasicModel.getRole(identityManager, "Administrator"));
+            return isAdmin(getIdentity().getAccount());
         }
 
         return false;
+    }
+
+    public boolean isAdmin(Account account) {
+        IdentityManager identityManager = getIdentityManager();
+        RelationshipManager relationshipManager = getRelationshipManager();
+
+        return BasicModel.hasRole(relationshipManager, account, BasicModel.getRole(identityManager, ADMINISTRATOR.name()));
     }
 
     /**

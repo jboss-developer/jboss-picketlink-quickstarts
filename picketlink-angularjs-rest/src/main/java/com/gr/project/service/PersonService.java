@@ -11,12 +11,11 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("/users")
+@Path("/private/person")
 @Stateless
 @UserLoggedIn
 public class PersonService {
@@ -35,18 +34,5 @@ public class PersonService {
 
         return em.createQuery(criteria).getResultList();
 
-    }
-
-    @GET
-    @Path("/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Person findById(@PathParam("id") String id) {
-    	Person person = em.find(Person.class, id);
-
-        if (person == null) {
-            throw new IllegalArgumentException("Invalid identifier.");
-        }
-
-        return person;
     }
 }

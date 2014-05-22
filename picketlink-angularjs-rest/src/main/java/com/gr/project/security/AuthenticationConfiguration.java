@@ -29,6 +29,8 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
 /**
+ * <p>This class is responsible to enable the {@link org.picketlink.authentication.web.TokenAuthenticationScheme}.</p>
+ *
  * @author Pedro Igor
  */
 @ApplicationScoped

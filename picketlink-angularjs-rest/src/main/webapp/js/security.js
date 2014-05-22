@@ -32,23 +32,23 @@ angular.module('PicketLinkSecurityModule', ['ngResource', 'ngRoute']).config(
     } ])
     .factory('LoginResource', ['$resource', function($resource) {
         return function(newUser) {
-            return $resource('rest/:dest', {}, {
+            return $resource('rest/private/:dest', {}, {
             login: {method: 'POST', params: {dest:"authc"}, headers:{"Authorization": "Basic " + btoa(newUser.userId + ":" + newUser.password)} },
         });
     }}])
     .factory('LogoutResource', ['$resource', function($resource) {
-        return $resource('rest/:dest', {}, {
+        return $resource('rest/private/:dest', {}, {
             logout: {method: 'POST', params: {dest:"logout"}}
         });
         }])
      .factory('AdminResource', ['$resource', function($resource) {
-        return $resource('rest/admin/:dest', {}, {
+        return $resource('rest/private/account/:dest', {}, {
             enableAccount: {method: 'POST', params: {dest:"enableAccount"}},
             disableAccount: {method: 'POST', params: {dest:"disableAccount"}}
         });
     }])
     .factory('UsersResource', ['$resource', function($resource) {
-        return $resource('rest/users/:dest', {}, {});
+        return $resource('rest/private/person/:dest', {}, {});
     }])
     .factory('RegistrationResource', ['$resource', function($resource) {
         return $resource('rest/register/:dest', {}, {
@@ -62,10 +62,10 @@ angular.module('PicketLinkSecurityModule', ['ngResource', 'ngRoute']).config(
 
             this.initSession = function(response) {
                 console.log("[INFO] Initializing user session.");
-                console.log("[INFO] Token is :" + response.token);
+                console.log("[INFO] Token is :" + response.authctoken);
                 console.log("[INFO] Token Stored in session storage.");
                 // persist token, user id to the storage
-                sessionStorage.setItem('token', response.token);
+                sessionStorage.setItem('token', response.authctoken);
             };
 
             this.endSession = function() {

@@ -23,6 +23,7 @@ package com.gr.project.security.model;
 
 import com.gr.project.model.Person;
 import com.gr.project.security.authentication.JWSTokenProvider;
+import com.gr.project.security.authorization.AuthorizationManager;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
@@ -36,10 +37,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
-
-import static com.gr.project.security.model.ApplicationRole.ADMINISTRATOR;
-import static com.gr.project.security.model.IdentityModelUtils.getRole;
-import static org.picketlink.idm.model.basic.BasicModel.hasRole;
 
 /**
  * <p>This class provides an abstraction point to the Identity Management operations required by the application./p>
@@ -61,6 +58,9 @@ public class IdentityModelManager {
 
     @Inject
     private RelationshipManager relationshipManager;
+
+    @Inject
+    private AuthorizationManager authorizationManager;
 
     @Inject
     private JWSTokenProvider tokenProvider;
@@ -139,7 +139,7 @@ public class IdentityModelManager {
     }
 
     public void disableAccount(MyUser user) {
-        if (hasRole(this.relationshipManager, user, getRole(ADMINISTRATOR, this.identityManager))) {
+        if (this.authorizationManager.isAdmin(user)) {
             throw new IllegalArgumentException("Administrators can not be disabled.");
         }
 
@@ -152,7 +152,7 @@ public class IdentityModelManager {
     }
 
     public void enableAccount(MyUser user) {
-        if (hasRole(this.relationshipManager, user, getRole(ADMINISTRATOR, this.identityManager))) {
+        if (this.authorizationManager.isAdmin(user)) {
             throw new IllegalArgumentException("Administrators can not be enabled.");
         }
 

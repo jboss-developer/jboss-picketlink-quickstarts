@@ -24,13 +24,10 @@ package com.gr.project.security;
 import com.gr.project.model.Person;
 import com.gr.project.security.authentication.JWSTokenProvider;
 import com.gr.project.security.model.ApplicationRole;
-import com.gr.project.security.model.IdentityModelUtils;
 import com.gr.project.security.model.MyUser;
 import com.gr.project.security.model.entity.MyUserTypeEntity;
 import org.picketlink.IdentityConfigurationEvent;
 import org.picketlink.PartitionManagerCreateEvent;
-import org.picketlink.annotations.PicketLink;
-import org.picketlink.authentication.web.TokenAuthenticationScheme;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
@@ -54,15 +51,14 @@ import org.picketlink.internal.EEJPAContextInitializer;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 
-import static com.gr.project.security.model.IdentityModelUtils.createRole;
 import static com.gr.project.security.model.IdentityModelUtils.findByLoginName;
+import static org.picketlink.idm.model.basic.BasicModel.getRole;
 import static org.picketlink.idm.model.basic.BasicModel.grantRole;
 
 /**
@@ -137,6 +133,18 @@ public class SecurityConfiguration {
         }
     }
 
+    public static Role createRole(ApplicationRole applicationRole, IdentityManager identityManager) {
+        String roleName = applicationRole.name();
+        Role role = getRole(identityManager, roleName);
+
+        if (role == null) {
+            role = new Role(roleName);
+            identityManager.add(role);
+        }
+
+        return role;
+    }
+
     private byte[] getPrivateKey() throws KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException {
         return getKeyStore().getKey("servercert", "test123".toCharArray()).getEncoded();
     }
@@ -181,7 +189,7 @@ public class SecurityConfiguration {
 
         identityManager.updateCredential(admin, new Password("admin"));
 
-        Role adminRole = IdentityModelUtils.getRole(ApplicationRole.ADMINISTRATOR, identityManager);
+        Role adminRole = getRole(identityManager, ApplicationRole.ADMINISTRATOR.name());
 
         grantRole(partitionManager.createRelationshipManager(), admin, adminRole);
     }

@@ -17,7 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 @javax.ejb.Stateless
-@Path("/admin")
+@Path("/private/account")
 @AllowedRole(ApplicationRole.ADMINISTRATOR)
 public class AccountService {
 
