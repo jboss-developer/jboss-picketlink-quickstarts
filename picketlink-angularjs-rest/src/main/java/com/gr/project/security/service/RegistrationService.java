@@ -22,12 +22,12 @@
 package com.gr.project.security.service;
 
 import com.gr.project.model.Email;
-import com.gr.project.util.MessageBuilder;
-import com.gr.project.security.authentication.credential.Token;
 import com.gr.project.security.model.IdentityModelManager;
 import com.gr.project.security.model.MyUser;
 import com.gr.project.security.model.Registration;
+import com.gr.project.util.MessageBuilder;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.picketlink.idm.credential.Token;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;

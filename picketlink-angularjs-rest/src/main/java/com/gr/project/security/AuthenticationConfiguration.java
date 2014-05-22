@@ -19,24 +19,29 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package com.gr.project.security.authentication.credential;
+package com.gr.project.security;
 
-import org.picketlink.idm.credential.storage.AbstractCredentialStorage;
-import org.picketlink.idm.credential.storage.annotations.Stored;
+import org.picketlink.annotations.PicketLink;
+import org.picketlink.authentication.web.TokenAuthenticationScheme;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 
 /**
+ * <p>This class is responsible to enable the {@link org.picketlink.authentication.web.TokenAuthenticationScheme}.</p>
+ *
  * @author Pedro Igor
  */
-public class TokenCredentialStorage extends AbstractCredentialStorage {
+@ApplicationScoped
+public class AuthenticationConfiguration {
 
-    private String token;
+    @Inject
+    private TokenAuthenticationScheme tokenAuthenticationScheme;
 
-    @Stored
-    public String getToken() {
-        return this.token;
-    }
-
-    public void setToken(String token) {
-        this.token = token;
+    @Produces
+    @PicketLink
+    public TokenAuthenticationScheme configureTokenAuthenticationScheme() {
+        return this.tokenAuthenticationScheme;
     }
 }

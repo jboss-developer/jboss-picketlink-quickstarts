@@ -22,8 +22,8 @@
 
 package com.gr.project.security.service;
 
+import com.gr.project.security.authentication.JWSTokenProvider;
 import com.gr.project.security.authorization.annotation.UserLoggedIn;
-import com.gr.project.security.model.IdentityModelManager;
 import org.picketlink.Identity;
 import org.picketlink.idm.model.Account;
 
@@ -36,11 +36,11 @@ import javax.ws.rs.Path;
  *
  */
 @Stateless
-@Path("/logout")
+@Path("/private/logout")
 public class LogoutService {
 
     @Inject
-    private IdentityModelManager identityModelManager;
+    private JWSTokenProvider tokenProvider;
 
     @Inject
     @Identity.Stateless
@@ -51,7 +51,7 @@ public class LogoutService {
     public void logout() {
         Account account = this.identity.getAccount();
 
-        this.identityModelManager.issueToken(account);
+        this.tokenProvider.invalidate(account);
 
         this.identity.logout();
     }

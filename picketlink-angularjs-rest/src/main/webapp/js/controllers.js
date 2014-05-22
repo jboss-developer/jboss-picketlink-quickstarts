@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-function HomeCtrl($scope, UsersResource, $location, SessionResource, SecurityService, AdminResource, MessageService) {
+function HomeCtrl($scope, UsersResource, $location, LogoutResource, SecurityService, AdminResource, MessageService) {
     
     // Define a refresh function, that updates the data from the REST service
     $scope.refresh = function() {
@@ -29,7 +29,7 @@ function HomeCtrl($scope, UsersResource, $location, SessionResource, SecuritySer
     };
 
     $scope.logout = function() {
-	    SessionResource.logout(function(resp) {
+	    LogoutResource.logout(function(resp) {
             SecurityService.endSession();
 	        $location.path( "/login" );
 	    });

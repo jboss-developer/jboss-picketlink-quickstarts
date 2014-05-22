@@ -22,12 +22,10 @@
 package com.gr.project.security;
 
 import com.gr.project.model.Person;
-import com.gr.project.security.authentication.credential.TokenCredentialHandler;
+import com.gr.project.security.authentication.JWSTokenProvider;
 import com.gr.project.security.model.ApplicationRole;
-import com.gr.project.security.model.IdentityModelUtils;
 import com.gr.project.security.model.MyUser;
 import com.gr.project.security.model.entity.MyUserTypeEntity;
-import com.gr.project.security.model.entity.TokenCredentialTypeEntity;
 import org.picketlink.IdentityConfigurationEvent;
 import org.picketlink.PartitionManagerCreateEvent;
 import org.picketlink.idm.IdentityManager;
@@ -36,6 +34,7 @@ import org.picketlink.idm.config.IdentityConfigurationBuilder;
 import org.picketlink.idm.config.SecurityConfigurationException;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.credential.handler.PasswordCredentialHandler;
+import org.picketlink.idm.credential.handler.TokenCredentialHandler;
 import org.picketlink.idm.jpa.model.sample.simple.AttributeTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.GroupTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.IdentityTypeEntity;
@@ -44,6 +43,7 @@ import org.picketlink.idm.jpa.model.sample.simple.PasswordCredentialTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.RelationshipIdentityTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.RelationshipTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.RoleTypeEntity;
+import org.picketlink.idm.jpa.model.sample.simple.TokenCredentialTypeEntity;
 import org.picketlink.idm.model.Attribute;
 import org.picketlink.idm.model.basic.Realm;
 import org.picketlink.idm.model.basic.Role;
@@ -57,8 +57,8 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 
-import static com.gr.project.security.model.IdentityModelUtils.createRole;
 import static com.gr.project.security.model.IdentityModelUtils.findByLoginName;
+import static org.picketlink.idm.model.basic.BasicModel.getRole;
 import static org.picketlink.idm.model.basic.BasicModel.grantRole;
 
 /**
@@ -70,6 +70,9 @@ public class SecurityConfiguration {
     public static final String KEYSTORE_FILE_PATH = "/keystore.jks";
 
     private KeyStore keyStore;
+
+    @Inject
+    private JWSTokenProvider tokenProvider;
 
     @Inject
     private EEJPAContextInitializer contextInitializer;
@@ -92,8 +95,8 @@ public class SecurityConfiguration {
                             TokenCredentialTypeEntity.class,
                             AttributeTypeEntity.class,
                             MyUserTypeEntity.class)
-                        .addCredentialHandler(TokenCredentialHandler.class)
                         .addContextInitializer(this.contextInitializer)
+                        .setCredentialHandlerProperty(TokenCredentialHandler.TOKEN_PROVIDER, this.tokenProvider)
                         .setCredentialHandlerProperty(PasswordCredentialHandler.SUPPORTED_ACCOUNT_TYPES_PROPERTY, MyUser.class)
                         .supportAllFeatures();
     }
@@ -128,6 +131,18 @@ public class SecurityConfiguration {
                 throw new SecurityConfigurationException("Could not create default partition.", e);
             }
         }
+    }
+
+    public static Role createRole(ApplicationRole applicationRole, IdentityManager identityManager) {
+        String roleName = applicationRole.name();
+        Role role = getRole(identityManager, roleName);
+
+        if (role == null) {
+            role = new Role(roleName);
+            identityManager.add(role);
+        }
+
+        return role;
     }
 
     private byte[] getPrivateKey() throws KeyStoreException, NoSuchAlgorithmException, UnrecoverableKeyException {
@@ -174,7 +189,7 @@ public class SecurityConfiguration {
 
         identityManager.updateCredential(admin, new Password("admin"));
 
-        Role adminRole = IdentityModelUtils.getRole(ApplicationRole.ADMINISTRATOR, identityManager);
+        Role adminRole = getRole(identityManager, ApplicationRole.ADMINISTRATOR.name());
 
         grantRole(partitionManager.createRelationshipManager(), admin, adminRole);
     }

@@ -22,8 +22,6 @@
 package com.gr.project.security.model;
 
 import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.model.basic.BasicModel;
-import org.picketlink.idm.model.basic.Role;
 import org.picketlink.idm.query.IdentityQuery;
 
 import java.util.List;
@@ -50,20 +48,4 @@ public class IdentityModelUtils {
 
         return null;
     }
-
-    public static Role createRole(ApplicationRole applicationRole, IdentityManager identityManager) {
-        Role role = getRole(applicationRole, identityManager);
-
-        if (role == null) {
-            role = new Role(applicationRole.name());
-            identityManager.add(role);
-        }
-
-        return role;
-    }
-
-    public static Role getRole(ApplicationRole role, IdentityManager identityManager) {
-        return BasicModel.getRole(identityManager, role.name());
-    }
-
 }

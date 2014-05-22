@@ -30,20 +30,25 @@ angular.module('PicketLinkSecurityModule', ['ngResource', 'ngRoute']).config(
             }
         });
     } ])
-    .factory('SessionResource', ['$resource', function($resource) {
-        return $resource('rest/:dest', {}, {
-            login: {method: 'POST', params: {dest:"authc"}},
+    .factory('LoginResource', ['$resource', function($resource) {
+        return function(newUser) {
+            return $resource('rest/private/:dest', {}, {
+            login: {method: 'POST', params: {dest:"authc"}, headers:{"Authorization": "Basic " + btoa(newUser.userId + ":" + newUser.password)} },
+        });
+    }}])
+    .factory('LogoutResource', ['$resource', function($resource) {
+        return $resource('rest/private/:dest', {}, {
             logout: {method: 'POST', params: {dest:"logout"}}
         });
-    }])
+        }])
      .factory('AdminResource', ['$resource', function($resource) {
-        return $resource('rest/admin/:dest', {}, {
+        return $resource('rest/private/account/:dest', {}, {
             enableAccount: {method: 'POST', params: {dest:"enableAccount"}},
             disableAccount: {method: 'POST', params: {dest:"disableAccount"}}
         });
     }])
     .factory('UsersResource', ['$resource', function($resource) {
-        return $resource('rest/users/:dest', {}, {});
+        return $resource('rest/private/person/:dest', {}, {});
     }])
     .factory('RegistrationResource', ['$resource', function($resource) {
         return $resource('rest/register/:dest', {}, {
@@ -53,12 +58,14 @@ angular.module('PicketLinkSecurityModule', ['ngResource', 'ngRoute']).config(
     .factory('SecurityService', ['$rootScope', function($rootScope) {
 
         var SecurityService = function() {
+            var userName, password;
+
             this.initSession = function(response) {
                 console.log("[INFO] Initializing user session.");
-                console.log("[INFO] Token is :" + response.token);
+                console.log("[INFO] Token is :" + response.authctoken);
                 console.log("[INFO] Token Stored in session storage.");
                 // persist token, user id to the storage
-                sessionStorage.setItem('token', response.token);
+                sessionStorage.setItem('token', response.authctoken);
             };
 
             this.endSession = function() {
@@ -77,7 +84,7 @@ angular.module('PicketLinkSecurityModule', ['ngResource', 'ngRoute']).config(
                 if(token != null && token != '' && token != 'undefined') {
                     console.log("[INFO] Securing request.");
                     console.log("[INFO] Setting x-session-token header: " + token);
-                    requestConfig.headers['x-session-token'] = token;
+                    requestConfig.headers['Authorization'] = 'Token ' + token;
                 }
             };
         };
@@ -86,12 +93,12 @@ angular.module('PicketLinkSecurityModule', ['ngResource', 'ngRoute']).config(
     }]);
 
 // controllers definition
-function LoginCtrl($scope, SessionResource, SecurityService, $location) {
+function LoginCtrl($scope, LoginResource, SecurityService, $location, $rootScope) {
     $scope.newUser = {};
 
     $scope.login = function() {
         if ($scope.newUser.userId != undefined && $scope.newUser.password != undefined) {
-            SessionResource.login($scope.newUser,
+            LoginResource($scope.newUser).login($scope.newUser,
                 function (data) {
                     SecurityService.initSession(data);
                     $location.path( "/home" );

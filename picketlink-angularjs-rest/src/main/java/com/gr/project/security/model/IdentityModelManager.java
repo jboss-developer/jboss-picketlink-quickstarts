@@ -22,24 +22,21 @@
 package com.gr.project.security.model;
 
 import com.gr.project.model.Person;
-import com.gr.project.security.authentication.TokenManager;
-import com.gr.project.security.authentication.credential.Token;
-import com.gr.project.security.authentication.credential.TokenCredentialStorage;
+import com.gr.project.security.authentication.JWSTokenProvider;
+import com.gr.project.security.authorization.AuthorizationManager;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
+import org.picketlink.idm.credential.Token;
 import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.BasicModel;
 import org.picketlink.idm.model.basic.Role;
 import org.picketlink.idm.query.IdentityQuery;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.UUID;
-
-import static com.gr.project.security.model.ApplicationRole.ADMINISTRATOR;
-import static com.gr.project.security.model.IdentityModelUtils.getRole;
-import static org.picketlink.idm.model.basic.BasicModel.hasRole;
 
 /**
  * <p>This class provides an abstraction point to the Identity Management operations required by the application./p>
@@ -53,6 +50,7 @@ import static org.picketlink.idm.model.basic.BasicModel.hasRole;
  *
  * @author Pedro Igor
  */
+@Stateless
 public class IdentityModelManager {
 
     @Inject
@@ -62,7 +60,10 @@ public class IdentityModelManager {
     private RelationshipManager relationshipManager;
 
     @Inject
-    private TokenManager tokenManager;
+    private AuthorizationManager authorizationManager;
+
+    @Inject
+    private JWSTokenProvider tokenProvider;
 
     public MyUser createAccount(Registration request) {
         if (!request.isValid()) {
@@ -79,8 +80,6 @@ public class IdentityModelManager {
 
         newUser.setPerson(person);
 
-        disableAccount(newUser);
-
         String activationCode = UUID.randomUUID().toString();
 
         newUser.setActivationCode(activationCode); // we set an activation code for future use.
@@ -89,19 +88,13 @@ public class IdentityModelManager {
 
         updatePassword(newUser, request.getPassword());
 
+        disableAccount(newUser);
+
         return newUser;
     }
 
     public void updatePassword(Account account, String password) {
         this.identityManager.updateCredential(account, new Password(password));
-    }
-
-    public Token issueToken(Account account) {
-        Token token = this.tokenManager.issue(account);
-
-        this.identityManager.updateCredential(account, token);
-
-        return token;
     }
 
     public void grantRole(MyUser account, ApplicationRole role) {
@@ -122,10 +115,6 @@ public class IdentityModelManager {
         this.identityManager.update(user);
 
         return issueToken(user);
-    }
-
-    public void activateAccount(MyUser user) {
-        activateAccount(user.getActivationCode());
     }
 
     public MyUser findByLoginName(String loginName) {
@@ -149,18 +138,8 @@ public class IdentityModelManager {
         return null;
     }
 
-    public String getToken(Account account) {
-        TokenCredentialStorage storage = this.identityManager.retrieveCurrentCredential(account, TokenCredentialStorage.class);
-
-        if (storage == null) {
-            return null;
-        }
-
-        return storage.getToken();
-    }
-
     public void disableAccount(MyUser user) {
-        if (hasRole(this.relationshipManager, user, getRole(ADMINISTRATOR, this.identityManager))) {
+        if (this.authorizationManager.isAdmin(user)) {
             throw new IllegalArgumentException("Administrators can not be disabled.");
         }
 
@@ -173,7 +152,7 @@ public class IdentityModelManager {
     }
 
     public void enableAccount(MyUser user) {
-        if (hasRole(this.relationshipManager, user, getRole(ADMINISTRATOR, this.identityManager))) {
+        if (this.authorizationManager.isAdmin(user)) {
             throw new IllegalArgumentException("Administrators can not be enabled.");
         }
 
@@ -185,5 +164,9 @@ public class IdentityModelManager {
         }
 
 
+    }
+
+    private Token issueToken(Account account) {
+        return this.tokenProvider.issue(account);
     }
 }
