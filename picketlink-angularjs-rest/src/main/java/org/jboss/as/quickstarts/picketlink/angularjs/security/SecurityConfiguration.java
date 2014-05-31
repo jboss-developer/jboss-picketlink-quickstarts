@@ -33,7 +33,6 @@ import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
 import org.picketlink.idm.config.SecurityConfigurationException;
 import org.picketlink.idm.credential.Password;
-import org.picketlink.idm.credential.handler.PasswordCredentialHandler;
 import org.picketlink.idm.credential.handler.TokenCredentialHandler;
 import org.picketlink.idm.jpa.model.sample.simple.AttributeTypeEntity;
 import org.picketlink.idm.jpa.model.sample.simple.GroupTypeEntity;
@@ -97,7 +96,7 @@ public class SecurityConfiguration {
                             MyUserTypeEntity.class)
                         .addContextInitializer(this.contextInitializer)
                         .setCredentialHandlerProperty(TokenCredentialHandler.TOKEN_PROVIDER, this.tokenProvider)
-                        .setCredentialHandlerProperty(PasswordCredentialHandler.SUPPORTED_ACCOUNT_TYPES_PROPERTY, MyUser.class)
+                        .supportType(MyUser.class)
                         .supportAllFeatures();
     }
 
