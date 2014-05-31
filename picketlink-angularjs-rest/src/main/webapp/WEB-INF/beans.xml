@@ -7,8 +7,11 @@
         http://java.sun.com/xml/ns/javaee 
         http://java.sun.com/xml/ns/javaee/beans_1_0.xsd">
         
-        <interceptors>
-        	<class>org.apache.deltaspike.security.impl.extension.SecurityInterceptor</class>
-        </interceptors>
-        
+    <interceptors>
+        <class>org.apache.deltaspike.security.impl.extension.SecurityInterceptor</class>
+    </interceptors>
+
+    <alternatives>
+        <stereotype>org.picketlink.annotations.StatelessIdentity</stereotype>
+    </alternatives>
 </beans>

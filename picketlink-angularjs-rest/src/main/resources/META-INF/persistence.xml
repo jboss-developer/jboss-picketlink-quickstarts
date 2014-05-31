@@ -17,9 +17,9 @@
 	<persistence-unit name="primary">
 		<jta-data-source>java:jboss/datasources/example-ds</jta-data-source>
 
-        <class>com.gr.project.model.Person</class>
+        <class>org.jboss.as.quickstarts.picketlink.angularjs.model.Person</class>
 
-        <class>com.gr.project.security.model.entity.MyUserTypeEntity</class>
+        <class>org.jboss.as.quickstarts.picketlink.angularjs.security.model.entity.MyUserTypeEntity</class>
         <class>org.picketlink.idm.jpa.model.sample.simple.AttributedTypeEntity</class>
 		<class>org.picketlink.idm.jpa.model.sample.simple.RoleTypeEntity</class>
 		<class>org.picketlink.idm.jpa.model.sample.simple.GroupTypeEntity</class>
