@@ -35,7 +35,8 @@ import org.picketlink.idm.permission.annotations.AllowedOperations;
  */
 @AllowedOperations({
     @AllowedOperation(value = "update", mask = 1),
-    @AllowedOperation(value = "delete", mask = 2)
+    @AllowedOperation(value = "delete", mask = 2),
+    @AllowedOperation(value = "create", mask = 4, classOperation = true)
 })
 @Entity
 public class Article implements Serializable {

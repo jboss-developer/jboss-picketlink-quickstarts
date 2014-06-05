@@ -38,6 +38,7 @@ import org.picketlink.idm.jpa.model.sample.simple.RoleTypeEntity;
 import org.picketlink.idm.model.Relationship;
 import org.picketlink.idm.model.basic.Realm;
 import org.picketlink.internal.EEJPAContextInitializer;
+import org.picketlink.quickstart.acl.model.ResourcePermission;
 
 /**
  * This bean produces the configuration for PicketLink IDM
@@ -82,7 +83,8 @@ public class SecurityConfiguration {
                                 RelationshipIdentityTypeEntity.class,
                                 PartitionTypeEntity.class,
                                 PasswordCredentialTypeEntity.class,
-                                AttributeTypeEntity.class)
+                                AttributeTypeEntity.class,
+                                ResourcePermission.class)
                         .supportGlobalRelationship(Relationship.class)
                         .addContextInitializer(this.contextInitializer)
                         // Specify that this identity store configuration supports all features
