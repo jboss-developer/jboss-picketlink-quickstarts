@@ -160,6 +160,7 @@
     <dependency>
       <groupId>org.apache.deltaspike.core</groupId>
       <artifactId>deltaspike-core-api</artifactId>
+      <version>0.7</version>
       <scope>compile</scope>
     </dependency>
 
@@ -168,6 +169,7 @@
     <dependency>
       <groupId>org.apache.deltaspike.core</groupId>
       <artifactId>deltaspike-core-impl</artifactId>
+      <version>0.7</version>
       <scope>runtime</scope>
     </dependency>
 
@@ -176,6 +178,7 @@
     <dependency>
       <groupId>org.apache.deltaspike.modules</groupId>
       <artifactId>deltaspike-security-module-api</artifactId>
+      <version>0.7</version>
       <scope>compile</scope>
     </dependency>
 
@@ -184,6 +187,25 @@
     <dependency>
       <groupId>org.apache.deltaspike.modules</groupId>
       <artifactId>deltaspike-security-module-impl</artifactId>
+      <version>0.7</version>
+      <scope>runtime</scope>
+    </dependency>
+    
+    <!-- Deltaspike JPA Module API. We use compile scope as we need
+        to compile against its API -->
+    <dependency>
+      <groupId>org.apache.deltaspike.modules</groupId>
+      <artifactId>deltaspike-jpa-module-api</artifactId>
+      <version>0.7</version>
+      <scope>compile</scope>
+    </dependency>
+
+    <!-- Deltaspike JPA Impl. we use runtime scope as we need its implementation
+        dependencies only on runtime -->
+    <dependency>
+      <groupId>org.apache.deltaspike.modules</groupId>
+      <artifactId>deltaspike-jpa-module-impl</artifactId>
+      <version>0.7</version>
       <scope>runtime</scope>
     </dependency>
 

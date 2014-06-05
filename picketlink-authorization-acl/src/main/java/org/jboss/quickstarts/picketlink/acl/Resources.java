@@ -16,13 +16,17 @@
  */
 package org.jboss.quickstarts.picketlink.acl;
 
-import javax.ejb.Stateful;
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 
+import org.apache.deltaspike.jpa.api.transaction.TransactionScoped;
 import org.picketlink.annotations.PicketLink;
 
 /**
@@ -37,10 +41,10 @@ import org.picketlink.annotations.PicketLink;
  * private FacesContext facesContext;
  * </pre>
  */
-//@Stateful
+@ApplicationScoped
 public class Resources {
-    
-    @Produces
+
+    /*@Produces
     @PersistenceContext(unitName = "picketlink-default")
     private EntityManager em;
 
@@ -48,25 +52,32 @@ public class Resources {
      @Produces
      @PicketLink
      private EntityManager entityManager;
-     
+*/
 
-    /*@PersistenceContext(unitName = "picketlink-default")
-    private EntityManager em;
+    @PersistenceContext(unitName = "picketlink-default")
+    private EntityManagerFactory emf;
 
-    @Produces
+    @Produces @Default @TransactionScoped
     public EntityManager getEntityManager() {
-        return em;
-    }*/
+        return emf.createEntityManager();
+    }
+
+    public void dispose(@Disposes EntityManager entityManager)
+    {
+        if (entityManager.isOpen())
+        {
+            entityManager.close();
+        }
+    }
 
     /*
      * Since we are using JPAIdentityStore to store identity-related data, we must provide it with an EntityManager via a
      * producer method or field annotated with the @PicketLink qualifier.
      */
-    /*@Produces
-    @PicketLink
+    @Produces @PicketLink @TransactionScoped
     public EntityManager getPicketLinkEntityManager() {
-        return em;
-    }*/
+        return emf.createEntityManager();
+    }
 
     @Produces
     @RequestScoped
