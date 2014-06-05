@@ -16,18 +16,14 @@
  */
 package org.jboss.quickstarts.picketlink.acl;
 
+import org.picketlink.annotations.PicketLink;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.inject.Default;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
-
-import org.apache.deltaspike.jpa.api.transaction.TransactionScoped;
-import org.picketlink.annotations.PicketLink;
 
 /**
  * This class uses CDI to alias Java EE resources, such as the {@link FacesContext}, to CDI beans
@@ -44,40 +40,14 @@ import org.picketlink.annotations.PicketLink;
 @ApplicationScoped
 public class Resources {
 
-    /*@Produces
-    @PersistenceContext(unitName = "picketlink-default")
-    private EntityManager em;
+    @Produces
+    @PersistenceContext
+    private EntityManager entityManager;
 
-     @PersistenceContext(unitName = "picketlink-default")
-     @Produces
-     @PicketLink
-     private EntityManager entityManager;
-*/
-
-    @PersistenceContext(unitName = "picketlink-default")
-    private EntityManagerFactory emf;
-
-    @Produces @Default @TransactionScoped
-    public EntityManager getEntityManager() {
-        return emf.createEntityManager();
-    }
-
-    public void dispose(@Disposes EntityManager entityManager)
-    {
-        if (entityManager.isOpen())
-        {
-            entityManager.close();
-        }
-    }
-
-    /*
-     * Since we are using JPAIdentityStore to store identity-related data, we must provide it with an EntityManager via a
-     * producer method or field annotated with the @PicketLink qualifier.
-     */
-    @Produces @PicketLink @TransactionScoped
-    public EntityManager getPicketLinkEntityManager() {
-        return emf.createEntityManager();
-    }
+    @PersistenceContext
+    @Produces
+    @PicketLink
+    private EntityManager securityEntityManager;
 
     @Produces
     @RequestScoped

@@ -17,19 +17,18 @@
  */
 package org.jboss.quickstarts.picketlink.acl;
 
-import java.io.Serializable;
+import org.jboss.quickstarts.picketlink.acl.model.Article;
+import org.picketlink.Identity;
+import org.picketlink.idm.PermissionManager;
+import org.picketlink.idm.model.basic.User;
 
+import javax.ejb.Stateful;
 import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
-
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
-import org.jboss.quickstarts.picketlink.acl.model.Article;
-import org.picketlink.Identity;
-import org.picketlink.idm.PermissionManager;
-import org.picketlink.idm.model.basic.User;
+import java.io.Serializable;
 
 /**
  * Action bean for Article related operations
@@ -37,6 +36,7 @@ import org.picketlink.idm.model.basic.User;
  * @author Shane Bryzak
  */
 @Named
+@Stateful
 @ConversationScoped
 public class ArticleController implements Serializable {
     @Inject EntityManager em;
@@ -49,7 +49,6 @@ public class ArticleController implements Serializable {
 
     private Article article;
 
-    @Transactional
     @CanCreate(Article.class)
     public void createArticle() {
         conversation.begin();
