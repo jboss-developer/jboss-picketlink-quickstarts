@@ -14,13 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.picketlink.quickstart.acl;
+package org.jboss.quickstarts.picketlink.acl;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
+import org.jboss.quickstarts.picketlink.acl.model.ResourcePermission;
 import org.picketlink.PartitionManagerCreateEvent;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.config.IdentityConfiguration;
@@ -38,7 +39,6 @@ import org.picketlink.idm.jpa.model.sample.simple.RoleTypeEntity;
 import org.picketlink.idm.model.Relationship;
 import org.picketlink.idm.model.basic.Realm;
 import org.picketlink.internal.EEJPAContextInitializer;
-import org.picketlink.quickstart.acl.model.ResourcePermission;
 
 /**
  * This bean produces the configuration for PicketLink IDM

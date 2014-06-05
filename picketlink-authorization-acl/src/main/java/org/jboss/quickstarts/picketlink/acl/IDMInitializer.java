@@ -14,19 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.picketlink.quickstart.acl;
+package org.jboss.quickstarts.picketlink.acl;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
+import org.jboss.quickstarts.picketlink.acl.model.Article;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.PermissionManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.basic.User;
-import org.picketlink.quickstart.acl.model.Article;
 
 /**
  * This startup bean creates a number of default users, groups and roles when the application is started.

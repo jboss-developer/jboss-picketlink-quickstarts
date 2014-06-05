@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.picketlink.quickstart.acl.model;
+package org.jboss.quickstarts.picketlink.acl.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -22,7 +22,6 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -30,29 +29,28 @@ import org.picketlink.idm.permission.annotations.AllowedOperation;
 import org.picketlink.idm.permission.annotations.AllowedOperations;
 
 /**
- * A comment made by a user on an article
+ * Represents an article written by a user
  *
  * @author Shane Bryzak
- *
  */
-@Entity
 @AllowedOperations({
     @AllowedOperation(value = "update", mask = 1),
-    @AllowedOperation(value = "delete", mask = 2)
+    @AllowedOperation(value = "delete", mask = 2),
+    @AllowedOperation(value = "create", mask = 4, classOperation = true)
 })
-public class Comment implements Serializable {
+@Entity
+public class Article implements Serializable {
 
-    private static final long serialVersionUID = -2908149218885884207L;
+    private static final long serialVersionUID = -7669013593822941592L;
 
     @Id @GeneratedValue
     private Long id;
 
-    @ManyToOne
-    private Article article;
-
-    @Temporal(TemporalType.DATE)
     private Date created;
+    private Date updated;
 
+    private String title;
+    private String author;
     private String content;
 
     public Long getId() {
@@ -63,20 +61,38 @@ public class Comment implements Serializable {
         this.id = id;
     }
 
-    public Article getArticle() {
-        return article;
-    }
-
-    public void setArticle(Article article) {
-        this.article = article;
-    }
-
+    @Temporal(TemporalType.DATE)
     public Date getCreated() {
         return created;
     }
 
     public void setCreated(Date created) {
         this.created = created;
+    }
+
+    @Temporal(TemporalType.DATE)
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getContent() {
