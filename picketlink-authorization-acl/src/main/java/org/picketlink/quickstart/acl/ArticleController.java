@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.acl;
+package org.picketlink.quickstart.acl;
 
 import java.io.Serializable;
 
@@ -26,10 +26,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 
-import org.jboss.as.quickstarts.picketlink.authorization.acl.model.Article;
 import org.picketlink.Identity;
 import org.picketlink.idm.PermissionManager;
 import org.picketlink.idm.model.basic.User;
+import org.picketlink.quickstart.acl.model.Article;
 
 /**
  * Action bean for Article related operations
@@ -38,7 +38,6 @@ import org.picketlink.idm.model.basic.User;
  */
 @Named
 @ConversationScoped
-@Stateful
 public class ArticleController implements Serializable {
     @Inject EntityManager em;
 

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.acl;
+package org.picketlink.quickstart.acl;
 
 import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
@@ -37,26 +37,36 @@ import org.picketlink.annotations.PicketLink;
  * private FacesContext facesContext;
  * </pre>
  */
-@Stateful
+//@Stateful
 public class Resources {
-
+    
+    @Produces
     @PersistenceContext(unitName = "picketlink-default")
+    private EntityManager em;
+
+     @PersistenceContext(unitName = "picketlink-default")
+     @Produces
+     @PicketLink
+     private EntityManager entityManager;
+     
+
+    /*@PersistenceContext(unitName = "picketlink-default")
     private EntityManager em;
 
     @Produces
     public EntityManager getEntityManager() {
         return em;
-    }
+    }*/
 
     /*
      * Since we are using JPAIdentityStore to store identity-related data, we must provide it with an EntityManager via a
      * producer method or field annotated with the @PicketLink qualifier.
      */
-    @Produces
+    /*@Produces
     @PicketLink
     public EntityManager getPicketLinkEntityManager() {
         return em;
-    }
+    }*/
 
     @Produces
     @RequestScoped

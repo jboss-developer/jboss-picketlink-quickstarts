@@ -14,23 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.acl;
+package org.picketlink.quickstart.acl;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import org.jboss.as.quickstarts.picketlink.authorization.acl.model.Article;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.PermissionManager;
-import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
-import org.picketlink.idm.model.basic.BasicModel;
-import org.picketlink.idm.model.basic.Group;
 import org.picketlink.idm.model.basic.User;
-import org.picketlink.idm.permission.Permission;
+import org.picketlink.quickstart.acl.model.Article;
 
 /**
  * This startup bean creates a number of default users, groups and roles when the application is started.
@@ -70,7 +66,7 @@ public class IDMInitializer {
         PermissionManager permissionManager = partitionManager.createPermissionManager();
 
         // Grant both john and mary permission to create new articles
-        //permissionManager.grantPermission(new Permission(Article.class, john, "create"));
-        //permissionManager.grantPermission(new Permission(Article.class, mary, "create"));
+        permissionManager.grantPermission(john, Article.class, "create");
+        permissionManager.grantPermission(mary, Article.class, "create");
     }
 }

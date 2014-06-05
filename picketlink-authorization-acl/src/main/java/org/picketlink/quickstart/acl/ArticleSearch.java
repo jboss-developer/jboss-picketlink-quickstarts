@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.acl;
+package org.picketlink.quickstart.acl;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-import org.jboss.as.quickstarts.picketlink.authorization.acl.model.Article;
+import org.picketlink.quickstart.acl.model.Article;
 
 /**
  * Controller bean for Article search operations

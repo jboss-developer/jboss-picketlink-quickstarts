@@ -14,28 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.acl;
+package org.picketlink.quickstart.acl;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import javax.interceptor.InvocationContext;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-import org.apache.deltaspike.security.api.authorization.Secures;
-import org.picketlink.Identity;
+import javax.enterprise.util.Nonbinding;
+
+import org.apache.deltaspike.security.api.authorization.SecurityBindingType;
 
 /**
- * Performs the business logic required for the declared security binding annotations
+ * This security binding type is used to determine whether the user has the necessary
+ * privileges to create instances of the specified class.
  *
  * @author Shane Bryzak
+ *
  */
-@ApplicationScoped
-public class PermissionAuthorizer {
-
-    @Inject Identity identity;
-
-    @Secures @CanCreate
-    public boolean checkCanCreate(InvocationContext ctx) {
-        return true;
-        //return identity.hasPermission(ctx.getMethod().getAnnotation(CanCreate.class).value(), "create");
-    }
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target({ ElementType.TYPE, ElementType.METHOD })
+@Documented
+@SecurityBindingType
+public @interface CanCreate {
+    @Nonbinding Class<?> value() default Object.class;
 }

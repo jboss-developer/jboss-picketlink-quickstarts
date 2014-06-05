@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.acl.model;
+package org.picketlink.quickstart.acl.model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,8 +26,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.picketlink.idm.permission.annotations.AllowedPermission;
-import org.picketlink.idm.permission.annotations.AllowedPermissions;
+import org.picketlink.idm.permission.annotations.AllowedOperation;
+import org.picketlink.idm.permission.annotations.AllowedOperations;
 
 /**
  * A comment made by a user on an article
@@ -36,9 +36,9 @@ import org.picketlink.idm.permission.annotations.AllowedPermissions;
  *
  */
 @Entity
-@AllowedPermissions({
-    @AllowedPermission(operation = "update", mask = 1),
-    @AllowedPermission(operation = "delete", mask = 2)
+@AllowedOperations({
+    @AllowedOperation(value = "update", mask = 1),
+    @AllowedOperation(value = "delete", mask = 2)
 })
 public class Comment implements Serializable {
 

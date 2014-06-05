@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.acl;
+package org.picketlink.quickstart.acl;
 
-import javax.ejb.Stateless;
+import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -32,8 +32,7 @@ import org.picketlink.Identity.AuthenticationResult;
  * @author Shane Bryzak
  * 
  */
-@Stateless
-@Named
+@Model
 public class LoginController {
 
     @Inject
