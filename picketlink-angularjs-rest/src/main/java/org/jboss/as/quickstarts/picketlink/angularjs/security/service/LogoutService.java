@@ -23,8 +23,8 @@
 package org.jboss.as.quickstarts.picketlink.angularjs.security.service;
 
 import org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSTokenProvider;
-import org.jboss.as.quickstarts.picketlink.angularjs.security.authorization.annotation.UserLoggedIn;
 import org.picketlink.Identity;
+import org.picketlink.authorization.annotations.RequiresAccount;
 import org.picketlink.idm.model.Account;
 
 import javax.ejb.Stateless;
@@ -46,7 +46,7 @@ public class LogoutService {
     private Identity identity;
 
     @POST
-    @UserLoggedIn
+    @RequiresAccount
     public void logout() {
         Account account = this.identity.getAccount();
 

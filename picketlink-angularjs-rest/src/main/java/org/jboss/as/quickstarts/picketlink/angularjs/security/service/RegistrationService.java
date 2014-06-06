@@ -26,7 +26,6 @@ import org.jboss.as.quickstarts.picketlink.angularjs.security.model.IdentityMode
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.Registration;
 import org.jboss.as.quickstarts.picketlink.angularjs.util.MessageBuilder;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.picketlink.idm.credential.Token;
 
 import javax.ejb.Stateless;
@@ -69,7 +68,6 @@ public class RegistrationService {
     @Inject
     private IdentityModelManager identityModelManager;
 
-
     @Inject
     @Any
     private Event<Email> event;
@@ -108,7 +106,7 @@ public class RegistrationService {
     @POST
     @Path("/activation")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response activateAccount(@NotNull @NotEmpty String activationCode) {
+    public Response activateAccount(String activationCode) {
         MessageBuilder message;
 
         try {

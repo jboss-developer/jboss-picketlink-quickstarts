@@ -21,9 +21,10 @@ package org.jboss.as.quickstarts.picketlink.angularjs.security.model;
  *
  * @author pedroigor
  */
-public enum ApplicationRole {
+public interface ApplicationRole {
 
-    ADMINISTRATOR,
-    USER;
+    String ADMINISTRATOR = "Administrator";
+    String USER = "User";
+
 
 }

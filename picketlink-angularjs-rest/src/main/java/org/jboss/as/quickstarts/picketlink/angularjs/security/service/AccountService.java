@@ -1,12 +1,12 @@
 package org.jboss.as.quickstarts.picketlink.angularjs.security.service;
 
 import org.jboss.as.quickstarts.picketlink.angularjs.model.Person;
-import org.jboss.as.quickstarts.picketlink.angularjs.security.authorization.AllowedRole;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.ApplicationRole;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.IdentityModelManager;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser;
 import org.jboss.as.quickstarts.picketlink.angularjs.util.EntityValidator;
 import org.jboss.as.quickstarts.picketlink.angularjs.util.MessageBuilder;
+import org.picketlink.authorization.annotations.RolesAllowed;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
@@ -18,7 +18,7 @@ import javax.ws.rs.core.Response;
 
 @javax.ejb.Stateless
 @Path("/private/account")
-@AllowedRole(ApplicationRole.ADMINISTRATOR)
+@RolesAllowed(ApplicationRole.ADMINISTRATOR)
 public class AccountService {
 
     @Inject

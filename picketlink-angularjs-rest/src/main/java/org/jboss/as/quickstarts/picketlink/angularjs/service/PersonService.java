@@ -1,7 +1,7 @@
 package org.jboss.as.quickstarts.picketlink.angularjs.service;
 
 import org.jboss.as.quickstarts.picketlink.angularjs.model.Person;
-import org.jboss.as.quickstarts.picketlink.angularjs.security.authorization.annotation.UserLoggedIn;
+import org.picketlink.authorization.annotations.RequiresAccount;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Path("/private/person")
 @Stateless
-@UserLoggedIn
+@RequiresAccount
 public class PersonService {
 
     @Inject

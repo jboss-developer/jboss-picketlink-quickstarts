@@ -64,7 +64,7 @@
       <!-- Dependency Management for PicketLink and Java EE 6.0. -->
       <dependency>
         <groupId>org.picketlink</groupId>
-        <artifactId>picketlink-javaee-6.0-with-deltaspike</artifactId>
+        <artifactId>picketlink-javaee-6.0</artifactId>
         <version>${version.picketlink.javaee.bom}</version>
         <scope>import</scope>
         <type>pom</type>
@@ -83,69 +83,36 @@
 
   <dependencies>
 
-    <!-- PicketLink dependencies -->
+    <!--
+        PicketLink Uber Dependency. It provides all PicketLink dependencies from a single JAR. You still can define each module separately,
+        if you want to.
+    -->
     <dependency>
         <groupId>org.picketlink</groupId>
-        <artifactId>picketlink-api</artifactId>
+        <artifactId>picketlink</artifactId>
         <scope>compile</scope>
     </dependency>
-    <dependency>
-		<groupId>org.picketlink</groupId>
-		<artifactId>picketlink-impl</artifactId>
-		<scope>compile</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.picketlink</groupId>
-		<artifactId>picketlink-idm-api</artifactId>
-		<scope>compile</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.picketlink</groupId>
-		<artifactId>picketlink-idm-impl</artifactId>
-		<scope>compile</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.picketlink</groupId>
-		<artifactId>picketlink-idm-simple-schema</artifactId>
-		<scope>compile</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.picketlink</groupId>
-		<artifactId>picketlink-json</artifactId>
-		<scope>compile</scope>
-	</dependency>
 
-    <!-- Apache DeltaSpike dependencies -->
-     <dependency>
-		<groupId>org.apache.deltaspike.core</groupId>
-		<artifactId>deltaspike-core-api</artifactId>
-		<scope>compile</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.deltaspike.core</groupId>
-		<artifactId>deltaspike-core-impl</artifactId>
-		<scope>runtime</scope>
-	</dependency>
-	<dependency>
-		<groupId>org.apache.deltaspike.modules</groupId>
-		<artifactId>deltaspike-security-module-api</artifactId>
-		<scope>compile</scope>
-	</dependency>
-	<dependency>
-	    <groupId>org.apache.deltaspike.modules</groupId>
-		<artifactId>deltaspike-security-module-impl</artifactId>
-		<scope>runtime</scope>
-	</dependency>
-
+   <!--
+        PicketLink Simple Schema for IDM JPA Identity Store. This is just a simple and specific schema that maps all types provided
+        by PicketLink IDM Basic Model. Eg.: User, Role and Group types.
+        You can always provide your own entities/schema in order to better satisfy your requirements.
+   -->
     <dependency>
-      <groupId>org.jboss.spec.javax.ejb</groupId>
-      <artifactId>jboss-ejb-api_3.1_spec</artifactId>
-      <scope>provided</scope>
+        <groupId>org.picketlink</groupId>
+        <artifactId>picketlink-idm-simple-schema</artifactId>
+        <scope>compile</scope>
     </dependency>
 
     <dependency>
       <groupId>javax.enterprise</groupId>
       <artifactId>cdi-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.jboss.spec.javax.ejb</groupId>
+      <artifactId>jboss-ejb-api_3.1_spec</artifactId>
       <scope>provided</scope>
     </dependency>
 
@@ -178,24 +145,6 @@
       <groupId>org.jboss.spec.javax.transaction</groupId>
       <artifactId>jboss-transaction-api_1.1_spec</artifactId>
       <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>org.hibernate</groupId>
-        <artifactId>hibernate-validator</artifactId>
-        <scope>provided</scope>
-        <exclusions>
-            <exclusion>
-                <artifactId>slf4j-api</artifactId>
-                <groupId>org.slf4j</groupId>
-            </exclusion>
-        </exclusions>
-    </dependency>
-
-    <dependency>
-        <groupId>org.jboss.spec.javax.servlet</groupId>
-        <artifactId>jboss-servlet-api_3.0_spec</artifactId>
-        <scope>provided</scope>
     </dependency>
 
     <dependency>

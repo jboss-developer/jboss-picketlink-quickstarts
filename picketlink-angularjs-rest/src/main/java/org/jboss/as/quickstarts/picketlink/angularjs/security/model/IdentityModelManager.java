@@ -23,7 +23,6 @@ package org.jboss.as.quickstarts.picketlink.angularjs.security.model;
 
 import org.jboss.as.quickstarts.picketlink.angularjs.model.Person;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSTokenProvider;
-import org.jboss.as.quickstarts.picketlink.angularjs.security.authorization.AuthorizationManager;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
@@ -60,9 +59,6 @@ public class IdentityModelManager {
     private RelationshipManager relationshipManager;
 
     @Inject
-    private AuthorizationManager authorizationManager;
-
-    @Inject
     private JWSTokenProvider tokenProvider;
 
     public MyUser createAccount(Registration request) {
@@ -97,9 +93,14 @@ public class IdentityModelManager {
         this.identityManager.updateCredential(account, new Password(password));
     }
 
-    public void grantRole(MyUser account, ApplicationRole role) {
-        Role storedRole = BasicModel.getRole(this.identityManager, role.name());
+    public void grantRole(MyUser account, String roleName) {
+        Role storedRole = BasicModel.getRole(this.identityManager, roleName);
         BasicModel.grantRole(this.relationshipManager, account, storedRole);
+    }
+
+    public boolean hasRole(MyUser account, String roleName) {
+        Role storedRole = BasicModel.getRole(this.identityManager, roleName);
+        return BasicModel.hasRole(this.relationshipManager, account, storedRole);
     }
 
     public Token activateAccount(String activationCode) {
@@ -139,7 +140,7 @@ public class IdentityModelManager {
     }
 
     public void disableAccount(MyUser user) {
-        if (this.authorizationManager.isAdmin(user)) {
+        if (hasRole(user, ApplicationRole.ADMINISTRATOR)) {
             throw new IllegalArgumentException("Administrators can not be disabled.");
         }
 
@@ -152,7 +153,7 @@ public class IdentityModelManager {
     }
 
     public void enableAccount(MyUser user) {
-        if (this.authorizationManager.isAdmin(user)) {
+        if (hasRole(user, ApplicationRole.ADMINISTRATOR)) {
             throw new IllegalArgumentException("Administrators can not be enabled.");
         }
 

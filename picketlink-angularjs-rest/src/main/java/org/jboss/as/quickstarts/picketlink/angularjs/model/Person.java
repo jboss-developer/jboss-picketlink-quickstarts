@@ -24,9 +24,6 @@ package org.jboss.as.quickstarts.picketlink.angularjs.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Pedro Igor
@@ -36,14 +33,11 @@ public class Person {
 
     @Id
     @GeneratedValue
-    @NotNull
     private Long id;
 
     private String firstName;
     private String lastName;
     
-    @NotNull
-    @NotEmpty
     private String email;
 
     public Long getId() {

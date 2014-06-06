@@ -86,8 +86,7 @@ public class SecurityInitializer {
         }
     }
 
-    public static Role createRole(ApplicationRole applicationRole, IdentityManager identityManager) {
-        String roleName = applicationRole.name();
+    public static Role createRole(String roleName, IdentityManager identityManager) {
         Role role = getRole(identityManager, roleName);
 
         if (role == null) {
@@ -142,7 +141,7 @@ public class SecurityInitializer {
 
         identityManager.updateCredential(admin, new Password("admin"));
 
-        Role adminRole = getRole(identityManager, ApplicationRole.ADMINISTRATOR.name());
+        Role adminRole = getRole(identityManager, ApplicationRole.ADMINISTRATOR);
 
         grantRole(partitionManager.createRelationshipManager(), admin, adminRole);
     }
