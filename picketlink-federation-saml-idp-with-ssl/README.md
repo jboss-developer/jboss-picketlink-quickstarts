@@ -69,13 +69,11 @@ You configure the security domain by running JBoss CLI commands. For your conven
         JBOSS_HOME/bin/jboss-cli.sh --connect --file=configure-security-domain.cli
 You should see the following result when you run the script:
 
-        #1 /subsystem=security/security-domain=idp:add(cache-type=default)
-        #2 /subsystem=security/security-domain=idp/authentication=classic:add
-        #3 /subsystem=security/security-domain=idp/authentication=classic/login-module=CertificateRoles:add(code=CertificateRoles,flag=optional,module-options=[password-stacking=useFirstPass,securityDomain=idp,verifier=org.jboss.security.auth.certs.AnyCertVerifier])
-        #4 /subsystem=security/security-domain=idp/authentication=classic/login-module=UsersRoles:add(code=UsersRoles,flag=required,module-options=[password-stacking=useFirstPass,usersProperties=users.properties,rolesProperties=roles.properties])
-        #5 /subsystem=security/security-domain=idp/jsse=classic:add(keystore={password="change_it",url="${jboss.server.config.dir}/server.keystore"},truststore={"password"="change_it",url="${jboss.server.config.dir}/server.keystore"}, client-auth=true)
-        #6 The batch executed successfully.
-        {"outcome" => "success"}
+        The batch executed successfully
+        {
+            "outcome" => "success",
+        }
+
 
 
 Review the Modified Server Configuration

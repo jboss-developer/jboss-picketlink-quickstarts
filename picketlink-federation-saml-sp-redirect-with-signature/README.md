@@ -39,12 +39,12 @@ Configure Maven
 
 If you have not yet done so, you must [Configure Maven](http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#configure_maven) before testing the quickstarts.
 
-Create the Security Domain
+Create the Security Domain for JBoss EAP
 ---------------
 
 These steps assume you are running the server in standalone mode and using the default standalone.xml supplied with the distribution.
 
-You configure the security domain by running JBoss CLI commands. For your convenience, this quickstart batches the commands into a `configure-security-domain.cli` script provided in the root directory of this quickstart.
+You configure the security domain by running JBoss CLI commands. For your convenience, this quickstart batches the commands into a `configure-security-domain-eap.cli` script provided in the root directory of this quickstart.
 
 1. Before you begin, back up your server configuration file
     * If it is running, stop the JBoss server.
@@ -55,21 +55,52 @@ You configure the security domain by running JBoss CLI commands. For your conven
 
         For Linux:  JBOSS_HOME/bin/standalone.sh
         For Windows:  JBOSS_HOME\bin\standalone.bat
-3. Review the `configure-security-domain.cli` file in the root of this quickstart directory. This script adds the `sp` domain to the `security` subsystem in the server configuration and configures authentication access. Comments in the script describe the purpose of each block of commands.
+3. Review the `configure-security-domain-eap.cli` file in the root of this quickstart directory. This script adds the `sp` domain to the `security` subsystem in the server configuration and configures authentication access. Comments in the script describe the purpose of each block of commands.
 
 4. Open a new command prompt, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
 
-        JBOSS_HOME/bin/jboss-cli.sh --connect --file=configure-security-domain.cli
+        JBOSS_HOME/bin/jboss-cli.sh --connect --file=configure-security-domain-eap.cli
+
 You should see the following result when you run the script:
 
-        #1 /subsystem=security/security-domain=sp:add(cache-type=default)
-        #2 /subsystem=security/security-domain=sp/authentication=classic:add
-        #3 /subsystem=security/security-domain=sp/authentication=classic/login-module=SAML2LoginModule:add(code=org.picketlink.identity.federation.bindings.jboss.auth.SAML2LoginModule,flag=required)
-        The batch executed successfully.
-        {"outcome" => "success"}
+        The batch executed successfully
+        {
+            "outcome" => "success",
+        }
 
 
-Review the Modified Server Configuration
+Create the Security Domain for WildFly
+---------------
+
+These steps assume you are running the server in standalone mode and using the default standalone.xml supplied with the distribution.
+
+You configure the security domain by running JBoss CLI commands. For your convenience, this quickstart batches the commands into a `configure-security-domain-wildfly.cli` script provided in the root directory of this quickstart.
+
+1. Before you begin, back up your server configuration file
+    * If it is running, stop the JBoss server.
+    * Backup the file: `JBOSS_HOME/standalone/configuration/standalone.xml`
+    * After you have completed testing this quickstart, you can replace this file to restore the server to its original configuration.
+
+2. Start the JBoss server by typing the following:
+
+        For Linux:  JBOSS_HOME/bin/standalone.sh
+        For Windows:  JBOSS_HOME\bin\standalone.bat
+3. Review the `configure-security-domain-wildfly.cli` file in the root of this quickstart directory. This script adds the `sp` domain to the `security` subsystem in the server configuration and configures authentication access. Comments in the script describe the purpose of each block of commands.
+
+4. Open a new command prompt, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
+
+        JBOSS_HOME/bin/jboss-cli.sh --connect --file=configure-security-domain-wildfly.cli
+
+You should see the following result when you run the script:
+
+        The batch executed successfully
+        {
+            "outcome" => "success",
+        }
+
+
+
+Review the Modified Server Configuration for EAP
 -----------------------------------
 
 If you want to review and understand newly added XML configuration, stop the JBoss server and open the  `JBOSS_HOME/standalone/configuration/standalone.xml` file.
@@ -83,6 +114,17 @@ The following `sp` security-domain was added to the `security` subsystem.
         </security-domain>
 
 The configuration above defines a security-domain which will be used by the SP to authenticate users based on a SAML Assertion previously issued by a Identity Provider.
+
+Review the Modified Server Configuration for WildFly
+-----------------------------------
+
+If you are using Wildfly, the security-domain should have the following configuration:
+
+        <security-domain name="sp" cache-type="default">
+            <authentication>
+                <login-module code="org.picketlink.identity.federation.bindings.wildfly.SAML2LoginModule" flag="required"/>
+            </authentication>
+        </security-domain>
 
 
 SAML SP-Initiated Single Sign-On
