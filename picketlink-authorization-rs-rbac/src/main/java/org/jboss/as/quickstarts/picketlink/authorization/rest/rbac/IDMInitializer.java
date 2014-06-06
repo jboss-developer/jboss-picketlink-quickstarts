@@ -28,8 +28,10 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.*;
-import static org.picketlink.idm.model.basic.BasicModel.*;
+import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.ADMINISTRATOR;
+import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.DEVELOPER;
+import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.PROJECT_MANAGER;
+import static org.picketlink.idm.model.basic.BasicModel.grantRole;
 
 @Singleton
 @Startup
@@ -45,7 +47,7 @@ public class IDMInitializer {
         createUser("kate", DEVELOPER);
     }
 
-    private void createUser(String loginName, ApplicationRole roleName) {
+    private void createUser(String loginName, String roleName) {
         User user = new User(loginName);
 
         IdentityManager identityManager = this.partitionManager.createIdentityManager();
@@ -56,7 +58,7 @@ public class IDMInitializer {
 
         identityManager.updateCredential(user, password);
 
-        Role role = new Role(roleName.name());
+        Role role = new Role(roleName);
 
         identityManager.add(role);
 

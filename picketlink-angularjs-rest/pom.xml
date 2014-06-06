@@ -93,14 +93,24 @@
         <scope>compile</scope>
     </dependency>
 
-   <!--
-        PicketLink Simple Schema for IDM JPA Identity Store. This is just a simple and specific schema that maps all types provided
-        by PicketLink IDM Basic Model. Eg.: User, Role and Group types.
-        You can always provide your own entities/schema in order to better satisfy your requirements.
-   -->
+    <!--
+         PicketLink Simple Schema for IDM JPA Identity Store. This is just a simple and specific schema that maps all types provided
+         by PicketLink IDM Basic Model. Eg.: User, Role and Group types.
+         You can always provide your own entities/schema in order to better satisfy your requirements.
+    -->
     <dependency>
         <groupId>org.picketlink</groupId>
         <artifactId>picketlink-idm-simple-schema</artifactId>
+        <scope>compile</scope>
+    </dependency>
+
+    <!--
+        Picket JSON Dependency. It provides an API to build JWT and JOSE based tokens. We must define it separately because it depends
+        on JSON-P (JSR-353) which is a JEE7 library. EAP supports JEE6.
+    -->
+    <dependency>
+        <groupId>org.picketlink</groupId>
+        <artifactId>picketlink-json</artifactId>
         <scope>compile</scope>
     </dependency>
 
@@ -117,12 +127,6 @@
     </dependency>
 
     <dependency>
-        <groupId>javax.validation</groupId>
-        <artifactId>validation-api</artifactId>
-        <scope>provided</scope>
-    </dependency>
-
-    <dependency>
         <groupId>org.jboss.spec.javax.ws.rs</groupId>
         <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
         <scope>provided</scope>
@@ -132,13 +136,6 @@
         <groupId>org.hibernate.javax.persistence</groupId>
         <artifactId>hibernate-jpa-2.0-api</artifactId>
         <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jboss.spec.javax.json</groupId>
-	  <artifactId>jboss-json-api_1.0_spec</artifactId>
-      <version>1.0.0.Final</version>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>

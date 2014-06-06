@@ -16,13 +16,14 @@
  */
 package org.jboss.as.quickstarts.picketlink.authorization.rest.rbac;
 
-import javax.inject.Inject;
+import org.picketlink.authorization.annotations.RolesAllowed;
+import org.picketlink.credential.DefaultLoginCredentials;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.apache.deltaspike.security.api.authorization.AccessDeniedException;
-import org.picketlink.credential.DefaultLoginCredentials;
+
 import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.ADMINISTRATOR;
 import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.DEVELOPER;
 import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.PROJECT_MANAGER;
@@ -30,33 +31,25 @@ import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.Applic
 @Path("/")
 public class ApplicationServices {
 
-    @Inject
-    private AuthorizationManager authorizationManager;
-
     @GET
     @Path("/risksManagement")
-    @DeclareRoles(PROJECT_MANAGER)
+    @RolesAllowed({PROJECT_MANAGER, ADMINISTRATOR})
     public Response risksManagement(DefaultLoginCredentials credential) {
         return Response.ok().entity("You're allowed to manage risks.").type(MediaType.TEXT_PLAIN).build();
     }
 
     @GET
     @Path("/timesheet")
-    @DeclareRoles({PROJECT_MANAGER, DEVELOPER})
+    @RolesAllowed({PROJECT_MANAGER, DEVELOPER, ADMINISTRATOR})
     public Response timesheet(DefaultLoginCredentials credential) {
         return Response.ok().entity("You're allowed to work with your timesheet.").type(MediaType.TEXT_PLAIN).build();
     }
 
     @GET
     @Path("/systemAdministration")
-    @DeclareRoles({ADMINISTRATOR})
+    @RolesAllowed({ADMINISTRATOR})
     public Response systemAdministration(DefaultLoginCredentials credential) {
-        // here we're using the authorization manager directly
-        if (this.authorizationManager.hasRole(ApplicationRole.ADMINISTRATOR.name())) {
-            return Response.ok().entity("You're allowed to perform system administration tasks.").type(MediaType.TEXT_PLAIN).build();
-        }
-
-        throw new AccessDeniedException(null);
+        return Response.ok().entity("You're allowed to perform system administration tasks.").type(MediaType.TEXT_PLAIN).build();
     }
 
 }

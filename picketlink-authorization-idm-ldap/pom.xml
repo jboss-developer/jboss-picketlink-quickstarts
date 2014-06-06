@@ -102,6 +102,16 @@
 
   <dependencies>
 
+    <!--
+        PicketLink Uber Dependency. It provides all PicketLink dependencies from a single JAR. You still can define each module separately,
+        if you want to.
+    -->
+    <dependency>
+      <groupId>org.picketlink</groupId>
+      <artifactId>picketlink</artifactId>
+      <scope>compile</scope>
+    </dependency>
+
     <!-- Import the EJB API, we use provided scope as the API is included in 
       JBoss AS 7 -->
     <dependency>
@@ -118,56 +128,12 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Import the Common Annotations API (JSR-250), we use provided scope 
-      as the API is included in JBoss AS 7 -->
-    <dependency>
-      <groupId>org.jboss.spec.javax.annotation</groupId>
-      <artifactId>jboss-annotations-api_1.1_spec</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- Import the JSF API, we use provided scope as the API is included in
       JBoss AS 7 -->
     <dependency>
       <groupId>org.jboss.spec.javax.faces</groupId>
       <artifactId>jboss-jsf-api_2.1_spec</artifactId>
       <scope>provided</scope>
-    </dependency>
-
-    <!-- Import the Servlet API, we use provided scope as the API is included in JBoss AS 7 -->
-    <dependency>
-      <groupId>org.jboss.spec.javax.servlet</groupId>
-      <artifactId>jboss-servlet-api_3.0_spec</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Import the PicketLink API, we deploy this as library with the application,
-      and can compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-api</artifactId>
-    </dependency>
-
-    <!-- Import the PicketLink implementation, we deploy this as library with the application,
-      but can't compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-impl</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-
-    <!-- Import the PicketLink IDM API, we deploy this as library with the application,
-        and can compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-idm-api</artifactId>
-    </dependency>
-
-    <!-- Import the PicketLink IDM API, we deploy this as library with the application,
-        and can compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-idm-impl</artifactId>
     </dependency>
 
     <!-- LDAP Embedded Server Dependencies -->
@@ -217,7 +183,7 @@
         <artifactId>jboss-as-maven-plugin</artifactId>
         <version>${version.jboss.maven.plugin}</version>
         <configuration>
-            <skip>true</skip>
+            <skip>false</skip>
         </configuration>
       </plugin>
     </plugins>

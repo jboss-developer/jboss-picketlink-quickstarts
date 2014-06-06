@@ -33,7 +33,6 @@ import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -74,7 +73,7 @@ public class RegistrationService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createMember(@NotNull Registration request) {
+    public Response createMember(Registration request) {
         if (!request.getPassword().equals(request.getPasswordConfirmation())) {
             return MessageBuilder.badRequest().message("Password mismatch.").build();
         }

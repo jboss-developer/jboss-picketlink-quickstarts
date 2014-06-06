@@ -63,12 +63,16 @@ public class AuthenticationService {
             this.identity.login();
         }
 
-        Account account = this.identity.getAccount();
-        List<Role> roles = getUserRoles(account);
+        if (this.identity.isLoggedIn()) {
+            Account account = this.identity.getAccount();
+            List<Role> roles = getUserRoles(account);
 
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse(account, roles);
+            AuthenticationResponse authenticationResponse = new AuthenticationResponse(account, roles);
 
-        return Response.ok().entity(authenticationResponse).type(MediaType.APPLICATION_JSON_TYPE).build();
+            return Response.ok().entity(authenticationResponse).type(MediaType.APPLICATION_JSON_TYPE).build();
+        }
+
+        return Response.status(Response.Status.UNAUTHORIZED).entity("Invalid credential").type(MediaType.APPLICATION_JSON_TYPE).build();
     }
 
     private List<Role> getUserRoles(Account account) {

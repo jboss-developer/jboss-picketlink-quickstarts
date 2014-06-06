@@ -21,10 +21,10 @@ package org.jboss.as.quickstarts.picketlink.authorization.rest.rbac;
  *
  * @author pedroigor
  */
-public enum ApplicationRole {
+public interface ApplicationRole {
 
-    PROJECT_MANAGER,
-    DEVELOPER,
-    ADMINISTRATOR;
+    String PROJECT_MANAGER = "Project Manager";
+    String DEVELOPER = "Developer";
+    String ADMINISTRATOR = "Administrator";
 
 }

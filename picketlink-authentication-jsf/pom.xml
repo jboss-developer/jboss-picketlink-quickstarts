@@ -39,13 +39,13 @@
   </licenses>
 
   <properties>
-        <!-- JBoss AS dependency versions -->
-      <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+    <!-- JBoss AS dependency versions -->
+    <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
-      <!-- WildFly dependency versions -->
-      <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
+    <!-- WildFly dependency versions -->
+    <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
 
-      <!-- PicketLink dependency versions -->
+    <!-- PicketLink dependency versions -->
     <version.picketlink.javaee.bom>2.6.0-SNAPSHOT</version.picketlink.javaee.bom>
 
     <!-- maven-war-plugin -->
@@ -71,28 +71,6 @@
   </dependencyManagement>
 
   <dependencies>
-    <!-- Import the CDI API, we use provided scope as the API is included in JBoss AS 7 -->
-    <dependency>
-      <groupId>javax.enterprise</groupId>
-      <artifactId>cdi-api</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Import the Common Annotations API (JSR-250), we use provided scope
-        as the API is included in JBoss AS 7 -->
-    <dependency>
-      <groupId>org.jboss.spec.javax.annotation</groupId>
-      <artifactId>jboss-annotations-api_1.1_spec</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <!-- Import the JSF API, we use provided scope as the API is included in
-      JBoss AS 7 -->
-    <dependency>
-      <groupId>org.jboss.spec.javax.faces</groupId>
-      <artifactId>jboss-jsf-api_2.1_spec</artifactId>
-      <scope>provided</scope>
-    </dependency>
 
     <!-- Import the PicketLink API, we deploy this as library with the application,
         and can compile against it -->
@@ -107,6 +85,21 @@
       <groupId>org.picketlink</groupId>
       <artifactId>picketlink-impl</artifactId>
       <scope>runtime</scope>
+    </dependency>
+
+    <!-- Import the CDI API, we use provided scope as the API is included in JBoss AS 7 -->
+    <dependency>
+      <groupId>javax.enterprise</groupId>
+      <artifactId>cdi-api</artifactId>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Import the JSF API, we use provided scope as the API is included in
+      JBoss AS 7 -->
+    <dependency>
+      <groupId>org.jboss.spec.javax.faces</groupId>
+      <artifactId>jboss-jsf-api_2.1_spec</artifactId>
+      <scope>provided</scope>
     </dependency>
 
   </dependencies>

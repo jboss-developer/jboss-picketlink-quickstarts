@@ -38,10 +38,10 @@ function performUsernamePasswordLogin() {
                     for (i = 0; i < response.roles.length; i++) {
                         var roleName = response.roles[i].name;
 
-                        if (roleName != 'ADMINISTRATOR') {
+                        if (roleName != 'Administrator') {
                             $("#systemAdministrationLink").text("System Administration is disabled, but you can try to hack and see what happens.");
 
-                            if (roleName == 'DEVELOPER') {
+                            if (roleName == 'Developer') {
                                 $("#risksManagementLink").text("Risks Management is disabled, but you can try to hack and see what happens.");
                             }
                         }

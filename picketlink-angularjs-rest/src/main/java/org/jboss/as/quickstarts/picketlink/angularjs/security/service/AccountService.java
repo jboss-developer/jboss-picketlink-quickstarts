@@ -4,12 +4,10 @@ import org.jboss.as.quickstarts.picketlink.angularjs.model.Person;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.ApplicationRole;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.IdentityModelManager;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser;
-import org.jboss.as.quickstarts.picketlink.angularjs.util.EntityValidator;
 import org.jboss.as.quickstarts.picketlink.angularjs.util.MessageBuilder;
 import org.picketlink.authorization.annotations.RolesAllowed;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -24,19 +22,13 @@ public class AccountService {
     @Inject
     private IdentityModelManager identityModelManager;
     
-    @Inject
-    private EntityValidator validator;
-
     @POST
     @Path("enableAccount")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response enable(@NotNull Person passedUser) {
+    public Response enable(Person passedUser) {
         MessageBuilder message;
 
         try {
-        	// validate input
-        	validator.validateEntity(passedUser);
-        	
             MyUser user = this.identityModelManager.findByLoginName(passedUser.getEmail());
 
             if (user == null) {
@@ -60,13 +52,10 @@ public class AccountService {
     @POST
     @Path("disableAccount")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response disable(@NotNull Person passedUser) {
+    public Response disable(Person passedUser) {
         MessageBuilder message;
 
         try {
-            // validate input
-            validator.validateEntity(passedUser);
-
             MyUser user = this.identityModelManager.findByLoginName(passedUser.getEmail());
 
             if (user == null) {

@@ -39,11 +39,11 @@
   </licenses>
 
   <properties>
-        <!-- JBoss AS dependency versions -->
-      <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+    <!-- JBoss AS dependency versions -->
+    <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
-      <!-- WildFly dependency versions -->
-      <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
+    <!-- WildFly dependency versions -->
+    <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
 
     <version.org.jboss.resteasy>2.3.6.Final</version.org.jboss.resteasy>
 
@@ -81,17 +81,25 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-
-      <!-- Apache HTTP Components -->
-      <dependency>
-        <groupId>org.apache.httpcomponents</groupId>
-        <artifactId>httpcore</artifactId>
-        <version>${version.org.apache.httpcomponents}</version>
-      </dependency>
     </dependencies>
   </dependencyManagement>
 
   <dependencies>
+
+    <!-- Import the PicketLink API, we deploy this as library with the application,
+      and can compile against it -->
+    <dependency>
+      <groupId>org.picketlink</groupId>
+      <artifactId>picketlink-api</artifactId>
+    </dependency>
+
+    <!-- Import the PicketLink implementation, we deploy this as library with the application,
+        but can't compile against it -->
+    <dependency>
+      <groupId>org.picketlink</groupId>
+      <artifactId>picketlink-impl</artifactId>
+      <scope>runtime</scope>
+    </dependency>
 
     <!-- Import the EJB API, we use provided scope as the API is included in 
       JBoss AS 7 -->
@@ -109,14 +117,6 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Import the Common Annotations API (JSR-250), we use provided scope 
-      as the API is included in JBoss AS 7 -->
-    <dependency>
-      <groupId>org.jboss.spec.javax.annotation</groupId>
-      <artifactId>jboss-annotations-api_1.1_spec</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
     <!-- Import the JSF API, we use provided scope as the API is included in
       JBoss AS 7 -->
     <dependency>
@@ -125,29 +125,9 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- Import the PicketLink API, we deploy this as library with the application,
-      and can compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-api</artifactId>
-    </dependency>
-
-    <!-- Import the PicketLink implementation, we deploy this as library with the application, 
-      but can't compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-impl</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxrs</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpcore</artifactId>
     </dependency>
 
   </dependencies>
