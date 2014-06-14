@@ -208,6 +208,20 @@
                 </plugin>
             </plugins>
         </build>
+        <dependencies>
+            <dependency>
+              <groupId>org.jboss.spec.javax.json</groupId>
+              <artifactId>jboss-json-api_1.0_spec</artifactId>
+              <version>1.0.0.Final</version>
+              <scope>provided</scope>
+            </dependency>
+            <dependency>
+              <groupId>org.glassfish</groupId>
+              <artifactId>javax.json</artifactId>
+              <version>1.0.4</version>
+              <scope>provided</scope>
+            </dependency>
+        </dependencies>
     </profile>
   </profiles>
 
