@@ -22,9 +22,15 @@
 			class="org.picketlink.identity.federation.web.handlers.saml2.SAML2AuthenticationHandler" />
 		<Handler
 			class="org.picketlink.identity.federation.web.handlers.saml2.RolesGenerationHandler" />
-      <Handler
-            class="org.picketlink.identity.federation.web.handlers.saml2.SAML2SignatureGenerationHandler" />
-      <Handler
+		<Handler
+            class="org.picketlink.identity.federation.web.handlers.saml2.SAML2SignatureGenerationHandler">
+            <!--
+                This is a optional configuration. By default, method http://www.w3.org/2000/09/xmldsig#rsa-sha1
+                and digest http://www.w3.org/2000/09/xmldsig#sha1 are used. -->
+            <Option Key="SIGN_METHOD" Value="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+            <Option Key="SIGN_DIGEST" Value="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        </Handler>
+        <Handler
             class="org.picketlink.identity.federation.web.handlers.saml2.SAML2SignatureValidationHandler" />
 	</Handlers>
 </PicketLink>
