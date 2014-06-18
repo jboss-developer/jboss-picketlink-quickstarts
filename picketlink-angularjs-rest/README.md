@@ -33,7 +33,7 @@ This application demonstrates how you can use PicketLink to:
 * Provide a custom credential type and handler
 * Provide your own types to represent your users
 
-Before you run this example, you must create certificates and configure the server to use SSL and validate client certificates. You must also
+Before you run this example, you must create certificates and configure the server to use SSL. You must also
 provide a Mail configuration in your server in order to send the activation code to new users.
 
 The latest PicketLink documentation is available [here](http://docs.jboss.org/picketlink/2/latest/).

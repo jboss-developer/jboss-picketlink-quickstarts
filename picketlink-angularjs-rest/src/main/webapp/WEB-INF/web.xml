@@ -4,12 +4,6 @@
 	<filter>
         <filter-name>AuthenticationFilter</filter-name>
         <filter-class>org.picketlink.authentication.web.AuthenticationFilter</filter-class>
-
-        <!-- As we're using a token to authenticate users in each request, we need a stateless authentication model. And not use at all session cookies on the server. -->
-        <init-param>
-            <param-name>statelessAuthentication</param-name>
-            <param-value>true</param-value>
-        </init-param>
 	</filter>
 
     <!-- Protect RESTful endpoints -->
