@@ -53,6 +53,7 @@
         <module>picketlink-authorization-rs-rbac</module>
         <module>picketlink-deltaspike-authorization</module>
         <module>picketlink-angularjs-rest</module>
+        <module>picketlink-idm-custom-identity-model</module>
 
         <module>picketlink-federation-saml-idp-basic</module>
         <module>picketlink-federation-saml-idp-with-signature</module>
