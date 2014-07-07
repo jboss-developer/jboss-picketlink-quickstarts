@@ -19,7 +19,7 @@
         The configuration bellow defines a token timeout and a clock skew. Both configurations will be used during the SAML Assertion creation.
         This configuration is optional. It is defined only to show you how to set the token timeout and clock skew configuration.
      -->
-    <PicketLinkSTS xmlns="urn:picketlink:identity-federation:config:2.1" TokenTimeout="5000" ClockSkew="0">
+    <PicketLinkSTS xmlns="urn:picketlink:identity-federation:config:2.1" TokenTimeout="100000" ClockSkew="100000">
 		<TokenProviders>
 			<TokenProvider
                 ProviderClass="org.picketlink.identity.federation.core.saml.v1.providers.SAML11AssertionTokenProvider"
