@@ -6,6 +6,9 @@ These quickstarts run JBoss Enterprise Application Platform 6 and WindFly.
 
 We recommend using the ZIP distribution file for both JBoss Enterprise Application Platform 6 and WildFly.
 
+You can also run PicketLink in Apache TomEE or Glassfish. In this case, you may need some additional configuration in order to get them
+up and running. For PicketLink JEE Security examples, you must ship JBoss Logging jars in your deployments. 
+
 ## System Requirements
 
 To run these quickstarts with the provided build scripts, you need the following:
