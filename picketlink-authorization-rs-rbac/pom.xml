@@ -62,7 +62,7 @@
       <!-- Dependency Management for PicketLink and Apache Deltaspike. -->
       <dependency>
         <groupId>org.picketlink</groupId>
-        <artifactId>picketlink-javaee-6.0-with-deltaspike</artifactId>
+        <artifactId>picketlink-javaee-6.0</artifactId>
         <version>${version.picketlink.javaee.bom}</version>
         <scope>import</scope>
         <type>pom</type>
