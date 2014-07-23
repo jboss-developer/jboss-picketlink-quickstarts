@@ -1,9 +1,9 @@
 picketlink-authorization-idm-jpa: PicketLink IDM Authorization Example using JPA
 ===============================
-Author: Shane Bryzak
-Level: Intermediate
-Technologies: CDI, PicketLink
-Summary: Basic example that demonstrates IDM-based authorization using a JPA-based PicketLink IDM configuration
+Author: Shane Bryzak  
+Level: Intermediate  
+Technologies: CDI, PicketLink  
+Summary: Basic example that demonstrates IDM-based authorization using a JPA-based PicketLink IDM configuration  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?

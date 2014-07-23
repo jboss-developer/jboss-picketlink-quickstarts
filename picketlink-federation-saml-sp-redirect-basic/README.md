@@ -1,9 +1,9 @@
 picketlink-federation-saml-sp-redirect-basic: PicketLink Service Provider With a Basic Configuration using SAML HTTP Redirect Binding
 ===============================
-Author: Pedro Igor
-Level: Intermediate
-Technologies: PicketLink Federation, SAML v2.0
-Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Service Provider using SAML HTTP Redirect Binding.
+Author: Pedro Igor  
+Level: Intermediate  
+Technologies: PicketLink Federation, SAML v2.0  
+Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Service Provider using SAML HTTP Redirect Binding.  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 

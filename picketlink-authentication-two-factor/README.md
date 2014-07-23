@@ -1,9 +1,9 @@
 picketlink-authentication-two-factor: PicketLink Two-Factor Authentication
 ===============================
-Author: Pedro Igor
-Level: Beginner
-Technologies: CDI, PicketLink, JSF
-Summary: Basic example that demonstrates how to use two-factor authentication using Time-based One-Time Passwords(TOTP) with a JSF view layer
+Author: Pedro Igor  
+Level: Beginner  
+Technologies: CDI, PicketLink, JSF  
+Summary: Basic example that demonstrates how to use two-factor authentication using Time-based One-Time Passwords(TOTP) with a JSF view layer  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 

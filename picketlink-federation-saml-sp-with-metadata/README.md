@@ -1,9 +1,9 @@
 picketlink-federation-saml-sp-with-metadata: PicketLink Service Provider using SAML HTTP POST Binding, Digital Signature in SAML Assertions and SAML Metadata Support.
 ===============================
-Author: Pedro Igor
-Level: Intermediate
-Technologies: PicketLink Federation, SAML v2.0
-Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Service Provider using SAML HTTP POST Binding, Digital Signature in SAML Assertions and SAML Metadata Support.
+Author: Pedro Igor  
+Level: Intermediate  
+Technologies: PicketLink Federation, SAML v2.0  
+Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Service Provider using SAML HTTP POST Binding, Digital Signature in SAML Assertions and SAML Metadata Support.  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 

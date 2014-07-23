@@ -1,9 +1,9 @@
 picketlink-federation-saml-idp-with-encryption: PicketLink Identity Provider With Encryption
 ===============================
-Author: Pedro Igor
-Level: Intermediate
-Technologies: PicketLink Federation, SAML v2.0
-Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Identity Provider With Encryption.
+Author: Pedro Igor  
+Level: Intermediate  
+Technologies: PicketLink Federation, SAML v2.0  
+Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Identity Provider With Encryption.  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
@@ -98,7 +98,7 @@ SAML v1.1 and v2.0 IdP-Initiated Single Sign-On
 Both versions of the SAML specification define a specific SSO mode called *IdP-Initiated SSO*. For more details, please take a look at the documentation below:
 
 1. [SAML v1.1 IdP-Initiated SSO](https://docs.jboss.org/author/display/PLINK/SAML+v1.1)
-2. [SAML v2.0 Unsolicited Responses](https://docs.jboss.org/author/display/PLINK/Unsolicted+Responses)
+2. [SAML v2.0 Unsolicited Responses](https://docs.jboss.org/author/display/PLINK/Unsolicited+Responses)
 
 _NOTE: In order to test how this SSO mode works you must have at least one Service Provider deployed. We provide a plenty of SP example applications
 along with our quickstarts, please read their instructions about how to build and deploy them.

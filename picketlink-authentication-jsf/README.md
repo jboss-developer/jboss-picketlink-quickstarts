@@ -1,9 +1,9 @@
 picketlink-authentication-jsf: PicketLink Authentication with JSF
 ===============================
-Author: Shane Bryzak
-Level: Beginner
-Technologies: CDI, PicketLink
-Summary: Basic example that demonstrates simple username/password authentication using PicketLink
+Author: Shane Bryzak  
+Level: Beginner  
+Technologies: CDI, PicketLink  
+Summary: Basic example that demonstrates simple username/password authentication using PicketLink  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?

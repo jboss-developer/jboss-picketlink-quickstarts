@@ -1,9 +1,9 @@
 picketlink-authentication-recaptcha: PicketLink Authentication using reCAPTCHA
 ===============================
-Author: Pedro Igor
-Level: Beginner
-Technologies: CDI, PicketLink, JSF
-Summary: Basic example that demonstrates how to use reCAPTCHA with PicketLink
+Author: Pedro Igor  
+Level: Beginner  
+Technologies: CDI, PicketLink, JSF  
+Summary: Basic example that demonstrates how to use reCAPTCHA with PicketLink  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 

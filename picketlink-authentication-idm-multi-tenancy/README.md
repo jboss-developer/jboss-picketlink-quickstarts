@@ -1,9 +1,9 @@
 picketlink-authentication-idm-multi-tenancy: PicketLink Multi-Tenancy Example
 ===============================
-Author: Pedro Igor
-Level: Intermediate
-Technologies: CDI, PicketLink, JSF
-Summary: Basic example that demonstrates how to use multi-tenancy using PicketLink with a JSF view layer
+Author: Pedro Igor  
+Level: Intermediate  
+Technologies: CDI, PicketLink, JSF  
+Summary: Basic example that demonstrates how to use multi-tenancy using PicketLink with a JSF view layer  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 

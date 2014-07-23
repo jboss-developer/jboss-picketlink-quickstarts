@@ -1,9 +1,9 @@
 picketlink-authentication-rs-endpoint: PicketLink JAX-RS Authentication Endpoint
 ===============================
-Author: Pedro Igor
-Level: Beginner
-Technologies: CDI, PicketLink, JAX-RS
-Summary: Basic example that demonstrates how to create a JAX-RS Authentication Endpoint using PicketLink
+Author: Pedro Igor  
+Level: Beginner  
+Technologies: CDI, PicketLink, JAX-RS  
+Summary: Basic example that demonstrates how to create a JAX-RS Authentication Endpoint using PicketLink  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 

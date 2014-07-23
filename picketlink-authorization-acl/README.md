@@ -1,7 +1,7 @@
 picketlink-authorization-acl: PicketLink IDM Authorization Example using ACLs
 ===============================
 Author: Shane Bryzak
-Level: Intermediate
+Level: Intermediate  
 Technologies: CDI, PicketLink
 Summary: Basic example that demonstrates IDM-based authorization using the Permissions API to implement ACL-based resource restrictions
 Target Product: EAP

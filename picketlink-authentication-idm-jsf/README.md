@@ -1,10 +1,10 @@
 picketlink-authentication-idm-jsf: PicketLink IDM Simple Authentication with JSF
 ===============================
-Author: Shane Bryzak
-Level: Beginner
-Technologies: CDI, PicketLink, JSF
-Summary: Basic example that demonstrates simple username/password authentication using a default PicketLink IDM configuration with a JSF view layer
-Target Product: EAP
+Author: Shane Bryzak  
+Level: Beginner  
+Technologies: CDI, PicketLink, JSF  
+Summary: Basic example that demonstrates simple username/password authentication using a default PicketLink IDM configuration with a JSF view layer  
+Target Product: EAP  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?
