@@ -1,12 +1,10 @@
 picketlink-federation-saml-idp-terms: PicketLink Identity Provider Using a Servlet Filter and a Terms of Service Page
 ===============================
-Author: Anil Saldhana
+Author: Anil Saldhana  
 Level: Intermediate  
 Technologies: PicketLink Federation, SAML v2.0  
-Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Identity Provider Using a Servlet Filter.
-After authentication at the Identity Provider, the user is presented a Terms of Service page where he/she can choose to accept
-or reject the TOS.
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Identity Provider Using a Servlet Filter. After authentication at the Identity Provider, the user is presented a Terms of Service page where he/she can choose to accept or reject the TOS.  
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?

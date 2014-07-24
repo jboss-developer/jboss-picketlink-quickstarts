@@ -4,7 +4,7 @@ Author: Pedro Igor
 Level: Intermediate  
 Technologies: CDI, PicketLink, JSF  
 Summary: Basic example that demonstrates how to use multi-tenancy using PicketLink with a JSF view layer  
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?

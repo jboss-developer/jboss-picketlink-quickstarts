@@ -1,10 +1,10 @@
 picketlink-authorization-acl: PicketLink IDM Authorization Example using ACLs
 ===============================
-Author: Shane Bryzak
+Author: Shane Bryzak  
 Level: Intermediate  
-Technologies: CDI, PicketLink
-Summary: Basic example that demonstrates IDM-based authorization using the Permissions API to implement ACL-based resource restrictions
-Target Product: EAP
+Technologies: CDI, PicketLink  
+Summary: Basic example that demonstrates IDM-based authorization using the Permissions API to implement ACL-based resource restrictions  
+Target Product: EAP  
 Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 What is it?

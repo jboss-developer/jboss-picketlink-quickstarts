@@ -1,10 +1,10 @@
 picketlink-deltaspike-authorization: Demonstrate the creation of a custom authorization example using PicketLink in conjunction with @SecurityBindingType from DeltaSpike
 ======================================================
-Author: Shane Bryzak
+Author: Shane Bryzak  
 Level: Intermediate  
 Technologies: JSF, CDI, PicketLink, Deltaspike  
 Summary: Demonstrate the creation of a custom authorization example using PicketLink and @SecurityBindingType from DeltaSpike  
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 What is it?
 -----------

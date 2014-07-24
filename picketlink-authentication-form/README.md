@@ -4,7 +4,7 @@ Author: Anil Saldhana
 Level: Beginner  
 Technologies: CDI, PicketLink, JSF  
 Summary: Basic example that demonstrates simple username/password authentication using the FORM Authentication with a JSF view layer  
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?

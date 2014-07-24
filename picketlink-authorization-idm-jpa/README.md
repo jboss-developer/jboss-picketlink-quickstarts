@@ -4,7 +4,7 @@ Author: Shane Bryzak
 Level: Intermediate  
 Technologies: CDI, PicketLink  
 Summary: Basic example that demonstrates IDM-based authorization using a JPA-based PicketLink IDM configuration  
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 What is it?
 -----------

@@ -4,7 +4,7 @@ Author: Pedro Igor
 Level: Beginner  
 Technologies: CDI, PicketLink, JSF  
 Summary: Basic example that demonstrates IDM-based authorization using a LDAP-based PicketLink IDM configuration  
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?

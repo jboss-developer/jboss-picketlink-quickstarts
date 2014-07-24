@@ -4,7 +4,7 @@ Author: Pedro Igor
 Level: Beginner  
 Technologies: CDI, PicketLink, JSF  
 Summary: Basic example that demonstrates how to use reCAPTCHA with PicketLink  
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?

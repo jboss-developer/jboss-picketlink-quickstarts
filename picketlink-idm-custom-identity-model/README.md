@@ -4,7 +4,7 @@ Author: Pedro Igor
 Level: Intermediate  
 Technologies: PicketLink IDM, JPA, Hibernate  
 Summary: An example about how to extends PicketLink IDM to provide your own Identity Model  
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?

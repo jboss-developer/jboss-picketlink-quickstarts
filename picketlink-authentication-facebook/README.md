@@ -1,10 +1,10 @@
 picketlink-authentication-facebook: PicketLink Authentication with Facebook login
 ===============================
-Author: Anil Saldhana
-Technologies: CDI, PicketLink
-Summary: Basic example that demonstrates facebook authentication using PicketLink
-Target Product: EAP
-Source: <https://github.com/jboss-jdf/jboss-as-quickstart/>
+Author: Anil Saldhana  
+Technologies: CDI, PicketLink  
+Summary: Basic example that demonstrates facebook authentication using PicketLink  
+Target Product: EAP  
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 What is it?
 -----------
