@@ -15,8 +15,6 @@ This example demonstrates the use of *PicketLink Federation* SAML v2.0 support t
 It provides a minimal configuration to enable your application as an Identity Provider, accordingly with the SAML v2.0 specification. An Identity Provider or IdP, is responsible to centralize authentication and issue SAML Assertions to their relying parties, also known as Service Providers.
 PicketLink supports both SAML v1.1 and v2.0 versions.
 
-Although this example provides you a good start to understand how an Identity Provider works, it does not provide some other important security-related configurations such as signature and encryption.
-We strongly recommend you to read our documentation about how to make your deployment safe and secure from a SAML perspective.
 
 Before you run this example, you must have a security-domain configuration in your server to authenticate users and provide role mappings.
 
