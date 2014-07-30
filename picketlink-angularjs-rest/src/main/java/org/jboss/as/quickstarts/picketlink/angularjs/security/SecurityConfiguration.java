@@ -23,22 +23,10 @@ package org.jboss.as.quickstarts.picketlink.angularjs.security;
 
 import org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSTokenProvider;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser;
-import org.jboss.as.quickstarts.picketlink.angularjs.security.model.entity.MyUserTypeEntity;
 import org.picketlink.annotations.PicketLink;
 import org.picketlink.authentication.web.TokenAuthenticationScheme;
 import org.picketlink.config.SecurityConfigurationBuilder;
 import org.picketlink.event.SecurityConfigurationEvent;
-import org.picketlink.idm.credential.handler.TokenCredentialHandler;
-import org.picketlink.idm.jpa.model.sample.simple.AttributeTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.GroupTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.IdentityTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.PartitionTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.PasswordCredentialTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.RelationshipIdentityTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.RelationshipTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.RoleTypeEntity;
-import org.picketlink.idm.jpa.model.sample.simple.TokenCredentialTypeEntity;
-import org.picketlink.internal.EEJPAContextInitializer;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
@@ -57,9 +45,6 @@ public class SecurityConfiguration {
     private JWSTokenProvider tokenProvider;
 
     @Inject
-    private EEJPAContextInitializer contextInitializer;
-
-    @Inject
     private TokenAuthenticationScheme tokenAuthenticationScheme;
 
     @Produces
@@ -73,25 +58,12 @@ public class SecurityConfiguration {
 
         builder
             .identity()
-            .stateless()
-            .idmConfig()
-            .named("default.config")
-            .stores()
-            .jpa()
-            .mappedEntity(
-                PartitionTypeEntity.class,
-                RoleTypeEntity.class,
-                GroupTypeEntity.class,
-                IdentityTypeEntity.class,
-                RelationshipTypeEntity.class,
-                RelationshipIdentityTypeEntity.class,
-                PasswordCredentialTypeEntity.class,
-                TokenCredentialTypeEntity.class,
-                AttributeTypeEntity.class,
-                MyUserTypeEntity.class)
-            .addContextInitializer(this.contextInitializer)
-            .setCredentialHandlerProperty(TokenCredentialHandler.TOKEN_PROVIDER, this.tokenProvider)
-            .supportType(MyUser.class)
-            .supportAllFeatures();
+                .stateless()
+                    .idmConfig()
+                        .named("default.config")
+                            .stores()
+                                .jpa()
+                                    .supportType(MyUser.class)
+                                    .supportAllFeatures();
     }
 }

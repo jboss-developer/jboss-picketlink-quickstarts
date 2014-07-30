@@ -28,25 +28,19 @@ public class AccountService {
     public Response enable(Person passedUser) {
         MessageBuilder message;
 
-        try {
-            MyUser user = this.identityModelManager.findByLoginName(passedUser.getEmail());
+        MyUser user = this.identityModelManager.findByLoginName(passedUser.getEmail());
 
-            if (user == null) {
-                return MessageBuilder.badRequest().message("Invalid account.").build();
-            }
-            
-            if(user.isEnabled()) {
-                return MessageBuilder.badRequest().message("Account is already enabled.").build();
-            }
-
-            this.identityModelManager.enableAccount(user);
-
-            message = MessageBuilder.ok().message("Account is now enabled.");
-        } catch (Exception e) {
-            message = MessageBuilder.badRequest().message(e.getMessage());
+        if (user == null) {
+            return MessageBuilder.badRequest().message("Invalid account.").build();
         }
 
-        return message.build();
+        if(user.isEnabled()) {
+            return MessageBuilder.badRequest().message("Account is already enabled.").build();
+        }
+
+        this.identityModelManager.enableAccount(user);
+
+        return MessageBuilder.ok().message("Account is now enabled.").build();
     }
 
     @POST
@@ -55,24 +49,18 @@ public class AccountService {
     public Response disable(Person passedUser) {
         MessageBuilder message;
 
-        try {
-            MyUser user = this.identityModelManager.findByLoginName(passedUser.getEmail());
+        MyUser user = this.identityModelManager.findByLoginName(passedUser.getEmail());
 
-            if (user == null) {
-                return MessageBuilder.badRequest().message("Invalid account.").build();
-            }
-
-            if(!user.isEnabled()) {
-                return MessageBuilder.badRequest().message("Accound is already disabled.").build();
-            }
-
-            this.identityModelManager.disableAccount(user);
-
-            message = MessageBuilder.ok().message("Account is now disabled.");
-        } catch (Exception e) {
-            message = MessageBuilder.badRequest().message(e.getMessage());
+        if (user == null) {
+            return MessageBuilder.badRequest().message("Invalid account.").build();
         }
 
-        return message.build();
+        if(!user.isEnabled()) {
+            return MessageBuilder.badRequest().message("Accound is already disabled.").build();
+        }
+
+        this.identityModelManager.disableAccount(user);
+
+        return MessageBuilder.ok().message("Account is now disabled.").build();
     }
 }

@@ -45,6 +45,9 @@ import static org.picketlink.idm.model.basic.BasicModel.getRole;
 import static org.picketlink.idm.model.basic.BasicModel.grantRole;
 
 /**
+ * <p>Just populates the identity store with a default administrator user and some roles. We also load the private and public
+ * key from a keystore in order to properly sign and validate tokens.</p>
+ *
  * @author Pedro Igor
  */
 @Stateless

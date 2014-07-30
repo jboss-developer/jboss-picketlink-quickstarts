@@ -3,10 +3,8 @@ package org.jboss.as.quickstarts.picketlink.angularjs.util;
 import org.picketlink.annotations.PicketLink;
 
 import javax.enterprise.inject.Produces;
-import javax.enterprise.inject.spi.InjectionPoint;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.logging.Logger;
 
 /**
  * This class uses CDI to alias Java EE resources, such as the persistence context, to CDI beans
@@ -34,14 +32,4 @@ public class Resources {
     @Produces
     @PicketLink
     private EntityManager entityManager;
-
-    /**
-    * Provider injectable loggers based around Java Util Logging.
-    * @param injectionPoint
-    * @return
-    */
-   @Produces
-   public Logger produceLog(InjectionPoint injectionPoint) {
-      return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
-   }
 }

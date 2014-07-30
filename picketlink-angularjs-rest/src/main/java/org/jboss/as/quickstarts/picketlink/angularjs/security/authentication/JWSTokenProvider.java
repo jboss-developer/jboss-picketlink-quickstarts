@@ -21,7 +21,6 @@
  */
 package org.jboss.as.quickstarts.picketlink.angularjs.security.authentication;
 
-import org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser;
 import org.picketlink.authentication.AuthenticationException;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
@@ -29,9 +28,6 @@ import org.picketlink.idm.credential.Token;
 import org.picketlink.idm.credential.storage.TokenCredentialStorage;
 import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.Realm;
-import org.picketlink.idm.query.IdentityQuery;
-import org.picketlink.json.JsonException;
-import org.picketlink.json.jose.JWS;
 import org.picketlink.json.jose.JWSBuilder;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -39,60 +35,42 @@ import javax.inject.Inject;
 import javax.transaction.Status;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
-import java.util.List;
 import java.util.UUID;
 
 /**
+ * <p>This is a simple {@link org.picketlink.idm.credential.Token.Provider} that manages a specific token type. In this case the
+ * type is {@link org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSToken}.</p>
+ *
  * @author Pedro Igor
+ *
+ * @see org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSToken
  */
 @ApplicationScoped
-public class JWSTokenProvider implements Token.Provider {
+public class JWSTokenProvider implements Token.Provider<JWSToken> {
 
     @Inject
     private PartitionManager partitionManager;
 
     @Inject
-    private IdentityManager identityManager;
-
-    @Inject
     private UserTransaction userTransaction;
 
     @Override
-    public Account getAccount(Token token) {
-        JWS jws = unMarshall(token);
-
-        IdentityQuery<MyUser> query = this.identityManager.createIdentityQuery(MyUser.class);
-
-        query.setParameter(MyUser.ID, jws.getSubject());
-
-        List<MyUser> result = query.getResultList();
-
-        if (!result.isEmpty()) {
-            return result.get(0);
-        }
-
-        return null;
-    }
-
-    @Override
-    public Token create(Object value) {
-        return new Token(value.toString());
-    }
-
-    @Override
-    public Token issue(Account account) {
+    public JWSToken issue(Account account) {
         JWSBuilder builder = new JWSBuilder();
 
+        byte[] privateKey = getPrivateKey();
+
+        // here we construct a JWS signed with the private key provided by the partition.
         builder
             .id(UUID.randomUUID().toString())
-            .rsa256(getPrivateKey())
+            .rsa256(privateKey)
             .issuer(account.getPartition().getName())
             .issuedAt(getCurrentTime())
             .subject(account.getId())
             .expiration(getCurrentTime() + (5 * 60))
             .notBefore(getCurrentTime());
 
-        Token token = new Token(builder.build().encode());
+        JWSToken token = new JWSToken(builder.build().encode());
 
         boolean isNewTransaction = true;
 
@@ -103,7 +81,8 @@ public class JWSTokenProvider implements Token.Provider {
                 this.userTransaction.begin();
             }
 
-            this.identityManager.updateCredential(account, token);
+            // now we update the account with the token previously issued by this provider.
+            getIdentityManager().updateCredential(account, token);
 
             if (isNewTransaction) {
                 this.userTransaction.commit();
@@ -123,48 +102,18 @@ public class JWSTokenProvider implements Token.Provider {
     }
 
     @Override
-    public Token renew(Token token) {
-        return issue(getAccount(token));
-    }
-
-    @Override
-    public boolean validate(Token token) {
-        Account account = getAccount(token);
-
-        if (account != null) {
-            TokenCredentialStorage tokenStorage = this.identityManager.retrieveCurrentCredential(account, TokenCredentialStorage.class);
-            return tokenStorage != null && tokenStorage.getValue().equals(token.getToken());
-        }
-
-        return false;
+    public JWSToken renew(Account account, JWSToken renewToken) {
+        return issue(account);
     }
 
     @Override
     public void invalidate(Account account) {
-        issue(account);
+        getIdentityManager().removeCredential(account, TokenCredentialStorage.class);
     }
 
     @Override
-    public boolean supports(Token token) {
-        return unMarshall(token) != null;
-    }
-
-    @Override
-    public <T extends TokenCredentialStorage> T getTokenStorage(Account account, Token token) {
-        return null;
-    }
-
-    private JWS unMarshall(Token token) {
-        try {
-            return new JWSBuilder().build(token.getToken(), getPublicKey());
-        } catch (JsonException ignore) {
-        }
-
-        return null;
-    }
-
-    private byte[] getPublicKey() {
-        return getPartition().<byte[]>getAttribute("PublicKey").getValue();
+    public Class<JWSToken> getTokenType() {
+        return JWSToken.class;
     }
 
     private byte[] getPrivateKey() {
@@ -177,5 +126,9 @@ public class JWSTokenProvider implements Token.Provider {
 
     private Realm getPartition() {
         return partitionManager.getPartition(Realm.class, Realm.DEFAULT_REALM);
+    }
+
+    private IdentityManager getIdentityManager() {
+        return this.partitionManager.createIdentityManager(getPartition());
     }
 }

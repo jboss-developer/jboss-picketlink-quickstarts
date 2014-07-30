@@ -68,6 +68,7 @@ var appModule = angular.module('PLAngular',
                         console.log("[INFO] Unauthorized response.");
                         SecurityService.endSession();
                         $location.path('/login');
+                        MessageService.setMessages(["Please, provide your credentials."]);
                     } else if (rejection.status == 400) {
                         console.log("[ERROR] Bad request response from the server.");
                     } else if (rejection.status == 500) {
