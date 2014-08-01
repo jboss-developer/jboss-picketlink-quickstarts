@@ -1,7 +1,5 @@
 package org.jboss.as.quickstarts.picketlink.angularjs.util;
 
-import org.picketlink.annotations.PicketLink;
-
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,7 +13,7 @@ import javax.persistence.PersistenceContext;
  * 
  * <pre>
  * &#064;Inject
- * private EntityManager em;
+ * private EntityManager entityManager;
  * </pre>
  */
 public class Resources {
@@ -26,10 +24,5 @@ public class Resources {
     // use @SuppressWarnings to tell IDE to ignore warnings about field not being referenced directly
    @Produces
    @PersistenceContext
-   private EntityManager em;
-
-    @PersistenceContext
-    @Produces
-    @PicketLink
-    private EntityManager entityManager;
+   private EntityManager entityManager;
 }
