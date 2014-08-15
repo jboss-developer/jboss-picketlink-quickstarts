@@ -61,6 +61,24 @@ public class IdentityModelManager {
     @Inject
     private JWSTokenProvider tokenProvider;
 
+    public static MyUser findByLoginName(String loginName, IdentityManager identityManager) {
+        if (loginName == null) {
+            throw new IllegalArgumentException("Invalid login name.");
+        }
+
+        IdentityQuery<MyUser> query = identityManager.createIdentityQuery(MyUser.class);
+
+        query.setParameter(MyUser.USER_NAME, loginName);
+
+        List<MyUser> result = query.getResultList();
+
+        if (!result.isEmpty()) {
+            return result.get(0);
+        }
+
+        return null;
+    }
+
     public MyUser createAccount(Registration request) {
         if (!request.isValid()) {
             throw new IllegalArgumentException("Insuficient information.");
@@ -119,7 +137,7 @@ public class IdentityModelManager {
     }
 
     public MyUser findByLoginName(String loginName) {
-        return IdentityModelUtils.findByLoginName(loginName, this.identityManager);
+        return findByLoginName(loginName, this.identityManager);
     }
 
     public MyUser findUserByActivationCode(String activationCode) {

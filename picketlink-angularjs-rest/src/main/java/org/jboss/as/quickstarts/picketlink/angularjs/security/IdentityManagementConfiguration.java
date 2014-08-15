@@ -21,49 +21,33 @@
  */
 package org.jboss.as.quickstarts.picketlink.angularjs.security;
 
-import org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSTokenProvider;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser;
-import org.picketlink.annotations.PicketLink;
-import org.picketlink.authentication.web.TokenAuthenticationScheme;
 import org.picketlink.config.SecurityConfigurationBuilder;
 import org.picketlink.event.SecurityConfigurationEvent;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 
 /**
- * <p>This class is responsible to enable the {@link org.picketlink.authentication.web.TokenAuthenticationScheme}.</p>
+ * <p>A simple CDI observer for the {@link org.picketlink.event.SecurityConfigurationEvent}.</p>
+ *
+ * <p>The event is fired during application startup and allows you to provide any configuration to PicketLink
+ * before it is initialized.</p>
+ *
+ * <p>All the configuration to PicketLink Identity Management is provided from this bean.</p>
  *
  * @author Pedro Igor
  */
-@ApplicationScoped
-public class SecurityConfiguration {
-
-    @Inject
-    private JWSTokenProvider tokenProvider;
-
-    @Inject
-    private TokenAuthenticationScheme tokenAuthenticationScheme;
-
-    @Produces
-    @PicketLink
-    public TokenAuthenticationScheme configureTokenAuthenticationScheme() {
-        return this.tokenAuthenticationScheme;
-    }
+public class IdentityManagementConfiguration {
 
     public void configureIdentityManagement(@Observes SecurityConfigurationEvent event) {
         SecurityConfigurationBuilder builder = event.getBuilder();
 
         builder
-            .identity()
-                .stateless()
-                    .idmConfig()
-                        .named("default.config")
-                            .stores()
-                                .jpa()
-                                    .supportType(MyUser.class)
-                                    .supportAllFeatures();
+            .idmConfig()
+                .named("default.config")
+                    .stores()
+                        .jpa()
+                            .supportType(MyUser.class)
+                            .supportAllFeatures();
     }
 }

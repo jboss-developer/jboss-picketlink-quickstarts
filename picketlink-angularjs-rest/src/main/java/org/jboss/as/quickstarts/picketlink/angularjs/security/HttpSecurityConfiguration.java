@@ -19,33 +19,36 @@
  * Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA
  * 02110-1301 USA, or see the FSF site: http://www.fsf.org.
  */
-package org.jboss.as.quickstarts.picketlink.angularjs.security.model;
+package org.jboss.as.quickstarts.picketlink.angularjs.security;
 
-import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.query.IdentityQuery;
+import org.picketlink.config.SecurityConfigurationBuilder;
+import org.picketlink.event.SecurityConfigurationEvent;
 
-import java.util.List;
+import javax.enterprise.event.Observes;
 
 /**
+ * <p>A simple CDI observer for the {@link org.picketlink.event.SecurityConfigurationEvent}.</p>
+ *
+ * <p>The event is fired during application startup and allows you to provide any configuration to PicketLink
+ * before it is initialized.</p>
+ *
+ * <p>All the configuration related with Http Security is provided from this bean.</p>
+ *
  * @author Pedro Igor
  */
-public class IdentityModelUtils {
+public class HttpSecurityConfiguration {
 
-    public static MyUser findByLoginName(String loginName, IdentityManager identityManager) {
-        if (loginName == null) {
-            throw new IllegalArgumentException("Invalid login name.");
-        }
+    public void onInit(@Observes SecurityConfigurationEvent event) {
+        SecurityConfigurationBuilder builder = event.getBuilder();
 
-        IdentityQuery<MyUser> query = identityManager.createIdentityQuery(MyUser.class);
-
-        query.setParameter(MyUser.USER_NAME, loginName);
-
-        List<MyUser> result = query.getResultList();
-
-        if (!result.isEmpty()) {
-            return result.get(0);
-        }
-
-        return null;
+        builder
+            .identity()
+                .stateless()
+            .http()
+                .path("/rest/private/*")
+                    .inbound()
+                        .authc()
+                            .token();
     }
+
 }

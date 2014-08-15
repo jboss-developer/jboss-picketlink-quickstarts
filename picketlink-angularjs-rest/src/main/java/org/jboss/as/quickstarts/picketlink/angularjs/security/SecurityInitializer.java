@@ -24,7 +24,7 @@ package org.jboss.as.quickstarts.picketlink.angularjs.security;
 import org.jboss.as.quickstarts.picketlink.angularjs.model.Person;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.ApplicationRole;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser;
-import org.picketlink.PartitionManagerCreateEvent;
+import org.picketlink.event.PartitionManagerCreateEvent;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.config.SecurityConfigurationException;
@@ -40,7 +40,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 
-import static org.jboss.as.quickstarts.picketlink.angularjs.security.model.IdentityModelUtils.findByLoginName;
+import static org.jboss.as.quickstarts.picketlink.angularjs.security.model.IdentityModelManager.findByLoginName;
 import static org.picketlink.idm.model.basic.BasicModel.getRole;
 import static org.picketlink.idm.model.basic.BasicModel.grantRole;
 
