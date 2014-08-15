@@ -39,13 +39,13 @@ import java.util.Map;
  * <p>In this case, we're just using a request parameter to choose the appropriate IdP.</p>
  *
  */
-public class CustomerSAML2AuthenticationHandler extends SAML2AuthenticationHandler {
+public class DynamicIdPSAML2AuthenticationHandler extends SAML2AuthenticationHandler {
 
     public static final String DYNAMIC_IDP_URL_SESSION_ATTRIBUTE_NAME = "org.picketlink.federation.dynamic.idp.url";
 
     private final Map<String, String> idpRegistry = new HashMap<String, String>();
 
-    public CustomerSAML2AuthenticationHandler() {
+    public DynamicIdPSAML2AuthenticationHandler() {
         this.idpRegistry.put("one", "http://localhost:8080/idp-one/");
         this.idpRegistry.put("two", "http://localhost:8080/idp-two/");
     }

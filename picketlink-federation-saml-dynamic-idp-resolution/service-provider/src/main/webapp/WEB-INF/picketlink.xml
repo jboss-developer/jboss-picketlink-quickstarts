@@ -19,7 +19,7 @@
 			class="org.picketlink.identity.federation.web.handlers.saml2.SAML2LogOutHandler" />
         <!-- This custom handler is responsible to dynamically choose an IdP based on an incoming request. -->
 		<Handler
-			class="org.picketlink.quickstarts.federation.saml.CustomerSAML2AuthenticationHandler" />
+			class="org.picketlink.quickstarts.federation.saml.DynamicIdPSAML2AuthenticationHandler" />
 		<Handler
 			class="org.picketlink.identity.federation.web.handlers.saml2.RolesGenerationHandler" />
 		<Handler
