@@ -68,6 +68,7 @@
         <module>picketlink-federation-saml-sp-with-metadata</module>
         <module>picketlink-federation-saml-sp-redirect-basic</module>
         <module>picketlink-federation-saml-sp-redirect-with-signature</module>
+        <module>picketlink-federation-saml-dynamic-idp-resolution</module>
     </modules>
 
     <properties>

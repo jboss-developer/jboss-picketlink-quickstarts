@@ -1,0 +1,127 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.picketlink.quickstarts</groupId>
+        <artifactId>picketlink-federation-saml-dynamic-idp-resolution-parent</artifactId>
+        <version>2.7.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <groupId>org.picketlink.quickstarts</groupId>
+    <artifactId>picketlink-federation-saml-dynamic-idp-resolution-ear</artifactId>
+    <version>2.7.0-SNAPSHOT</version>
+
+    <packaging>ear</packaging>
+
+    <name>PicketLink Quickstart: picketlink-federation-saml-dynamic-idp-resolution EAR</name>
+    <description>PicketLink Quickstart: PicketLink Federation SAML Dynamic IdP Resolution</description>
+
+    <url>http://www.picketlink.org</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+
+    <properties>
+        <!-- JBoss AS dependency versions -->
+        <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
+
+        <!-- WildFly dependency versions -->
+        <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
+
+        <!-- PicketLink dependency versions -->
+        <version.picketlink.javaee.bom>2.7.0-SNAPSHOT</version.picketlink.javaee.bom>
+
+        <!-- Default target container. -->
+        <target.container>jboss-eap</target.container>
+
+        <!-- maven-war-plugin -->
+        <version.war.plugin>2.1.1</version.war.plugin>
+
+        <!-- maven-compiler-plugin -->
+        <version.compiler.plugin>3.1</version.compiler.plugin>
+        <maven.compiler.target>1.6</maven.compiler.target>
+        <maven.compiler.source>1.6</maven.compiler.source>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.picketlink.quickstarts</groupId>
+            <artifactId>idp-one</artifactId>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>org.picketlink.quickstarts</groupId>
+            <artifactId>idp-two</artifactId>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>org.picketlink.quickstarts</groupId>
+            <artifactId>idp-default</artifactId>
+            <type>war</type>
+        </dependency>
+        <dependency>
+            <groupId>org.picketlink.quickstarts</groupId>
+            <artifactId>service-provider</artifactId>
+            <type>war</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+    <finalName>${project.parent.artifactId}</finalName>
+    <plugins>
+        <!-- Ear plugin -->
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-ear-plugin</artifactId>
+            <version>${version.ear.plugin}</version>
+            <!-- configuring the ear plugin -->
+            <configuration>
+            <!-- Tell Maven we are using Java EE 6 -->
+                <version>6</version>
+                <defaultLibBundleDir>lib</defaultLibBundleDir>
+                <modules>
+                    <webModule>
+                      <groupId>org.picketlink.quickstarts</groupId>
+                      <artifactId>idp-one</artifactId>
+                      <contextRoot>/idp-one</contextRoot>
+                    </webModule>
+                    <webModule>
+                      <groupId>org.picketlink.quickstarts</groupId>
+                      <artifactId>idp-two</artifactId>
+                      <contextRoot>/idp-two</contextRoot>
+                    </webModule>
+                    <webModule>
+                      <groupId>org.picketlink.quickstarts</groupId>
+                      <artifactId>idp-default</artifactId>
+                      <contextRoot>/idp-default</contextRoot>
+                    </webModule>
+                    <webModule>
+                      <groupId>org.picketlink.quickstarts</groupId>
+                      <artifactId>service-provider</artifactId>
+                      <contextRoot>/service-provider</contextRoot>
+                    </webModule>
+                </modules>
+                <fileNameMapping>no-version</fileNameMapping>
+            </configuration>
+        </plugin>
+        <!-- JBoss AS plugin to deploy ear -->
+        <plugin>
+            <groupId>org.jboss.as.plugins</groupId>
+            <artifactId>jboss-as-maven-plugin</artifactId>
+            <version>${version.jboss.maven.plugin}</version>
+            <configuration>
+                <filename>${project.parent.artifactId}.ear</filename>
+                <skip>false</skip>
+            </configuration>
+        </plugin>
+    </plugins>
+  </build>
+
+</project>

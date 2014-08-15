@@ -1,24 +1,43 @@
-picketlink-federation-saml-idp-basic: PicketLink Identity Provider With a Basic Configuration
+picketlink-federation-saml-dynamic-idp-resolution: PicketLink Federation SAML Dynamic IdP Resolution
 ===============================
 Author: Pedro Igor
-Level: Intermediate
+Level: Advanced
 Technologies: PicketLink Federation, SAML v2.0
-Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Identity Provider.
+Summary: Demonstrates how to write a custom handler to dynamically choose the Identity Provider for a given Service Provider
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 
 What is it?
 -----------
 
-This example demonstrates the use of *PicketLink Federation* SAML v2.0 support to setup an application as an Identity Provider in *JBoss Enterprise Application Platform 6* or *WildFly*.
+This example demonstrates the use of *PicketLink Federation* SAML v2.0 support to provide a dynamic resolution of the IdP for Service Providers.
 
-It provides a minimal configuration to enable your application as an Identity Provider, accordingly with the SAML v2.0 specification. An Identity Provider or IdP, is responsible to centralize authentication and issue SAML Assertions to their relying parties, also known as Service Providers.
-PicketLink supports both SAML v1.1 and v2.0 versions.
+This is an EAR application providing the following submodules:
 
-Although this example provides you a good start to understand how an Identity Provider works, it does not provide some other important security-related configurations such as signature and encryption.
-We strongly recommend you to read our documentation about how to make your deployment safe and secure from a SAML perspective.
+* idp-one.war : PicketLink Identity Provider
+* idp-two.war : PicketLink Identity Provider
+* idp-default.war : PicketLink Identity Provider
+* service-provider.war : PicketLink Service Provider
 
-Before you run this example, you must have a security-domain configuration in your server to authenticate users and provide role mappings.
+By default, the *service-provider.war* is configured to redirect users to the *idp-default.war*, if no other IdP is specified. To specify
+a different IdP, other than the default one, you just need to make a request to the *service-provider.war* as follows:
+
+    To use *idp-one.war*, use http://localhost:8080/service-provider/?IDP=one.
+    
+    To use *idp-two.war*, use http://localhost:8080/service-provider/?IDP=two
+    
+    To use *idp-default.war*, use http://localhost:8080/service-provider/
+    
+The dynamic resolution for IdPs is provided by the following custom handler:
+
+    org.picketlink.quickstarts.federation.saml.CustomerSAML2AuthenticationHandler
+    
+Located at */picketlink-federation-saml-dynamic-idp-resolution/service-provider/src/main/java/org/picketlink/quickstarts/federation/saml*.
+
+You can check how this handler is configured by looking at the */pedroigor/java/workspace/jboss/picketlink/picketlink-quickstarts/picketlink-federation-saml-dynamic-idp-resolution/service-provider/src/main/webapp/WEB-INF/picketlink.xml*.
+
+Basically, what this handler does is use the information from the request to choose the appropriate IdP. In this case, we're just using a 
+request parameter to identify which IdP should be used to authenticate users.
 
 You can checkout the SAML v2.0 specification from [here](http://saml.xml.org/saml-specifications). We strongly recommend you to spend some time understanding at least the basic core concepts from it.
 
@@ -83,23 +102,13 @@ The following `idp` security-domain was added to the `security` subsystem.
                 </login-module>
             </authentication>
         </security-domain>
-        
+
 The configuration above defines a security-domain which will be used by the IdP to authenticate users. This is a very simple configuration,
 using a JAAS LoginModule that reads users and their corresponding roles from properties files. Both properties files, *users.properties*
 and *roles.properties* are located at *src/main/resources* directory.
 
 In a real world scenario your users and roles will not be located in properties files, but in LDAP, databases or whatever, depending
 where your identity data is located.
-
-For the service provider, the following `sp` security-domain was added to the `security` subsystem.
-
-        <security-domain name="sp" cache-type="default">
-            <authentication>
-                <login-module code="org.picketlink.identity.federation.bindings.jboss.auth.SAML2LoginModule" flag="required"/>
-            </authentication>
-        </security-domain>
-        
-The configuration above defines a security-domain which will be used by the SP to authenticate users based on a SAML Assertion previously issued by a Identity Provider.        
 
 SAML v1.1 and v2.0 IdP-Initiated Single Sign-On
 -----------------------------------
@@ -145,7 +154,7 @@ _NOTE: The following build command assumes you have configured your Maven user s
 Access the application
 ---------------------
 
-The application will be running at the following URL: <http://localhost:8080/idp>.
+The application will be running at the following URL: <http://localhost:8080/picketlink-federation-saml-dynamic-idp-resolution>.
 
 The IdP is pre-configured with a default user, whose credentials are:
 

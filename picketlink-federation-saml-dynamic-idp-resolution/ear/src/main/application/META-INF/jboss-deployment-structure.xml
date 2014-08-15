@@ -1,0 +1,23 @@
+<jboss-deployment-structure>
+  <sub-deployment name="idp-one.war">
+    <dependencies>
+      <module name="org.picketlink" />
+    </dependencies>
+  </sub-deployment>
+  <sub-deployment name="idp-two.war">
+    <dependencies>
+      <module name="org.picketlink" />
+    </dependencies>
+  </sub-deployment>
+  <sub-deployment name="idp-default.war">
+    <dependencies>
+      <module name="org.picketlink" />
+    </dependencies>
+  </sub-deployment>
+  <sub-deployment name="service-provider.war">
+    <dependencies>
+      <module name="org.picketlink" />
+        <module name="org.picketlink.common" />
+    </dependencies>
+  </sub-deployment>
+</jboss-deployment-structure>
