@@ -18,6 +18,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 <body>
-    Hi <b>#{identity.account.loginName}</b>, this resource is protected. If you reach this page is because you're authenticated.
+    <p>Hi <b>#{identity.account.loginName}</b>, this resource is protected. If you reach this page is because you're authenticated.</p>
+    <p>Click here to <a href="#{request.contextPath}/logout">Logout</a></p>
 </body>
 </html>

@@ -36,7 +36,7 @@ import javax.inject.Inject;
  **/
 @Singleton
 @Startup
-public class IDMInitializer {
+public class SecurityInitializer {
 
     @Inject
     private PartitionManager partitionManager;

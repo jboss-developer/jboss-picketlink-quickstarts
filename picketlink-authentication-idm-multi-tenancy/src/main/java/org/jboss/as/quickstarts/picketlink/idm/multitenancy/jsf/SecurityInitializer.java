@@ -27,7 +27,7 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
 
 @Stateless
-public class IDMInitializer {
+public class SecurityInitializer {
 
     /**
      * <p>Creates some default users for each realm/company.</p>

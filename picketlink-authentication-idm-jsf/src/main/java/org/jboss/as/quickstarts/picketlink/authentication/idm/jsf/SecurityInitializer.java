@@ -14,11 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authentication.digest;
+package org.jboss.as.quickstarts.picketlink.authentication.idm.jsf;
 
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
-import org.picketlink.idm.credential.Digest;
+import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.basic.User;
 
 import javax.annotation.PostConstruct;
@@ -36,13 +36,14 @@ import javax.inject.Inject;
  */
 @Singleton
 @Startup
-public class IDMInitializer {
+public class SecurityInitializer {
 
     @Inject
     private PartitionManager partitionManager;
 
     @PostConstruct
     public void create() {
+
         User user = new User("jane");
 
         user.setEmail("jane@doe.com");
@@ -52,13 +53,6 @@ public class IDMInitializer {
         IdentityManager identityManager = this.partitionManager.createIdentityManager();
 
         identityManager.add(user);
-
-        Digest digestCredential = new Digest();
-
-        digestCredential.setRealm("My Realm");
-        digestCredential.setUsername(user.getLoginName());
-        digestCredential.setPassword("abcd1234");
-
-        identityManager.updateCredential(user, digestCredential);
+        identityManager.updateCredential(user, new Password("abcd1234"));
     }
 }
