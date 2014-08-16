@@ -32,9 +32,6 @@
         <!-- JBoss AS dependency versions -->
         <version.jboss.maven.plugin>7.4.Final</version.jboss.maven.plugin>
 
-        <!-- WildFly dependency versions -->
-        <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
-
         <!-- maven-war-plugin -->
         <version.war.plugin>2.1.1</version.war.plugin>
 
