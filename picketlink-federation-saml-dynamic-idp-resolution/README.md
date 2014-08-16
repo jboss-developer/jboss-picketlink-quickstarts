@@ -30,7 +30,7 @@ a different IdP, other than the default one, you just need to make a request to 
     
 The dynamic resolution for IdPs is provided by the following custom handler:
 
-    org.picketlink.quickstarts.federation.saml.CustomerSAML2AuthenticationHandler
+    org.picketlink.quickstarts.federation.saml.DynamicIdPSAML2AuthenticationHandler
     
 Located at */picketlink-federation-saml-dynamic-idp-resolution/service-provider/src/main/java/org/picketlink/quickstarts/federation/saml*.
 
