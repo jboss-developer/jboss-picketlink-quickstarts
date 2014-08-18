@@ -44,9 +44,8 @@ public class HttpSecurityConfiguration {
         builder
             .http()
                 .allPaths()
-                    .inbound()
-                        .authc()
-                            .digest();
+                    .authc()
+                        .digest();
     }
 
 }

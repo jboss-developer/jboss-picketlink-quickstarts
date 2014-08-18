@@ -44,10 +44,9 @@ public class HttpSecurityConfiguration {
         builder
             .http()
                 .allPaths()
-                    .inbound()
-                        .authc()
-                            .basic()
-                                .realmName("PicketLink HTTP Basic Quickstart Realm");
+                    .authc()
+                        .basic()
+                            .realmName("PicketLink HTTP Basic Quickstart Realm");
     }
 
 }

@@ -115,4 +115,24 @@
     </plugins>
   </build>
 
+    <profiles>
+        <profile>
+            <id>wildfly</id>
+            <properties>
+                <target.container>wildfly</target.container>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.wildfly.plugins</groupId>
+                        <artifactId>wildfly-maven-plugin</artifactId>
+                        <version>${version.wildfly.maven.plugin}</version>
+                        <configuration>
+                            <filename>${project.parent.artifactId}.ear</filename>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

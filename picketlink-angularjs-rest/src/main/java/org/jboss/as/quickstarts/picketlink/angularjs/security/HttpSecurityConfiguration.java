@@ -46,9 +46,8 @@ public class HttpSecurityConfiguration {
                 .stateless()
             .http()
                 .path("/rest/private/*")
-                    .inbound()
-                        .authc()
-                            .token();
+                    .authc()
+                        .token();
     }
 
 }

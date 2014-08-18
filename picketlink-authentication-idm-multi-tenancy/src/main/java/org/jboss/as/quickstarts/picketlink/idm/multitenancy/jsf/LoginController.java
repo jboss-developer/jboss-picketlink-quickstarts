@@ -16,14 +16,15 @@
  */
 package org.jboss.as.quickstarts.picketlink.idm.multitenancy.jsf;
 
+import org.picketlink.Identity;
+import org.picketlink.credential.DefaultLoginCredentials;
+import org.picketlink.idm.IdentityManager;
+
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import org.picketlink.Identity;
-import org.picketlink.credential.DefaultLoginCredentials;
-import org.picketlink.idm.IdentityManager;
 
 /**
  * We control the authentication process from this bean, so that in the event of a failed authentication we can add an
@@ -64,7 +65,7 @@ public class LoginController {
 
     public String logout() {
         this.identity.logout();
-        return "/home.xhtml";
+        return "/home.xhtml?faces-redirect=true";
     }
 
 }

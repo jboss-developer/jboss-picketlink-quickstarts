@@ -44,16 +44,13 @@ public class HttpSecurityConfiguration {
         builder
             .http()
                 .allPaths()
-                    .inbound()
-                        .authc()
-                            .form()
-                                .loginPage("/login.xhtml")
-                                .errorPage("/error.xhtml")
+                    .authc()
+                        .form()
+                            .loginPage("/login.xhtml")
+                            .errorPage("/error.xhtml")
                 .path("/logout")
-                    .inbound()
-                        .logout()
-                    .outbound()
-                        .redirectTo("/index.html");
+                    .logout()
+                    .redirectTo("/index.html");
     }
 
 }

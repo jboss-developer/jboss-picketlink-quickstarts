@@ -44,11 +44,9 @@ public class HttpSecurityConfiguration {
         builder
             .http()
                 .path("/companies/{identity.account.partition.name}/*")
-                    .inbound()
-                        .authz()
-                            .expression("#{identity.account.partition.name}")
-                    .outbound()
-                        .redirectTo("/accessDenied.jsf").whenForbidden();
+                    .authz()
+                        .expression("#{identity.account.partition.name}")
+                    .redirectTo("/accessDenied.jsf").whenForbidden();
     }
 
 }

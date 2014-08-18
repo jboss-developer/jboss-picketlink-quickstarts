@@ -17,7 +17,6 @@
 package org.jboss.as.quickstarts.picketlink.authentication.form;
 
 import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.basic.User;
 
@@ -39,7 +38,7 @@ import javax.inject.Inject;
 public class SecurityInitializer {
 
     @Inject
-    private PartitionManager partitionManager;
+    private IdentityManager identityManager;
 
     @PostConstruct
     public void create() {
@@ -49,9 +48,7 @@ public class SecurityInitializer {
         user.setFirstName("Jane");
         user.setLastName("Doe");
 
-        IdentityManager identityManager = this.partitionManager.createIdentityManager();
-
-        identityManager.add(user);
-        identityManager.updateCredential(user, new Password("abcd1234"));
+        this.identityManager.add(user);
+        this.identityManager.updateCredential(user, new Password("abcd1234"));
     }
 }
