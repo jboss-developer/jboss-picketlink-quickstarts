@@ -32,6 +32,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
 /**
+ * <p>This is a simple example about how to extend the entity classes provided by the Basic Identity Model to map your own types.
+ * In this case, this entity is responsible to map {@link org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser}.</p>
+ *
+ * <p>You are not forced to use the Basic Identity Model all the time. This is just an example.</p>
+ *
  * @author Pedro Igor
  */
 @Entity
