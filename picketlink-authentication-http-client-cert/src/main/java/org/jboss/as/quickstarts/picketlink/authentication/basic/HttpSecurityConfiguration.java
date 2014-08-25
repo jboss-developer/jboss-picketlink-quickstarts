@@ -44,7 +44,7 @@ public class HttpSecurityConfiguration {
         builder
             .http()
                 .allPaths()
-                    .authc()
+                    .authenticateWith()
                         .x509();
     }
 

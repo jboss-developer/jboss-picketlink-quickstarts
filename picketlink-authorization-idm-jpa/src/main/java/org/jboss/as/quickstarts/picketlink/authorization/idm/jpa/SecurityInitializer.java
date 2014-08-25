@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.deltaspike.authorization;
+package org.jboss.as.quickstarts.picketlink.authorization.idm.jpa;
 
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
+import org.picketlink.idm.model.basic.Group;
 import org.picketlink.idm.model.basic.Role;
 import org.picketlink.idm.model.basic.User;
 
@@ -28,16 +29,18 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import static org.picketlink.idm.model.basic.BasicModel.*;
+import static org.picketlink.idm.model.basic.BasicModel.addToGroup;
+import static org.picketlink.idm.model.basic.BasicModel.grantGroupRole;
+import static org.picketlink.idm.model.basic.BasicModel.grantRole;
 
 /**
- * This startup bean creates the default users, groups and roles when the application is started.
+ * This startup bean creates a number of default users, groups and roles when the application is started.
  * 
  * @author Shane Bryzak
  */
 @Singleton
 @Startup
-public class IDMInitializer {
+public class SecurityInitializer {
 
     @Inject
     private PartitionManager partitionManager;
@@ -64,20 +67,35 @@ public class IDMInitializer {
         identityManager.add(mary);
         identityManager.updateCredential(mary, new Password("demo"));
 
-        // Create role "employee"
-        Role employee = new Role("employee");
-        identityManager.add(employee);
+        // Create user jane
+        User jane = new User("jane");
+        jane.setEmail("jane@acme.com");
+        jane.setFirstName("Jane");
+        jane.setLastName("Doe");
+        identityManager.add(jane);
+        identityManager.updateCredential(jane, new Password("demo"));
+
+        // Create role "manager"
+        Role manager = new Role("manager");
+        identityManager.add(manager);
 
         // Create application role "superuser"
-        Role admin = new Role("admin");
-        identityManager.add(admin);
+        Role superuser = new Role("superuser");
+        identityManager.add(superuser);
+
+        // Create group "sales"
+        Group sales = new Group("sales");
+        identityManager.add(sales);
 
         RelationshipManager relationshipManager = this.partitionManager.createRelationshipManager();
 
-        // Grant the "employee" application role to john
-        grantRole(relationshipManager, john, employee);
+        // Make john a member of the "sales" group
+        addToGroup(relationshipManager, john, sales);
 
-        // Grant the "admin" application role to jane
-        grantRole(relationshipManager, mary, admin);
+        // Make mary a manager of the "sales" group
+        grantGroupRole(relationshipManager, mary, manager, sales);
+
+        // Grant the "superuser" application role to jane
+        grantRole(relationshipManager, jane, superuser);
     }
 }

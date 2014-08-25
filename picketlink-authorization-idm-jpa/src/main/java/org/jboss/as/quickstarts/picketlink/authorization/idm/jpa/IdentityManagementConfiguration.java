@@ -19,7 +19,6 @@ package org.jboss.as.quickstarts.picketlink.authorization.idm.jpa;
 import org.picketlink.idm.config.IdentityConfiguration;
 import org.picketlink.idm.config.IdentityConfigurationBuilder;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
 /**
@@ -29,34 +28,25 @@ import javax.enterprise.inject.Produces;
  * @author Shane Bryzak
  *
  */
-@ApplicationScoped
-public class IDMConfiguration {
-
-    private IdentityConfiguration identityConfig = null;
-
-    @Produces IdentityConfiguration createConfig() {
-        if (identityConfig == null) {
-            initConfig();
-        }
-        return identityConfig;
-    }
+public class IdentityManagementConfiguration {
 
     /**
-     * This method uses the IdentityConfigurationBuilder to create an IdentityConfiguration, which 
-     * defines how PicketLink stores identity-related data.  In this particular example, a 
+     * This method uses the IdentityConfigurationBuilder to create an IdentityConfiguration, which
+     * defines how PicketLink stores identity-related data.  In this particular example, a
      * JPAIdentityStore is configured to allow the identity data to be stored in a relational database
      * using JPA.
      */
-    private void initConfig() {
+    @Produces IdentityConfiguration produceIdentityManagementConfiguration() {
         IdentityConfigurationBuilder builder = new IdentityConfigurationBuilder();
 
         builder
             .named("default")
-                .stores()
-                    .jpa()
-                        // Specify that this identity store configuration supports all features
-                        .supportAllFeatures();
+            .stores()
+            .jpa()
+                // Specify that this identity store configuration supports all features
+            .supportAllFeatures();
 
-        identityConfig = builder.build();
+        return builder.build();
     }
+
 }

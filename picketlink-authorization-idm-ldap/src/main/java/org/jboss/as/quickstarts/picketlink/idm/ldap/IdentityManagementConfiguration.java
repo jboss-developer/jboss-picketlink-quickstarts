@@ -38,7 +38,7 @@ import static org.picketlink.common.constants.LDAPConstants.UID;
 
 
 @ApplicationScoped
-public class IDMConfiguration {
+public class IdentityManagementConfiguration {
 
     private static final String BASE_DN = "dc=jboss,dc=org";
     private static final String LDAP_URL = "ldap://localhost:10389";

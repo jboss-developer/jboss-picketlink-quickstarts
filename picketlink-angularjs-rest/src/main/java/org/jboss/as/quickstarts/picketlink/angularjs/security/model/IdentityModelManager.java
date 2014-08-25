@@ -22,7 +22,6 @@
 package org.jboss.as.quickstarts.picketlink.angularjs.security.model;
 
 import org.jboss.as.quickstarts.picketlink.angularjs.model.Person;
-import org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSTokenProvider;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
@@ -59,7 +58,7 @@ public class IdentityModelManager {
     private RelationshipManager relationshipManager;
 
     @Inject
-    private JWSTokenProvider tokenProvider;
+    private Token.Provider tokenProvider;
 
     public static MyUser findByLoginName(String loginName, IdentityManager identityManager) {
         if (loginName == null) {
@@ -79,7 +78,7 @@ public class IdentityModelManager {
         return null;
     }
 
-    public MyUser createAccount(Registration request) {
+    public MyUser createAccount(UserRegistration request) {
         if (!request.isValid()) {
             throw new IllegalArgumentException("Insuficient information.");
         }

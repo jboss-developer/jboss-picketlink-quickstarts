@@ -22,12 +22,11 @@
 
 package org.jboss.as.quickstarts.picketlink.angularjs.security.service;
 
-import org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSTokenProvider;
 import org.picketlink.Identity;
 import org.picketlink.authorization.annotations.LoggedIn;
+import org.picketlink.idm.credential.Token;
 import org.picketlink.idm.model.Account;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -35,12 +34,11 @@ import javax.ws.rs.Path;
 /**
  *
  */
-@Stateless
 @Path("/private/logout")
 public class LogoutService {
 
     @Inject
-    private JWSTokenProvider tokenProvider;
+    private Token.Provider tokenProvider;
 
     @Inject
     private Identity identity;

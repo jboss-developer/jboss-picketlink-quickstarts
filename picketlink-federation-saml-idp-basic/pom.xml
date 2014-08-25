@@ -43,6 +43,14 @@
         <maven.compiler.source>1.6</maven.compiler.source>
     </properties>
 
+    <dependencies>
+        <dependency>
+<groupId>org.picketlink.distribution</groupId>
+<artifactId>picketlink-jbas7</artifactId><version>2.7.0-SNAPSHOT</version>
+            <scope>provided</scope>
+</dependency>
+    </dependencies>
+
     <build>
         <!-- Set the name of the war, used as the context root when the app is deployed -->
         <finalName>${project.artifactId}</finalName>

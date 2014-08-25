@@ -1,4 +1,4 @@
-/**
+/*
  * JBoss, Home of Professional Open Source
  * Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
  * contributors by the @authors tag. See the copyright.txt in the
@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jboss.as.quickstarts.picketlink.authorization.rest.rbac;
+package org.jboss.as.quickstarts.picketlink.idm.ldap;
 
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
@@ -28,42 +28,54 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 
-import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.ADMINISTRATOR;
-import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.DEVELOPER;
-import static org.jboss.as.quickstarts.picketlink.authorization.rest.rbac.ApplicationRole.PROJECT_MANAGER;
-import static org.picketlink.idm.model.basic.BasicModel.grantRole;
+import static org.jboss.as.quickstarts.picketlink.idm.ldap.ApplicationRole.*;
+import static org.picketlink.idm.model.basic.BasicModel.*;
 
-@Singleton
 @Startup
-public class IDMInitializer {
+@Singleton
+public class SecurityInitializer {
 
     @Inject
     private PartitionManager partitionManager;
 
+    /**
+     * <p>Initializes the identity store with some default users and roles.</p>
+     */
     @PostConstruct
-    public void createUsers() {
+    public void createDefaultUsers() {
         createUser("admin", ADMINISTRATOR);
         createUser("john", PROJECT_MANAGER);
         createUser("kate", DEVELOPER);
     }
 
-    private void createUser(String loginName, String roleName) {
-        User user = new User(loginName);
-
+    private void createUser(String loginName, ApplicationRole roleName) {
         IdentityManager identityManager = this.partitionManager.createIdentityManager();
 
-        identityManager.add(user);
+        User user = getUser(identityManager, loginName);
 
-        Password password = new Password(loginName + "123");
+        if (user == null) {
+            user = new User(loginName);
 
-        identityManager.updateCredential(user, password);
+            identityManager.add(user);
 
-        Role role = new Role(roleName);
+            Password password = new Password(loginName + "123");
 
-        identityManager.add(role);
+            identityManager.updateCredential(user, password);
+        }
+
+        Role role = getRole(identityManager, roleName.name());
+
+        if (role == null) {
+            role = new Role(roleName.name());
+
+            identityManager.add(role);
+        }
 
         RelationshipManager relationshipManager = this.partitionManager.createRelationshipManager();
 
-        grantRole(relationshipManager, user, role);
+        if (!hasRole(relationshipManager, user, role)) {
+            grantRole(relationshipManager, user, role);
+        }
     }
+
 }

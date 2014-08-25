@@ -21,7 +21,6 @@
  */
 package org.jboss.as.quickstarts.picketlink.angularjs.security.authentication;
 
-import org.picketlink.authentication.AuthenticationException;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.credential.Token;
@@ -30,11 +29,8 @@ import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.Realm;
 import org.picketlink.json.jose.JWSBuilder;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.transaction.Status;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 import java.util.UUID;
 
 /**
@@ -45,14 +41,11 @@ import java.util.UUID;
  *
  * @see org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSToken
  */
-@ApplicationScoped
+@Stateless
 public class JWSTokenProvider implements Token.Provider<JWSToken> {
 
     @Inject
     private PartitionManager partitionManager;
-
-    @Inject
-    private UserTransaction userTransaction;
 
     @Override
     public JWSToken issue(Account account) {
@@ -72,31 +65,8 @@ public class JWSTokenProvider implements Token.Provider<JWSToken> {
 
         JWSToken token = new JWSToken(builder.build().encode());
 
-        boolean isNewTransaction = true;
-
-        try {
-            isNewTransaction = Status.STATUS_ACTIVE != this.userTransaction.getStatus();
-
-            if (isNewTransaction) {
-                this.userTransaction.begin();
-            }
-
-            // now we update the account with the token previously issued by this provider.
-            getIdentityManager().updateCredential(account, token);
-
-            if (isNewTransaction) {
-                this.userTransaction.commit();
-            }
-        } catch (Exception e) {
-            if (isNewTransaction) {
-                try {
-                    this.userTransaction.rollback();
-                } catch (SystemException ignore) {
-                }
-            }
-
-            throw new AuthenticationException("Could not issue token for account [" + account + "]", e);
-        }
+        // now we update the account with the token previously issued by this provider.
+        getIdentityManager().updateCredential(account, token);
 
         return token;
     }

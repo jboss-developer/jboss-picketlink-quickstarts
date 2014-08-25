@@ -45,8 +45,8 @@ public class HttpSecurityConfiguration {
             .identity()
                 .stateless()
             .http()
-                .path("/rest/private/*")
-                    .authc()
+                .forPath("/rest/private/*")
+                    .authenticateWith()
                         .token();
     }
 

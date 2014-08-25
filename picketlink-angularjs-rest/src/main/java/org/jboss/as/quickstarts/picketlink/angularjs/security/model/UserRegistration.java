@@ -25,7 +25,7 @@ package org.jboss.as.quickstarts.picketlink.angularjs.security.model;
 /**
  * @author Pedro Silva
  */
-public class Registration {
+public class UserRegistration {
 
     private String firstName;
     private String lastName;

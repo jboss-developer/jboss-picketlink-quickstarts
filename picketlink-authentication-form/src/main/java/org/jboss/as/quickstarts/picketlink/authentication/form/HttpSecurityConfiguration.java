@@ -44,11 +44,11 @@ public class HttpSecurityConfiguration {
         builder
             .http()
                 .allPaths()
-                    .authc()
+                    .authenticateWith()
                         .form()
                             .loginPage("/login.xhtml")
                             .errorPage("/error.xhtml")
-                .path("/logout")
+                .forPath("/logout")
                     .logout()
                     .redirectTo("/index.html");
     }

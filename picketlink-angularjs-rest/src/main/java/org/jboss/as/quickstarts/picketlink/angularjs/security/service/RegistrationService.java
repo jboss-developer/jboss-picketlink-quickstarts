@@ -24,7 +24,7 @@ package org.jboss.as.quickstarts.picketlink.angularjs.security.service;
 import org.jboss.as.quickstarts.picketlink.angularjs.model.Email;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.IdentityModelManager;
 import org.jboss.as.quickstarts.picketlink.angularjs.security.model.MyUser;
-import org.jboss.as.quickstarts.picketlink.angularjs.security.model.Registration;
+import org.jboss.as.quickstarts.picketlink.angularjs.security.model.UserRegistration;
 import org.jboss.as.quickstarts.picketlink.angularjs.util.MessageBuilder;
 import org.picketlink.idm.credential.Token;
 
@@ -32,7 +32,6 @@ import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -61,10 +60,6 @@ import static org.jboss.as.quickstarts.picketlink.angularjs.security.model.Appli
 public class RegistrationService {
 
     @Inject
-    @Named("ACTIVATION_CODE_ATTRIBUTE_NAME")
-    private String ACTIVATION_CODE_ATTRIBUTE_NAME;
-
-    @Inject
     private IdentityModelManager identityModelManager;
 
     @Inject
@@ -73,7 +68,7 @@ public class RegistrationService {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response createMember(Registration request) {
+    public Response createMember(UserRegistration request) {
         if (!request.getPassword().equals(request.getPasswordConfirmation())) {
             return MessageBuilder.badRequest().message("Password mismatch.").build();
         }
@@ -119,7 +114,7 @@ public class RegistrationService {
     }
 
 
-    private void sendNotification(Registration request, String activationCode) {
+    private void sendNotification(UserRegistration request, String activationCode) {
         Email email = new Email("Please complete the signup", "http://localhost:8080/picketlink-angularjs-rest/#/activate/" + activationCode, request.getEmail());
 
         event.fire(email);

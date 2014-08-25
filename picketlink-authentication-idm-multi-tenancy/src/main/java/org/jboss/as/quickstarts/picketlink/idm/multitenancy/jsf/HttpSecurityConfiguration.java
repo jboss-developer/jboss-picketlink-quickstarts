@@ -43,8 +43,8 @@ public class HttpSecurityConfiguration {
 
         builder
             .http()
-                .path("/companies/{identity.account.partition.name}/*")
-                    .authz()
+                .forPath("/companies/{identity.account.partition.name}/*")
+                    .authorizeWith()
                         .expression("#{identity.account.partition.name}")
                     .redirectTo("/accessDenied.jsf").whenForbidden();
     }
