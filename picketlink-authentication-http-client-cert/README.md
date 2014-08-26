@@ -1,10 +1,10 @@
 picketlink-authentication-http-client-cert: PicketLink HTTP CLIENT-CERT Authentication
 ===============================
-Author: Pedro Igor
-Level: Intermediate
-Technologies: CDI, PicketLink
-Summary: Basic example that demonstrates simple username/password authentication using the HTTP CLIENT-CERT scheme
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Author: Pedro Igor  
+Level: Intermediate  
+Technologies: CDI, PicketLink  
+Summary: Basic example that demonstrates simple username/password authentication using the HTTP CLIENT-CERT scheme  
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?

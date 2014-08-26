@@ -1,10 +1,10 @@
 picketlink-federation-saml-sp-redirect-with-signature: PicketLink Service Provider With a Basic Configuration using SAML HTTP Redirect Binding With Signature Support
 ===============================
-Author: Pedro Igor
-Level: Intermediate
-Technologies: PicketLink Federation, SAML v2.0
-Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Service Provider using SAML HTTP Redirect Binding With Signature Support.
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Author: Pedro Igor  
+Level: Intermediate  
+Technologies: PicketLink Federation, SAML v2.0  
+Summary: Basic example that demonstrates how to setup an application as a SAML v2.0 Service Provider using SAML HTTP Redirect Binding With Signature Support.  
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?

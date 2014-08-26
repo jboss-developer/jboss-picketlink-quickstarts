@@ -1,11 +1,11 @@
 picketlink-authorization-drools: PicketLink IDM Authorization Example using Drools
 ===============================
-Author: Shane Bryzak
-Level: Intermediate
-Technologies: CDI, PicketLink, Drools
-Summary: Basic example that demonstrates IDM-based authorization using Drools to implement temporal-based security restrictions
-Target Product: EAP
-Source: <https://github.com/picketlink/picketlink-eap-quickstarts/>
+Author: Shane Bryzak  
+Level: Intermediate  
+Technologies: CDI, PicketLink, Drools  
+Summary: Basic example that demonstrates IDM-based authorization using Drools to implement temporal-based security restrictions  
+Target Product: EAP  
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 What is it?
 -----------

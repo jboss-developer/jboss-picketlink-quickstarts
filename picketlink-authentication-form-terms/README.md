@@ -1,11 +1,10 @@
 picketlink-authentication-form: PicketLink HTTP FORM Authentication
 ===============================
-Author: Anil Saldhana
-Level: Beginner
-Technologies: CDI, PicketLink, JSF
-Summary: Basic example that demonstrates simple username/password authentication using the FORM Authentication with a JSF view layer
-         with a Terms of Service page.
-Source: <https://github.com/picketlink/picketlink-quickstarts/>
+Author: Anil Saldhana  
+Level: Beginner  
+Technologies: CDI, PicketLink, JSF  
+Summary: Basic example that demonstrates simple username/password authentication using the FORM Authentication with a JSF view layer with a Terms of Service page.  
+Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
 What is it?
