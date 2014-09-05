@@ -22,6 +22,7 @@
 package org.jboss.as.quickstarts.picketlink.angularjs.security.model;
 
 import org.jboss.as.quickstarts.picketlink.angularjs.model.Person;
+import org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSToken;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.credential.Password;
@@ -58,7 +59,7 @@ public class IdentityModelManager {
     private RelationshipManager relationshipManager;
 
     @Inject
-    private Token.Provider tokenProvider;
+    private Token.Provider<JWSToken> tokenProvider;
 
     public static MyUser findByLoginName(String loginName, IdentityManager identityManager) {
         if (loginName == null) {

@@ -22,6 +22,7 @@
 
 package org.jboss.as.quickstarts.picketlink.angularjs.security.service;
 
+import org.jboss.as.quickstarts.picketlink.angularjs.security.authentication.JWSToken;
 import org.picketlink.Identity;
 import org.picketlink.authorization.annotations.LoggedIn;
 import org.picketlink.idm.credential.Token;
@@ -38,7 +39,7 @@ import javax.ws.rs.Path;
 public class LogoutService {
 
     @Inject
-    private Token.Provider tokenProvider;
+    private Token.Provider<JWSToken> tokenProvider;
 
     @Inject
     private Identity identity;
