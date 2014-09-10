@@ -35,7 +35,7 @@
 		style="margin-bottom: 80px; border: 1px solid #000000; width: 440px; background-color: #F8F8F8; align: center;">
 		<center>
 			<p>
-				<b>The Identity Provider could not process the authentication request.</b>
+				<b>The Service Provider could not process the request.</b>
 			</p>
 		</center>
 	</div>
