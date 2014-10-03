@@ -17,6 +17,7 @@
   -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
 
   <p>
@@ -65,23 +66,33 @@
 
     <h3>Articles</h3>
     
-    <ui:fragment rendered="#{empty articleSearch.articles}">
+    <ui:fragment rendered="#{empty articleController.articles}">
       <p>No articles exist - why don't you create one?</p>
     </ui:fragment>
 
-    <ui:repeat value="#{articleSearch.articles}" var="article">
+    <h:messages/>
 
-      <p>
-        <h:outputText value="#{article.title}"/>      
-        <div>by <h:outputText value="#{article.author}"/></div>
-      </p>
-      
-    </ui:repeat>
-    
     <h:form>
-      <div>
-        <h:commandLink value="Create new article" action="#{articleController.createArticle}"/>
-      </div>
+        <h:dataTable value="#{articleController.articles}" var="article" rendered="#{not empty articleController.articles}"
+                border="1">
+            <h:column>
+                <f:facet name="header">Title</f:facet>
+                #{article.title}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Author</f:facet>
+                #{article.author}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <h:commandLink action="${articleController.showUpdate(article)}" rendered="#{identity.hasPermission(article, 'update')}">[Edit]</h:commandLink>
+                <h:commandLink action="${articleController.delete(article)}">[Delete]</h:commandLink>
+            </h:column>
+        </h:dataTable>
+        <br/>
+        <div>
+            <h:commandLink value="Create new article" action="#{articleController.showCreate}"/>
+        </div>
     </h:form>
 
   </ui:fragment>    

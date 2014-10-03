@@ -16,14 +16,12 @@
  */
 package org.jboss.quickstarts.picketlink.acl;
 
+import org.picketlink.Identity;
+
 import javax.enterprise.inject.Model;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.picketlink.Identity;
-import org.picketlink.Identity.AuthenticationResult;
 
 /**
  * We control the authentication process from this action bean, so that in the event of a failed authentication we can add an
@@ -42,8 +40,9 @@ public class LoginController {
     private FacesContext facesContext;
 
     public void login() {
-        AuthenticationResult result = identity.login();
-        if (AuthenticationResult.FAILED.equals(result)) {
+        this.identity.login();
+
+        if (this.identity.isLoggedIn()) {
             facesContext.addMessage(
                     null,
                     new FacesMessage("Authentication was unsuccessful.  Please check your username and password "

@@ -31,11 +31,19 @@
       </div>
       
       <h:inputTextarea value="#{articleController.article.content}" style="width:600px;height:400px"/>
-      
-      <div>
-        <h:commandButton value="Save Article" action="#{articleController.saveArticle}"/>
-      </div>
-    </h:form>
+
+      <ui:fragment rendered="#{articleController.article.id == null}">
+          <div>
+            <h:commandButton value="Save Article" action="#{articleController.create}"/>
+          </div>
+      </ui:fragment>
+
+        <ui:fragment rendered="#{articleController.article.id != null}">
+            <div>
+                <h:commandButton value="Save Article" action="#{articleController.update}"/>
+            </div>
+        </ui:fragment>
+</h:form>
 
   </ui:fragment>
 

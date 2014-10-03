@@ -16,8 +16,6 @@
  */
 package org.jboss.quickstarts.picketlink.acl;
 
-import org.picketlink.annotations.PicketLink;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
@@ -43,11 +41,6 @@ public class Resources {
     @Produces
     @PersistenceContext
     private EntityManager entityManager;
-
-    @PersistenceContext
-    @Produces
-    @PicketLink
-    private EntityManager securityEntityManager;
 
     @Produces
     @RequestScoped

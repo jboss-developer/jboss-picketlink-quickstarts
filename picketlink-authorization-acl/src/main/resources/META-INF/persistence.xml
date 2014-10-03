@@ -25,7 +25,7 @@
          data source, this example data source is just for development and testing! -->
       <!-- The datasource is deployed as WEB-INF/picketlink-quickstart-ds.xml, you
          can find it in the source at src/main/webapp/WEB-INF/picketlink-quickstart-ds.xml -->
-      <jta-data-source>java:jboss/datasources/PicketLinkQuickstartDS</jta-data-source>
+      <jta-data-source>java:jboss/datasources/PicketLinkQuickstartPermACLDS</jta-data-source>
 
       <class>org.picketlink.idm.jpa.model.sample.simple.AttributedTypeEntity</class>
       <class>org.picketlink.idm.jpa.model.sample.simple.AccountTypeEntity</class>
@@ -37,6 +37,7 @@
       <class>org.picketlink.idm.jpa.model.sample.simple.PartitionTypeEntity</class>
       <class>org.picketlink.idm.jpa.model.sample.simple.PasswordCredentialTypeEntity</class>
       <class>org.picketlink.idm.jpa.model.sample.simple.AttributeTypeEntity</class>
+      <class>org.picketlink.idm.jpa.model.sample.simple.PermissionTypeEntity</class>
 
       <properties>
          <!-- Properties for Hibernate -->

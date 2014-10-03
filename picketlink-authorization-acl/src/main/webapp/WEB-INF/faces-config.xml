@@ -20,26 +20,4 @@
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd">
 
-  <navigation-rule>
-    <from-view-id>/home.xhtml</from-view-id>
-    
-    <navigation-case>
-      <from-action>#{articleController.createArticle}</from-action>
-      <if>#{true}</if>
-      <to-view-id>/createArticle.xhtml</to-view-id>
-      <redirect/>
-    </navigation-case>
-  </navigation-rule>
-  
-  <navigation-rule>
-    <from-view-id>/createArticle.xhtml</from-view-id>
-    
-    <navigation-case>
-      <from-action>#{articleController.saveArticle}</from-action>
-      <if>#{true}</if>
-      <to-view-id>/home.xhtml</to-view-id>
-      <redirect/>
-    </navigation-case>
-  </navigation-rule>
-
 </faces-config>

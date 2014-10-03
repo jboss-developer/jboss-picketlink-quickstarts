@@ -16,17 +16,17 @@
  */
 package org.jboss.quickstarts.picketlink.acl;
 
-import javax.annotation.PostConstruct;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.inject.Inject;
-
 import org.jboss.quickstarts.picketlink.acl.model.Article;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.PermissionManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.model.basic.User;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.inject.Inject;
 
 /**
  * This startup bean creates a number of default users, groups and roles when the application is started.
@@ -35,14 +35,13 @@ import org.picketlink.idm.model.basic.User;
  */
 @Singleton
 @Startup
-public class IDMInitializer {
+public class SecurityInitializer {
 
     @Inject
     private PartitionManager partitionManager;
 
     @PostConstruct
     public void create() {
-
         // Create user john
         User john = new User("john");
         john.setEmail("john@acme.com");

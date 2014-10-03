@@ -50,9 +50,6 @@
       <!-- WildFly dependency versions -->
       <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
 
-      <!-- PicketLink dependency versions -->
-    <version.picketlink.javaee.deltaspike.bom>2.7.0-SNAPSHOT</version.picketlink.javaee.deltaspike.bom>
-    
     <!-- Delete this after the drools module has been added to the bom -->
     <version.picketlink>2.7.0-SNAPSHOT</version.picketlink>
 
@@ -71,8 +68,8 @@
       <!-- Dependency Management for PicketLink and Java EE 6.0. -->
       <dependency>
         <groupId>org.picketlink</groupId>
-        <artifactId>picketlink-javaee-6.0-with-deltaspike</artifactId>
-        <version>${version.picketlink.javaee.deltaspike.bom}</version>
+        <artifactId>picketlink-javaee-6.0</artifactId>
+        <version>${version.picketlink}</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
@@ -125,30 +122,9 @@
       and can compile against it -->    
     <dependency>
       <groupId>org.picketlink</groupId>     
-      <artifactId>picketlink-api</artifactId>
+      <artifactId>picketlink</artifactId>
     </dependency>
 
-    <!-- Import the PicketLink implementation, we deploy this as library with 
-      the application, but can't compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-impl</artifactId>
-    </dependency>
-
-    <!-- Import the PicketLink IDM API, we deploy this as library with the application,
-            and can compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-idm-api</artifactId>
-    </dependency>
-
-    <!-- Import the PicketLink IDM API, we deploy this as library with the application,
-          and can compile against it -->
-    <dependency>
-      <groupId>org.picketlink</groupId>
-      <artifactId>picketlink-idm-impl</artifactId>
-    </dependency>
-    
     <!-- Import the PicketLink IDM Simple Schema, which provides some built-in JPA entities for
       the sample model -->
     <dependency>
@@ -156,41 +132,6 @@
       <artifactId>picketlink-idm-simple-schema</artifactId>
     </dependency>
     
-    <!-- Deltaspike API. We use compile scope as we need compile against its API -->
-    <dependency>
-      <groupId>org.apache.deltaspike.core</groupId>
-      <artifactId>deltaspike-core-api</artifactId>
-      <version>0.7</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <!-- Deltaspike Impl. we use runtime scope as we need its implementation
-        dependencies only on runtime -->
-    <dependency>
-      <groupId>org.apache.deltaspike.core</groupId>
-      <artifactId>deltaspike-core-impl</artifactId>
-      <version>0.7</version>
-      <scope>runtime</scope>
-    </dependency>
-
-    <!-- Deltaspike Security Module API. We use compile scope as we need
-        to compile against its API -->
-    <dependency>
-      <groupId>org.apache.deltaspike.modules</groupId>
-      <artifactId>deltaspike-security-module-api</artifactId>
-      <version>0.7</version>
-      <scope>compile</scope>
-    </dependency>
-
-    <!-- Deltaspike Security Impl. we use runtime scope as we need its implementation
-        dependencies only on runtime -->
-    <dependency>
-      <groupId>org.apache.deltaspike.modules</groupId>
-      <artifactId>deltaspike-security-module-impl</artifactId>
-      <version>0.7</version>
-      <scope>runtime</scope>
-    </dependency>
-
   </dependencies>
 
   <build>

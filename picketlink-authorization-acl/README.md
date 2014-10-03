@@ -1,6 +1,6 @@
 picketlink-authorization-acl: PicketLink IDM Authorization Example using ACLs
 ===============================
-Author: Shane Bryzak  
+Author: Shane Bryzak, Pedro Igor  
 Level: Intermediate  
 Technologies: CDI, PicketLink  
 Summary: Basic example that demonstrates IDM-based authorization using the Permissions API to implement ACL-based resource restrictions  
@@ -11,6 +11,16 @@ What is it?
 -----------
 
 This example demonstrates the use of *CDI 1.0*, and *PicketLink IDM* *JBoss Enterprise Application Platform 6* or *WildFly 8*.
+
+It provides a simple example about how to support fine-grained authorization using PicketLink Permission API. In this application
+you are able to create articles using two different users:
+
+    Username: john / Password: demo
+    Username: mary / Password: demo
+    
+Both users can create articles, but only the owner can edit or delete articles.
+
+It demonstrates how to use the *Identity* bean, *PermissionManager* and the *RequiresPermission* annotation to protect resources. 
 
 System requirements
 -------------------
