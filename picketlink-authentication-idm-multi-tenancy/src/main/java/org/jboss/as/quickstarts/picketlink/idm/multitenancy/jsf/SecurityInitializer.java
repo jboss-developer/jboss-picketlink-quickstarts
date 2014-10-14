@@ -16,7 +16,7 @@
  */
 package org.jboss.as.quickstarts.picketlink.idm.multitenancy.jsf;
 
-import org.picketlink.PartitionManagerCreateEvent;
+import org.picketlink.event.PartitionManagerCreateEvent;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.credential.Password;

@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.query.IdentityQuery;
+import org.picketlink.idm.query.IdentityQueryBuilder;
 import org.picketlink.quickstart.identitymodel.ApplicationRealm;
 import org.picketlink.quickstart.identitymodel.Group;
 import org.picketlink.quickstart.identitymodel.Realm;
@@ -50,17 +51,18 @@ public class GroupTestCase extends AbstractIdentityManagementTestCase {
         assertNotNull(acme);
 
         // we need an identity manager instance for acme realm. so we can store the group
-        IdentityManager identityManager = partitionManager.createIdentityManager(acme);
+        IdentityManager acmeIdentityManager = partitionManager.createIdentityManager(acme);
         String globalGroupName = "Acme Administrators";
         Group globalGroup = new Group(globalGroupName);
 
         // stores the group
-        identityManager.add(globalGroup);
+        acmeIdentityManager.add(globalGroup);
 
-        IdentityQuery<Group> query = identityManager.createIdentityQuery(Group.class);
+        IdentityQueryBuilder acmeQueryBuilder = acmeIdentityManager.getQueryBuilder();
+        IdentityQuery<Group> query = acmeQueryBuilder.createIdentityQuery(Group.class);
 
         // let's check if the role is stored by querying using a name
-        query.setParameter(Group.NAME, globalGroupName);
+        query.where(acmeQueryBuilder.equal(Group.NAME, globalGroupName));
 
         List<Group> groups = query.getResultList();
 
@@ -78,10 +80,11 @@ public class GroupTestCase extends AbstractIdentityManagementTestCase {
 
         applicationIdentityManager.add(applicationGroup);
 
-        query = applicationIdentityManager.createIdentityQuery(Group.class);
+        IdentityQueryBuilder applicationQueryBuilder = applicationIdentityManager.getQueryBuilder();
+        query = applicationQueryBuilder.createIdentityQuery(Group.class);
 
         // let's check if the group is stored by querying using a name
-        query.setParameter(Role.NAME, applicationGroupName);
+        query.where(applicationQueryBuilder.equal(Role.NAME, applicationGroupName));
 
         groups = query.getResultList();
 
@@ -92,9 +95,9 @@ public class GroupTestCase extends AbstractIdentityManagementTestCase {
         assertEquals(applicationGroup.getName(), storedApplicationGroup.getName());
 
         // application group is not visible from realm partition. Neither from other applications.
-        query = identityManager.createIdentityQuery(Group.class);
+        query = acmeQueryBuilder.createIdentityQuery(Group.class);
 
-        query.setParameter(Group.NAME, applicationGroup.getName());
+        query.where(acmeQueryBuilder.equal(Group.NAME, applicationGroup.getName()));
 
         assertTrue(query.getResultList().isEmpty());
     }
@@ -118,10 +121,11 @@ public class GroupTestCase extends AbstractIdentityManagementTestCase {
         // stores the managers group
         identityManager.add(salesManagers);
 
-        IdentityQuery<Group> query = identityManager.createIdentityQuery(Group.class);
+        IdentityQueryBuilder queryBuilder = identityManager.getQueryBuilder();
+        IdentityQuery<Group> query = queryBuilder.createIdentityQuery(Group.class);
 
         // query all childs of sales unit
-        query.setParameter(Group.PARENT, salesUnit);
+        query.where(queryBuilder.equal(Group.PARENT, salesUnit));
 
         List<Group> salesUnitChilds = query.getResultList();
 
@@ -131,10 +135,10 @@ public class GroupTestCase extends AbstractIdentityManagementTestCase {
 
         identityManager.add(salesVendors);
 
-        query = identityManager.createIdentityQuery(Group.class);
+        query = queryBuilder.createIdentityQuery(Group.class);
 
         // query all childs of sales unit again
-        query.setParameter(Group.PARENT, salesUnit);
+        query.where(queryBuilder.equal(Group.PARENT, salesUnit));
 
         salesUnitChilds = query.getResultList();
 

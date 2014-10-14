@@ -31,6 +31,7 @@ import org.picketlink.idm.model.Account;
 import org.picketlink.idm.model.basic.BasicModel;
 import org.picketlink.idm.model.basic.Role;
 import org.picketlink.idm.query.IdentityQuery;
+import org.picketlink.idm.query.IdentityQueryBuilder;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -66,9 +67,10 @@ public class IdentityModelManager {
             throw new IllegalArgumentException("Invalid login name.");
         }
 
-        IdentityQuery<MyUser> query = identityManager.createIdentityQuery(MyUser.class);
+        IdentityQueryBuilder queryBuilder = identityManager.getQueryBuilder();
+        IdentityQuery<MyUser> query = queryBuilder.createIdentityQuery(MyUser.class);
 
-        query.setParameter(MyUser.USER_NAME, loginName);
+        query.where(queryBuilder.equal(MyUser.USER_NAME, loginName));
 
         List<MyUser> result = query.getResultList();
 
@@ -145,9 +147,10 @@ public class IdentityModelManager {
             throw new IllegalArgumentException("Invalid activation code.");
         }
 
-        IdentityQuery<MyUser> query = identityManager.createIdentityQuery(MyUser.class);
+        IdentityQueryBuilder queryBuilder = identityManager.getQueryBuilder();
+        IdentityQuery<MyUser> query = queryBuilder.createIdentityQuery(MyUser.class);
         List<MyUser> result = query
-            .setParameter(MyUser.ACTIVATION_CODE, activationCode.replaceAll("\"", ""))
+            .where(queryBuilder.equal(MyUser.ACTIVATION_CODE, activationCode.replaceAll("\"", "")))
             .getResultList();
 
         if (!result.isEmpty()) {

@@ -27,6 +27,7 @@ import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.credential.Password;
 import org.picketlink.idm.credential.UsernamePasswordCredentials;
 import org.picketlink.idm.query.IdentityQuery;
+import org.picketlink.idm.query.IdentityQueryBuilder;
 import org.picketlink.quickstart.identitymodel.Realm;
 import org.picketlink.quickstart.identitymodel.User;
 
@@ -54,10 +55,11 @@ public class UserTestCase extends AbstractIdentityManagementTestCase {
         // stores the user in the acme partition
         identityManager.add(user);
 
-        IdentityQuery<User> query = identityManager.createIdentityQuery(User.class);
+        IdentityQueryBuilder queryBuilder = identityManager.getQueryBuilder();
+        IdentityQuery<User> query = queryBuilder.createIdentityQuery(User.class);
 
         // let's check if the user is stored by querying by name
-        query.setParameter(User.USER_NAME, user.getUserName());
+        query.where(queryBuilder.equal(User.USER_NAME, user.getUserName()));
 
         List<User> users = query.getResultList();
 

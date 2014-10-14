@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.query.IdentityQuery;
+import org.picketlink.idm.query.IdentityQueryBuilder;
 import org.picketlink.quickstart.identitymodel.Application;
 import org.picketlink.quickstart.identitymodel.ApplicationRealm;
 import org.picketlink.quickstart.identitymodel.Realm;
@@ -52,10 +53,11 @@ public class ApplicationTestCase extends AbstractIdentityManagementTestCase {
         // stores the application in the acme partition
         identityManager.add(timeSheetApplication);
 
-        IdentityQuery<Application> query = identityManager.createIdentityQuery(Application.class);
+        IdentityQueryBuilder queryBuilder = identityManager.getQueryBuilder();
+        IdentityQuery<Application> query = queryBuilder.createIdentityQuery(Application.class);
 
         // let's check if the application is stored by querying by the identifier
-        query.setParameter(Application.ID, timeSheetApplication.getId());
+        query.where(queryBuilder.equal(Application.ID, timeSheetApplication.getId()));
 
         List<Application> applications = query.getResultList();
 

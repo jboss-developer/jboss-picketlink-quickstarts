@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.query.IdentityQuery;
+import org.picketlink.idm.query.IdentityQueryBuilder;
 import org.picketlink.quickstart.identitymodel.ApplicationRealm;
 import org.picketlink.quickstart.identitymodel.Realm;
 import org.picketlink.quickstart.identitymodel.Role;
@@ -50,10 +51,11 @@ public class RoleTestCase extends AbstractIdentityManagementTestCase {
         // stores the global role
         acmeIdentityManager.add(globalRole);
 
-        IdentityQuery<Role> query = acmeIdentityManager.createIdentityQuery(Role.class);
+        IdentityQueryBuilder acmeQueryBuilder = acmeIdentityManager.getQueryBuilder();
+        IdentityQuery<Role> query = acmeQueryBuilder.createIdentityQuery(Role.class);
 
         // let's check if the role is stored by querying using a name
-        query.setParameter(Role.NAME, globalRole.getName());
+        query.where(acmeQueryBuilder.equal(Role.NAME, globalRole.getName()));
 
         List<Role> roles = query.getResultList();
 
@@ -71,10 +73,11 @@ public class RoleTestCase extends AbstractIdentityManagementTestCase {
         // stores a application specific role
         applicationIdentityManager.add(applicationRole);
 
-        query = applicationIdentityManager.createIdentityQuery(Role.class);
+        IdentityQueryBuilder applicationQueryBuilder = applicationIdentityManager.getQueryBuilder();
+        query = applicationQueryBuilder.createIdentityQuery(Role.class);
 
         // let's check if the role is stored by querying using a name
-        query.setParameter(Role.NAME, applicationRole.getName());
+        query.where(applicationQueryBuilder.equal(Role.NAME, applicationRole.getName()));
 
         roles = query.getResultList();
 
@@ -85,9 +88,9 @@ public class RoleTestCase extends AbstractIdentityManagementTestCase {
         assertEquals(applicationRole.getName(), storedApplicationRole.getName());
 
         // let's check if is possible to get the application role from the acme partition
-        query = acmeIdentityManager.createIdentityQuery(Role.class);
+        query = acmeQueryBuilder.createIdentityQuery(Role.class);
 
-        query.setParameter(Role.NAME, applicationRole.getName());
+        query.where(acmeQueryBuilder.equal(Role.NAME, applicationRole.getName()));
 
         // partitions don't share identity types
         assertTrue(query.getResultList().isEmpty());
