@@ -11,6 +11,8 @@
 			<Auth Key="KeyStorePass" Value="store123" />
 			<Auth Key="SigningKeyPass" Value="test123" />
 			<Auth Key="SigningKeyAlias" Value="servercert" />
+			<Auth Key="EncryptionKeyPass" Value="test123" />
+			<Auth Key="EncryptionKeyAlias" Value="servercert" />
 			<ValidatingAlias Key="localhost" Value="servercert" />
 			<ValidatingAlias Key="127.0.0.1" Value="servercert" />
 		</KeyProvider>

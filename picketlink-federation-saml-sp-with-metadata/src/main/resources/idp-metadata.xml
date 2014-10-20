@@ -63,7 +63,7 @@ lTz3UNkn6k2iagzYdJdnhgRZGpRWjf1t4skoJjvfL3HwkOWhSFKundbKcZSZwifI
 				Location="http://localhost:8080/idp-metadata/" />
 			<SingleSignOnService
 				Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-				Location="http://localhost:8080/idp-metadata/" />
+				Location="http://localhost:8080/idp-metadata" />
 		</IDPSSODescriptor>
 		<Organization>
 			<OrganizationName xmlns="urn:oasis:names:tc:SAML:2.0:metadata"

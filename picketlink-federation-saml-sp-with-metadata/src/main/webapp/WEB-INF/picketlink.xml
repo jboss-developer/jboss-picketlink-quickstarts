@@ -7,9 +7,10 @@
 			<Auth Key="KeyStorePass" Value="store123" />
 			<Auth Key="SigningKeyPass" Value="test123" />
 			<Auth Key="SigningKeyAlias" Value="servercert" />
-			<ValidatingAlias Key="localhost" Value="servercert" />
-			<ValidatingAlias Key="127.0.0.1" Value="servercert" />
 		</KeyProvider>
+        <MetaDataProvider ClassName="org.picketlink.identity.federation.core.saml.md.providers.FileBasedEntitiesMetadataProvider">
+            <Option Key="FileName" Value="/WEB-INF/classes/idp-metadata.xml"/>
+        </MetaDataProvider>
 	</PicketLinkSP>
 	<Handlers xmlns="urn:picketlink:identity-federation:handler:config:2.1">
 		<Handler
