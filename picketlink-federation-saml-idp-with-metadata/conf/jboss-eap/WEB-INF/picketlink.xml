@@ -1,5 +1,8 @@
 <PicketLink xmlns="urn:picketlink:identity-federation:config:2.1">
 	<PicketLinkIDP xmlns="urn:picketlink:identity-federation:config:2.1" SupportsSignatures="true" Encrypt="true">
+		<Trust>
+			<Domains>localhost,jboss.com,jboss.org,amazonaws.com</Domains>
+		</Trust>
 		<KeyProvider
 			ClassName="org.picketlink.identity.federation.core.impl.KeyStoreKeyManager">
 			<Auth Key="KeyStoreURL" Value="/jbid_test_keystore.jks" />
@@ -13,6 +16,9 @@
 			<ValidatingAlias Key="localhost" Value="servercert" />
 			<ValidatingAlias Key="127.0.0.1" Value="servercert" />
 		</KeyProvider>
+        <MetaDataProvider ClassName="org.picketlink.identity.federation.core.saml.md.providers.FileBasedEntitiesMetadataProvider">
+            <Option Key="FileName" Value="/WEB-INF/classes/sp-metadata.xml"/>
+        </MetaDataProvider>
 	</PicketLinkIDP>
 	<Handlers xmlns="urn:picketlink:identity-federation:handler:config:2.1">
 		<Handler
