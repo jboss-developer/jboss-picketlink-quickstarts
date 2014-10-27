@@ -67,6 +67,7 @@
         <module>picketlink-federation-saml-sp-post-with-signature</module>
         <module>picketlink-federation-saml-sp-post-with-ssl</module>
         <module>picketlink-federation-saml-sp-with-encryption</module>
+        <module>picketlink-federation-saml-sp-with-servlet-filter</module>
         <module>picketlink-federation-saml-sp-with-metadata</module>
         <module>picketlink-federation-saml-sp-redirect-basic</module>
         <module>picketlink-federation-saml-sp-redirect-with-signature</module>

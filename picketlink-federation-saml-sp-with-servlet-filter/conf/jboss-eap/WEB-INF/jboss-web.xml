@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jboss-web>
+    <!-- Here we just define the context path of the deployment. -->
+    <context-root>sales-with-servlet-filter</context-root>
+</jboss-web>
