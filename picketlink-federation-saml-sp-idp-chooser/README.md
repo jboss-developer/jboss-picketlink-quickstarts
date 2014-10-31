@@ -1,4 +1,4 @@
-picketlink-federation-saml-sp-post-with-signature: PicketLink Service Provider With a Basic Configuration using SAML HTTP POST Binding With Signature Support
+picketlink-federation-saml-sp-idp-chooser: PicketLink Service Provider that allow users to choose between IdPs
 ===============================
 Author: Pedro Igor  
 Level: Intermediate  
@@ -11,6 +11,8 @@ What is it?
 -----------
 
 This example demonstrates the use of *PicketLink Federation* SAML v2.0 support to setup an application as a Service Provider in *JBoss Enterprise Application Platform 6* or *WildFly*.
+
+This service provider allows users to choose between IdPs when they try to access it for the first time.
 
 It provides a minimal configuration to enable your application as a Service Provider, accordingly with the SAML v2.0 specification. A Service Provider is an application that participates in a Single Sign-On as a relying party.
 It relies on the Identity Provider to authenticate users and issue SAML Assertions, which will be used by the Service Provider to authenticate the user locally.
@@ -158,7 +160,7 @@ _NOTE: The following build command assumes you have configured your Maven user s
         For EAP 6:     mvn clean package jboss-as:deploy
         For WildFly:   mvn -Pwildfly clean package wildfly:deploy
 
-4. This will deploy `target/picketlink-federation-saml-sp-post-with-signature.war` to the running instance of the server.
+4. This will deploy `target/picketlink-federation-saml-sp-idp-chooser.war` to the running instance of the server.
 
 
 Access the application
