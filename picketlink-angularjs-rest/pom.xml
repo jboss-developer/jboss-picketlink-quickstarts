@@ -48,8 +48,6 @@
     <!-- PicketLink dependency versions -->
     <version.picketlink.javaee.bom>2.7.0-SNAPSHOT</version.picketlink.javaee.bom>
 
-    <jboss.bom.version>1.0.7.CR8</jboss.bom.version>
-
     <!-- maven-war-plugin -->
     <version.war.plugin>2.1.1</version.war.plugin>
 
@@ -68,15 +66,6 @@
         <version>${version.picketlink.javaee.bom}</version>
         <scope>import</scope>
         <type>pom</type>
-      </dependency>
-
-      <!-- Dependency Management for Java EE 6.0 -->
-      <dependency>
-        <groupId>org.jboss.bom</groupId>
-        <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
-        <version>${jboss.bom.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -136,12 +125,6 @@
         <groupId>org.hibernate.javax.persistence</groupId>
         <artifactId>hibernate-jpa-2.0-api</artifactId>
         <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.jboss.spec.javax.transaction</groupId>
-      <artifactId>jboss-transaction-api_1.1_spec</artifactId>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
