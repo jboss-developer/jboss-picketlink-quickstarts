@@ -48,6 +48,7 @@
         <module>picketlink-authentication-recaptcha</module>
         <module>picketlink-authentication-rs-endpoint</module>
         <module>picketlink-authentication-two-factor</module>
+        <module>picketlink-authentication-security-level</module>
         <module>picketlink-authorization-idm-jpa</module>
         <module>picketlink-authorization-idm-ldap</module>
         <module>picketlink-authorization-rs-rbac</module>
