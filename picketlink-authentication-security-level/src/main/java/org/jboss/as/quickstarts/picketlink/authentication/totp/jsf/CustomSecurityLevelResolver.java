@@ -21,7 +21,6 @@
  */
 package org.jboss.as.quickstarts.picketlink.authentication.totp.jsf;
 
-import org.picketlink.annotations.PicketLink;
 import org.picketlink.authentication.levels.Level;
 import org.picketlink.authentication.levels.SecurityLevelResolver;
 import org.picketlink.authentication.levels.internal.DefaultLevel;
@@ -39,7 +38,6 @@ import javax.inject.Inject;
  *
  * @author Pedro Igor
  */
-@PicketLink
 @RequestScoped
 public class CustomSecurityLevelResolver implements SecurityLevelResolver {
 
