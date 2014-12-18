@@ -8,8 +8,8 @@ import org.jboss.as.quickstarts.picketlink.authentication.model.UserSettings;
 import org.picketlink.Identity;
 import org.picketlink.annotations.PicketLink;
 import org.picketlink.authentication.levels.Level;
-import org.picketlink.authentication.levels.LevelFactory;
 import org.picketlink.authentication.levels.SecurityLevelResolver;
+import org.picketlink.authentication.levels.internal.DefaultLevel;
 
 /**
  * <p>This custom {@link org.picketlink.authentication.levels.SecurityLevelResolver} resolve a security level based on
@@ -21,9 +21,6 @@ import org.picketlink.authentication.levels.SecurityLevelResolver;
  */
 @PicketLink
 public class ContextCheck implements SecurityLevelResolver {
-
-    @Inject
-    LevelFactory levelFactory;
 
     @Inject
     Identity identity;
@@ -41,7 +38,8 @@ public class ContextCheck implements SecurityLevelResolver {
 
             //very simple check if the IP of the request is same as the one saved in settings
             if(request.getRemoteAddr().equals(settings.getIp())){
-                return levelFactory.createLevel("3");
+                //because we did not define our own Level implementation we use default
+                return new DefaultLevel(3);
             }
         }
 
