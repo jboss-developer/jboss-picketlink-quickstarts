@@ -15,6 +15,7 @@
 			<!-- <Auth Key="SigningKeyPass" Value="test123" /> -->
 			<Auth Key="SigningKeyPass" Value="MASK-AJbh4WmHwy8=" />
 			<Auth Key="SigningKeyAlias" Value="servercert" />
+			<Auth Key="X509CERTIFICATE" Value="servercert"/>
 			<Auth Key="salt" Value="18273645" />
 			<Auth Key="iterationCount" Value="11" />
 			<ValidatingAlias Key="localhost" Value="servercert" />
