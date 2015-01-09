@@ -3,7 +3,7 @@
                     xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
     >
 	<EntityDescriptor entityID="http://localhost:8080/idp-metadata/">
-		<IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+		<IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol" WantAuthnRequestsSigned="true">
             <KeyDescriptor use="signing">
                 <dsig:KeyInfo xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
                     <dsig:X509Data>
