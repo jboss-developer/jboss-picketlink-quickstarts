@@ -17,6 +17,7 @@
 package org.jboss.as.quickstarts.picketlink.authentication.digest;
 
 import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.credential.Digest;
 import org.picketlink.idm.model.basic.User;
 
@@ -29,8 +30,8 @@ import javax.inject.Inject;
  * This startup bean creates a default user account when the application is started. Since we are not
  * providing an IDM configuration in this example, PicketLink will default to using a file-based identity
  * store to persist user and other identity state.
- * 
- * 
+ *
+ *
  * @author Shane Bryzak
  */
 @Singleton
@@ -38,7 +39,7 @@ import javax.inject.Inject;
 public class SecurityInitializer {
 
     @Inject
-    private IdentityManager identityManager;
+    private PartitionManager partitionManager;
 
     @PostConstruct
     public void create() {
@@ -48,7 +49,9 @@ public class SecurityInitializer {
         user.setFirstName("Jane");
         user.setLastName("Doe");
 
-        this.identityManager.add(user);
+        IdentityManager identityManager = this.partitionManager.createIdentityManager();
+
+        identityManager.add(user);
 
         Digest digestCredential = new Digest();
 
@@ -56,6 +59,6 @@ public class SecurityInitializer {
         digestCredential.setUsername(user.getLoginName());
         digestCredential.setPassword("abcd1234");
 
-        this.identityManager.updateCredential(user, digestCredential);
+        identityManager.updateCredential(user, digestCredential);
     }
 }

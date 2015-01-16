@@ -17,6 +17,7 @@
 package org.jboss.as.quickstarts.picketlink.authentication.basic;
 
 import org.picketlink.idm.IdentityManager;
+import org.picketlink.idm.PartitionManager;
 import org.picketlink.idm.model.basic.User;
 
 import javax.annotation.PostConstruct;
@@ -34,13 +35,14 @@ import javax.inject.Inject;
 public class SecurityInitializer {
 
     @Inject
-    private IdentityManager identityManager;
+    private PartitionManager partitionManager;
 
     @PostConstruct
     public void create() {
         User user = new User("client");
+        IdentityManager identityManager = this.partitionManager.createIdentityManager();
 
-        this.identityManager.add(user);
+        identityManager.add(user);
     }
 
 }
