@@ -49,24 +49,32 @@ public class JWSTokenProvider implements Token.Provider<JWSToken> {
 
     @Override
     public JWSToken issue(Account account) {
-        JWSBuilder builder = new JWSBuilder();
+        TokenCredentialStorage tokenCredentialStorage = getIdentityManager().retrieveCurrentCredential(account, TokenCredentialStorage.class);
+        JWSToken token;
 
-        byte[] privateKey = getPrivateKey();
+        if (tokenCredentialStorage == null) {
+            JWSBuilder builder = new JWSBuilder();
 
-        // here we construct a JWS signed with the private key provided by the partition.
-        builder
-            .id(UUID.randomUUID().toString())
-            .rsa256(privateKey)
-            .issuer(account.getPartition().getName())
-            .issuedAt(getCurrentTime())
-            .subject(account.getId())
-            .expiration(getCurrentTime() + (5 * 60))
-            .notBefore(getCurrentTime());
+            byte[] privateKey = getPrivateKey();
 
-        JWSToken token = new JWSToken(builder.build().encode());
+            // here we construct a JWS signed with the private key provided by the partition.
+            builder
+                    .id(UUID.randomUUID().toString())
+                    .rsa256(privateKey)
+                    .issuer(account.getPartition().getName())
+                    .issuedAt(getCurrentTime())
+                    .subject(account.getId())
+                    .expiration(getCurrentTime() + (5 * 60))
+                    .notBefore(getCurrentTime());
 
-        // now we update the account with the token previously issued by this provider.
-        getIdentityManager().updateCredential(account, token);
+            token = new JWSToken(builder.build().encode());
+
+            // now we update the account with the token previously issued by this provider.
+            getIdentityManager().updateCredential(account, token);
+        } else {
+            token = new JWSToken(tokenCredentialStorage.getToken());
+
+        }
 
         return token;
     }
