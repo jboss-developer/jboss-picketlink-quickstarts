@@ -47,7 +47,9 @@ public class HttpSecurityConfiguration {
             .http()
                 .forPath("/rest/private/*")
                     .authenticateWith()
-                        .token();
+                        .token()
+                    .cors()
+                        .allowAll();
     }
 
 }
