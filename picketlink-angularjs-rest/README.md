@@ -1,9 +1,9 @@
 picketlink-angularjs-rest: PicketLink AngularJS and REST Security
 ===============================
 Author: Maximos Sapranidis
-Level: Intermediate  
-Technologies: CDI, PicketLink, REST, HTML5, AngularJS, JSON, JWT, JWS  
-Summary: Demonstrates how to use PicketLink and Angular.js to secure a RESTful (JAX-RS) JEE application.  
+Level: Intermediate
+Technologies: CDI, PicketLink, REST, HTML5, AngularJS, JSON, JWT, JWS
+Summary: Demonstrates how to use PicketLink and Angular.js to secure a RESTful (JAX-RS) JEE application.
 Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 
@@ -69,13 +69,13 @@ Create the Server Certicate
 
 ## Configure the Server to Use SSL
 
-Now that the certificates and keystores are properly configured, you must enable SSL in the server configuration. 
+Now that the certificates and keystores are properly configured, you must enable SSL in the server configuration.
 
 ### Configure the HTTPS Connector in the Web Subsystem by Running the JBoss CLI Script (JBoss Enterprise Application Platform)
 
 1. Start the WildFly Server by typing the following:
 
-        For Linux:  JBOSS_HOME/bin/standalone.sh 
+        For Linux:  JBOSS_HOME/bin/standalone.sh
         For Windows:  JBOSS_HOME\bin\standalone.bat
 2. Open a new command line, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
 
@@ -89,7 +89,7 @@ This script adds and configures the `https` connector to the `web` subsystem in 
 
 This command reloads the server configuration before completion. You don`t need to manually stop/start the server to the configuration take effect.
 
-### Configure the HTTPS Connector in the Web Subsystem by Running the JBoss CLI Script (WildFly)
+### Configure the HTTPS Connector in the Web Subsystem (WildFly)
 
 In order to configure SSL support on Wildfly please follow this instructions:
 
@@ -200,7 +200,7 @@ This script adds and configures the `https` connector to the `web` subsystem in 
 
 This command reloads the server configuration before completion. You don`t need to manually stop/start the server to the configuration take effect.
 
-Configuring the Mail Service in the Mail Subsystem by Running the JBoss CLI Script (WildFly)
+Configuring the Mail Service in the Mail Subsystem (WildFly)
 ----------------------------
 
 In order to configure the email JNDI resource please follow this instructions:
@@ -257,7 +257,7 @@ Start JBoss Enterprise Application Platform 6 or WildFly with the Web Profile
         For Linux:   JBOSS_HOME/bin/standalone.sh
         For Windows: JBOSS_HOME\bin\standalone.bat
 
- 
+
 Build and Deploy the Quickstart
 -------------------------
 
@@ -292,7 +292,7 @@ Undeploy the Archive
 Remove the SSL Configuration
 ----------------------------
 
-You can remove the security domain configuration by running the  `remove-https.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file. 
+You can remove the security domain configuration by running the  `remove-https.cli` script provided in the root directory of this quickstart or by manually restoring the back-up copy the configuration file.
 
 ### Remove the SSL Configuration by Running the JBoss CLI Script
 
@@ -302,7 +302,7 @@ You can remove the security domain configuration by running the  `remove-https.c
         For Windows:  JBOSS_HOME_SERVER_1\bin\standalone.bat
 2. Open a new command line, navigate to the root directory of this quickstart, and run the following command, replacing JBOSS_HOME with the path to your server:
 
-        JBOSS_HOME/bin/jboss-cli.sh --connect --file=remove-https.cli 
+        JBOSS_HOME/bin/jboss-cli.sh --connect --file=remove-https.cli
 This script removes the `https` connector from the `web` subsystem in the server configuration. You should see the following result when you run the script:
 
         {"outcome" => "success"}
@@ -332,7 +332,7 @@ You should see the following result when you run the script:
 
 Run the Quickstart in JBoss Developer Studio or Eclipse
 -------------------------------------
-You can also start the server and deploy the quickstarts from Eclipse using JBoss tools. For more information, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](../README.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts) 
+You can also start the server and deploy the quickstarts from Eclipse using JBoss tools. For more information, see [Use JBoss Developer Studio or Eclipse to Run the Quickstarts](../README.md#use-jboss-developer-studio-or-eclipse-to-run-the-quickstarts)
 
 
 Debug the Application
