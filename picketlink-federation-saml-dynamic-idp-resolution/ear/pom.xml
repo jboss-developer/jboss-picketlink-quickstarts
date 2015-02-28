@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.picketlink.quickstarts</groupId>
         <artifactId>picketlink-federation-saml-dynamic-idp-resolution-parent</artifactId>
-        <version>2.7.0-SNAPSHOT</version>
+        <version>2.7.0.Final</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <groupId>org.picketlink.quickstarts</groupId>
     <artifactId>picketlink-federation-saml-dynamic-idp-resolution-ear</artifactId>
-    <version>2.7.0-SNAPSHOT</version>
+    <version>2.7.0.Final</version>
 
     <packaging>ear</packaging>
 
