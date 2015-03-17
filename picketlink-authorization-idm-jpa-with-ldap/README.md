@@ -1,9 +1,9 @@
 picketlink-authorization-idm-jpa-with-ldap: PicketLink IDM Authorization Example using JPA
 ===============================
-Author: Pedro Igor
-Level: Intermediate
-Technologies: CDI, PicketLink
-Summary: Basic example that demonstrates IDM-based authorization using a JPA and LDAP identity store to store different types
+Author: Pedro Igor  
+Level: Intermediate  
+Technologies: CDI, PicketLink  
+Summary: Basic example that demonstrates IDM-based authorization using a JPA and LDAP identity store to store different types  
 Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 What is it?

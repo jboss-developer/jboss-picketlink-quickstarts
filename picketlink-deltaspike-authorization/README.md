@@ -2,7 +2,7 @@ picketlink-deltaspike-authorization: Demonstrate the creation of a custom author
 ======================================================
 Author: Shane Bryzak  
 Level: Intermediate  
-Technologies: JSF, CDI, PicketLink, Deltaspike  
+Technologies: JSF, CDI, PicketLink, DeltaSpike  
 Summary: Demonstrate the creation of a custom authorization example using PicketLink and @SecurityBindingType from DeltaSpike  
 Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 

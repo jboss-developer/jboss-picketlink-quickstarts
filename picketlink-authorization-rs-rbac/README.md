@@ -2,7 +2,7 @@ picketlink-authorization-rs-rbac: PicketLink Role-based Access Control(RBAC) for
 ===============================
 Author: Pedro Igor  
 Level: Intermediate  
-Technologies: CDI, PicketLink, Apache Deltaspike, JAX-RS  
+Technologies: CDI, PicketLink, DeltaSpike, JAX-RS  
 Summary: Basic example that demonstrates how to use RBAC to your JAX-RS Endpoints  
 Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
