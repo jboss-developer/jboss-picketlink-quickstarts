@@ -12,7 +12,7 @@ What is it?
 
 This example demonstrates the use of *CDI 1.0* and *PicketLink* in *JBoss Enterprise Application Platform 6* or *WildFly*.
 
-You'll learn from this quickstart how to listen for PL specific events fired during authentication, logout and when performing
+You'll learn from this quickstart how to listen for security events fired during authentication, logout and when performing
 identity management operations.
 
 When running this example, you should see some messages in the server logs similar as these ones:
