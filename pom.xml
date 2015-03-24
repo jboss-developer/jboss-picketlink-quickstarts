@@ -59,6 +59,7 @@
         <module>picketlink-idm-custom-identity-model</module>
         <module>picketlink-http-servlet-integration</module>
         <module>picketlink-authorization-acl</module>
+        <module>picketlink-events</module>
 
         <module>picketlink-federation-saml-idp-basic</module>
         <module>picketlink-federation-saml-idp-with-signature</module>
