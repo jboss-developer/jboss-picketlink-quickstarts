@@ -5,45 +5,44 @@
 	<EntityDescriptor entityID="http://localhost:8080/sales-metadata/">
 		<SPSSODescriptor
 			protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol urn:oasis:names:tc:SAML:1.1:protocol http://schemas.xmlsoap.org/ws/2003/07/secext">
-			<NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient
-			</NameIDFormat>
+                    <KeyDescriptor>
+                        <dsig:KeyInfo xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+                            <dsig:X509Data>
+                                <dsig:X509Certificate>
+                                    MIIB9DCCAV0CBElvalIwDQYJKoZIhvcNAQEEBQAwQTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBUpC
+                                    b3NzMQ4wDAYDVQQLEwVKQm9zczESMBAGA1UEAxMJamJpZCB0ZXN0MB4XDTA5MDExNTE2NTQ0MloX
+                                    DTA5MDQxNTE2NTQ0MlowQTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBUpCb3NzMQ4wDAYDVQQLEwVK
+                                    Qm9zczESMBAGA1UEAxMJamJpZCB0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDsqJo7
+                                    vBYZ9+tlxfItxjezJntNZUTnAHNTTz8O+CVO+9JB6i2YkMoFN5rw3wp/xIqp0EA0fx2dhPTBFeR5
+                                    0BD73tjDBYqLBPP4Qdi9/AFZBpXcEG7aQtV73D6HKRc+YQQhDNddt+gG33GLmnCisOyMklE6J8rn
+                                    55S2MgraOQbMowIDAQABMA0GCSqGSIb3DQEBBAUAA4GBAFthl5SFim6NXCsRzOl8VHDdrIskk9i5
+                                    71zQLEI1BW24IiDtAgQBY6YXb1kkEJ6GmlW44IWIBZLTRerYXAivdJTdW+9D+HCapByQeNfj7HnQ
+                                    lTz3UNkn6k2iagzYdJdnhgRZGpRWjf1t4skoJjvfL3HwkOWhSFKundbKcZSZwifI
+                                </dsig:X509Certificate>
+                            </dsig:X509Data>
+                        </dsig:KeyInfo>
+                    </KeyDescriptor>
+                    <KeyDescriptor use="encryption">
+                        <dsig:KeyInfo xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
+                            <dsig:X509Data>
+                                <dsig:X509Certificate>
+                                    MIIB9DCCAV0CBElvalIwDQYJKoZIhvcNAQEEBQAwQTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBUpC
+                                    b3NzMQ4wDAYDVQQLEwVKQm9zczESMBAGA1UEAxMJamJpZCB0ZXN0MB4XDTA5MDExNTE2NTQ0MloX
+                                    DTA5MDQxNTE2NTQ0MlowQTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBUpCb3NzMQ4wDAYDVQQLEwVK
+                                    Qm9zczESMBAGA1UEAxMJamJpZCB0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDsqJo7
+                                    vBYZ9+tlxfItxjezJntNZUTnAHNTTz8O+CVO+9JB6i2YkMoFN5rw3wp/xIqp0EA0fx2dhPTBFeR5
+                                    0BD73tjDBYqLBPP4Qdi9/AFZBpXcEG7aQtV73D6HKRc+YQQhDNddt+gG33GLmnCisOyMklE6J8rn
+                                    55S2MgraOQbMowIDAQABMA0GCSqGSIb3DQEBBAUAA4GBAFthl5SFim6NXCsRzOl8VHDdrIskk9i5
+                                    71zQLEI1BW24IiDtAgQBY6YXb1kkEJ6GmlW44IWIBZLTRerYXAivdJTdW+9D+HCapByQeNfj7HnQ
+                                    lTz3UNkn6k2iagzYdJdnhgRZGpRWjf1t4skoJjvfL3HwkOWhSFKundbKcZSZwifI
+                                </dsig:X509Certificate>
+                            </dsig:X509Data>
+                        </dsig:KeyInfo>
+                    </KeyDescriptor>
+                    <NameIDFormat>urn:oasis:names:tc:SAML:2.0:nameid-format:transient</NameIDFormat>
 			<AssertionConsumerService
 				Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="http://localhost:8080/sales-metadata/"
 				index="1" isDefault="true" />
-            <KeyDescriptor>
-                <dsig:KeyInfo xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
-                    <dsig:X509Data>
-                        <dsig:X509Certificate>
-                            MIIB9DCCAV0CBElvalIwDQYJKoZIhvcNAQEEBQAwQTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBUpC
-b3NzMQ4wDAYDVQQLEwVKQm9zczESMBAGA1UEAxMJamJpZCB0ZXN0MB4XDTA5MDExNTE2NTQ0MloX
-DTA5MDQxNTE2NTQ0MlowQTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBUpCb3NzMQ4wDAYDVQQLEwVK
-Qm9zczESMBAGA1UEAxMJamJpZCB0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDsqJo7
-vBYZ9+tlxfItxjezJntNZUTnAHNTTz8O+CVO+9JB6i2YkMoFN5rw3wp/xIqp0EA0fx2dhPTBFeR5
-0BD73tjDBYqLBPP4Qdi9/AFZBpXcEG7aQtV73D6HKRc+YQQhDNddt+gG33GLmnCisOyMklE6J8rn
-55S2MgraOQbMowIDAQABMA0GCSqGSIb3DQEBBAUAA4GBAFthl5SFim6NXCsRzOl8VHDdrIskk9i5
-71zQLEI1BW24IiDtAgQBY6YXb1kkEJ6GmlW44IWIBZLTRerYXAivdJTdW+9D+HCapByQeNfj7HnQ
-lTz3UNkn6k2iagzYdJdnhgRZGpRWjf1t4skoJjvfL3HwkOWhSFKundbKcZSZwifI
-                        </dsig:X509Certificate>
-                    </dsig:X509Data>
-                </dsig:KeyInfo>
-		    </KeyDescriptor>
-		    <KeyDescriptor use="encryption">
-                <dsig:KeyInfo xmlns:dsig="http://www.w3.org/2000/09/xmldsig#">
-                    <dsig:X509Data>
-                        <dsig:X509Certificate>
-                            MIIB9DCCAV0CBElvalIwDQYJKoZIhvcNAQEEBQAwQTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBUpC
-b3NzMQ4wDAYDVQQLEwVKQm9zczESMBAGA1UEAxMJamJpZCB0ZXN0MB4XDTA5MDExNTE2NTQ0MloX
-DTA5MDQxNTE2NTQ0MlowQTELMAkGA1UEBhMCVVMxDjAMBgNVBAoTBUpCb3NzMQ4wDAYDVQQLEwVK
-Qm9zczESMBAGA1UEAxMJamJpZCB0ZXN0MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDsqJo7
-vBYZ9+tlxfItxjezJntNZUTnAHNTTz8O+CVO+9JB6i2YkMoFN5rw3wp/xIqp0EA0fx2dhPTBFeR5
-0BD73tjDBYqLBPP4Qdi9/AFZBpXcEG7aQtV73D6HKRc+YQQhDNddt+gG33GLmnCisOyMklE6J8rn
-55S2MgraOQbMowIDAQABMA0GCSqGSIb3DQEBBAUAA4GBAFthl5SFim6NXCsRzOl8VHDdrIskk9i5
-71zQLEI1BW24IiDtAgQBY6YXb1kkEJ6GmlW44IWIBZLTRerYXAivdJTdW+9D+HCapByQeNfj7HnQ
-lTz3UNkn6k2iagzYdJdnhgRZGpRWjf1t4skoJjvfL3HwkOWhSFKundbKcZSZwifI
-                        </dsig:X509Certificate>
-                    </dsig:X509Data>
-                </dsig:KeyInfo>
-		    </KeyDescriptor>
 		</SPSSODescriptor>
 		<Organization>
 			<OrganizationName xmlns="urn:oasis:names:tc:SAML:2.0:metadata"
