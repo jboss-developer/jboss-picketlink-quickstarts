@@ -28,11 +28,15 @@ import org.picketlink.idm.RelationshipManager;
 import org.picketlink.idm.query.RelationshipQuery;
 import org.picketlink.quickstart.identitymodel.ApplicationRealm;
 import org.picketlink.quickstart.identitymodel.Grant;
+import org.picketlink.quickstart.identitymodel.Group;
+import org.picketlink.quickstart.identitymodel.GroupMembership;
 import org.picketlink.quickstart.identitymodel.Realm;
 import org.picketlink.quickstart.identitymodel.Role;
 import org.picketlink.quickstart.identitymodel.User;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @author Pedro Igor
@@ -77,6 +81,38 @@ public class GrantTestCase extends AbstractIdentityManagementTestCase {
 
         // user is assigned with two roles
         assertEquals(2, query.getResultCount());
+    }
+
+    @Test
+    public void testGrantRoleToGroup() throws Exception {
+        PartitionManager partitionManager = getPartitionManager();
+        Realm acmeRealm = getAcmeRealm();
+        IdentityManager acmeIdentityManager = partitionManager.createIdentityManager(acmeRealm);
+        Role administratorRole = new Role("Administrator");
+
+        acmeIdentityManager.add(administratorRole);
+
+        Group administratorsGroup = new Group("Administrators");
+
+        acmeIdentityManager.add(administratorsGroup);
+
+        User user = new User("mary");
+
+        acmeIdentityManager.add(user);
+
+        RelationshipManager relationshipManager = partitionManager.createRelationshipManager();
+
+        // grant role to group
+        relationshipManager.add(new Grant(administratorsGroup, administratorRole));
+
+        // user does not have this role
+        assertFalse(relationshipManager.inheritsPrivileges(user, administratorRole));
+
+        // user is now a member of group
+        relationshipManager.add(new GroupMembership(user, administratorsGroup));
+
+        // user now inherits the role because he is a member of the group
+        assertTrue(relationshipManager.inheritsPrivileges(user, administratorRole));
     }
 
 }
