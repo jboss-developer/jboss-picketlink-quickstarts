@@ -20,7 +20,7 @@
 
     <groupId>org.picketlink.quickstarts</groupId>
     <artifactId>picketlink-authentication-facebook</artifactId>
-    <version>2.8.0.Beta1-SNAPSHOT</version>
+    <version>2.7.1.Final-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>JBoss AS Quickstarts: PicketLink Authentication with facebook</name>
     <description>JBoss AS Quickstarts: PicketLink Authentication with facebook</description>
@@ -57,7 +57,7 @@
         <maven.compiler.source>1.6</maven.compiler.source>
 
         <!-- PicketLink dependency versions -->
-        <version.picketlink.javaee.bom>2.8.0.Beta1-SNAPSHOT</version.picketlink.javaee.bom>
+        <version.picketlink.javaee.bom>2.7.1.Final-SNAPSHOT</version.picketlink.javaee.bom>
     </properties>
 
     <dependencyManagement>
