@@ -1,9 +1,9 @@
 picketlink-http-servlet-integration: PicketLink HTTP Servlet Integration
 ===============================
-Author: Pedro Igor
-Level: Beginner
-Technologies: CDI, Java Servlet, PicketLink
-Summary: Basic example that demonstrates PicketLink and Java Servlet API integration
+Author: Pedro Igor  
+Level: Beginner  
+Technologies: CDI, Java Servlet, PicketLink  
+Summary: Basic example that demonstrates PicketLink and Java Servlet API integration  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 What is it?

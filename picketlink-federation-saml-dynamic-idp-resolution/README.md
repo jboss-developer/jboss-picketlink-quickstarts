@@ -1,9 +1,9 @@
 picketlink-federation-saml-dynamic-idp-resolution: PicketLink Federation SAML Dynamic IdP Resolution
 ===============================
-Author: Pedro Igor
-Level: Advanced
-Technologies: PicketLink Federation, SAML v2.0
-Summary: Demonstrates how to write a custom handler to dynamically choose the Identity Provider for a given Service Provider
+Author: Pedro Igor  
+Level: Advanced  
+Technologies: PicketLink Federation, SAML v2.0  
+Summary: Demonstrates how to write a custom handler to dynamically choose the Identity Provider for a given Service Provider  
 Source: <https://github.com/picketlink/picketlink-quickstarts/>
 
 

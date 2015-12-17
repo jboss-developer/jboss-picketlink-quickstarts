@@ -1,9 +1,9 @@
 picketlink-angularjs-rest: PicketLink AngularJS and REST Security
 ===============================
-Author: Maximos Sapranidis
-Level: Intermediate
-Technologies: CDI, PicketLink, REST, HTML5, AngularJS, JSON, JWT, JWS
-Summary: Demonstrates how to use PicketLink and Angular.js to secure a RESTful (JAX-RS) JEE application.
+Author: Maximos Sapranidis  
+Level: Intermediate  
+Technologies: CDI, PicketLink, REST, HTML5, AngularJS, JSON, JWT, JWS  
+Summary: Demonstrates how to use PicketLink and Angular.js to secure a RESTful (JAX-RS) JEE application.  
 Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
 
 

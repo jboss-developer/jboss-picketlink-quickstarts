@@ -1,7 +1,7 @@
 picketlink-authentication-http-digest: PicketLink HTTP Digest Authentication
 ===============================
 Author: Pedro Igor  
-Level: Beginner
+Level: Beginner  
 Technologies: CDI, PicketLink, JSF  
 Summary: Basic example that demonstrates simple username/password authentication using the HTTP Digest scheme with a JSF view layer  
 Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>

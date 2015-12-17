@@ -1,7 +1,7 @@
 picketlink-authentication-security-level: PicketLink Security Level Authentication and Authorization
 ===============================
 Author: Pedro Igor  
-Level: Intermediate
+Level: Intermediate  
 Technologies: CDI, PicketLink, JSF  
 Summary: Basic example that demonstrates how to use assign security levels to your users and protect resources based on levels  
 Source: <https://github.com/jboss-developer/jboss-picketlink-quickstarts/>
