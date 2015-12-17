@@ -4,7 +4,7 @@
 
     <groupId>org.picketlink.quickstarts</groupId>
     <artifactId>picketlink-federation-saml-idp-servlet-filter</artifactId>
-    <version>2.7.1.Final</version>
+    <version>2.7.2.Final-SNAPSHOT</version>
 
     <packaging>war</packaging>
 
@@ -29,7 +29,7 @@
         <version.wildfly.maven.plugin>1.0.1.Final</version.wildfly.maven.plugin>
 
         <!-- PicketLink dependency versions -->
-        <version.picketlink.javaee.bom>2.7.1.Final</version.picketlink.javaee.bom>
+        <version.picketlink.javaee.bom>2.7.2.Final-SNAPSHOT</version.picketlink.javaee.bom>
 
         <!-- Default target container. -->
         <target.container>jboss-eap</target.container>

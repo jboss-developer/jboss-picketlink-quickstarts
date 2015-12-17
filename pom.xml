@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.picketlink.quickstarts</groupId>
     <artifactId>picketlink-quickstarts-parent</artifactId>
-    <version>2.7.1.Final</version>
+    <version>2.7.2.Final-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
