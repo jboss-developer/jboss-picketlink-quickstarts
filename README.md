@@ -2,7 +2,7 @@
 
 ## Introduction
 
-These quickstarts run JBoss Enterprise Application Platform 6 and WindFly.
+These quickstarts run JBoss Enterprise Application Platform 6 and WildFly.
 
 We recommend using the ZIP distribution file for both JBoss Enterprise Application Platform 6 and WildFly.
 
