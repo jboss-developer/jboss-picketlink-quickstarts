@@ -39,7 +39,7 @@ Configure Maven
 
 If you have not yet done so, you must [Configure Maven](http://www.jboss.org/jdf/quickstarts/jboss-as-quickstart/#configure_maven) before testing the quickstarts.
 
-Create the Security Domain for JBoss EAP
+Create the Security Domain for JBoss EAP6/7
 ---------------
 
 These steps assume you are running the server in standalone mode and using the default standalone.xml supplied with the distribution.
@@ -100,7 +100,7 @@ You should see the following result when you run the script:
 
 
 
-Review the Modified Server Configuration for EAP
+Review the Modified Server Configuration for EAP6/7
 -----------------------------------
 
 If you want to review and understand newly added XML configuration, stop the JBoss server and open the  `JBOSS_HOME/standalone/configuration/standalone.xml` file.
@@ -136,7 +136,7 @@ Please, take a look at the following documentation for more details:
 1. [SAML v2.0 SP-Initiated SSO](https://docs.jboss.org/author/display/PLINK/SP-Initiated+SSO)
 
 
-Start JBoss Enterprise Application Platform 6 or WildFly with the Web Profile
+Start JBoss Enterprise Application Platform 6/7 or WildFly with the Web Profile
 -------------------------
 
 1. Open a command line and navigate to the root of the JBoss server directory.
@@ -156,7 +156,7 @@ _NOTE: The following build command assumes you have configured your Maven user s
 3. Type this command to build and deploy the archive:
 
         For EAP 6:     mvn clean package jboss-as:deploy
-        For WildFly:   mvn -Pwildfly clean package wildfly:deploy
+        For EAP 7/WildFly:   mvn -Pwildfly clean package wildfly:deploy
 
 4. This will deploy `target/picketlink-federation-saml-sp-post-basic.war` to the running instance of the server.
 
@@ -177,7 +177,7 @@ Undeploy the Archive
 3. When you are finished testing, type this command to undeploy the archive:
 
         For EAP 6:     mvn jboss-as:undeploy
-        For WildFly:   mvn -Pwildfly wildfly:undeploy
+        For EAP 7/WildFly:   mvn -Pwildfly wildfly:undeploy
 
 
 Run the Quickstart in JBoss Developer Studio or Eclipse
