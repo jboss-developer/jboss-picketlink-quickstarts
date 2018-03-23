@@ -51,7 +51,7 @@
                 <directory>src/main/resources</directory>
             </resource>
             <resource>
-                <directory>../picketlink-federation-saml-sp-post-basic/src/main/resources</directory>
+                <directory>../picketlink-federation-saml-sp-post-with-signature/src/main/resources</directory>
             </resource>
         </resources>
         <plugins>
@@ -72,7 +72,7 @@
                             <directory>src/main/webapp</directory>
                         </resource>
                         <resource>
-                            <directory>../picketlink-federation-saml-sp-post-basic/src/main/webapp</directory>
+                            <directory>../picketlink-federation-saml-sp-post-with-signature/src/main/webapp</directory>
                         </resource>
 						<resource>
 							<directory>${basedir}/conf/${target.container}</directory>
