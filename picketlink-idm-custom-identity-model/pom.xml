@@ -49,7 +49,7 @@
     <version.picketlink.javaee.bom>2.7.2.Final-SNAPSHOT</version.picketlink.javaee.bom>
 
     <!-- JUnit dependency versions -->
-    <version.junit>4.10</version.junit>
+    <version.junit>4.13.1</version.junit>
 
     <!-- JUnit dependency versions -->
     <version.jpa.spec>1.0.0.Final</version.jpa.spec>
